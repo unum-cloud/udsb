@@ -8,6 +8,12 @@ Let us put Pandas, Monin and cuDF head-to-head, to see how well they will perfor
 
 The original dataset comes from the NYC Taxi & Limo commission, [here](https://www1.nyc.gov/site/tlc/about/fhv-trip-record-data.page).
 The original parsing and pre-processing scripts can be found on Github, [here](https://github.com/toddwschneider/nyc-taxi-data).
+A better version can be acquired in the form of **pre-processed Parquet** files, like [here](https://duckdb.org/2021/12/03/duck-arrow.html#fnref:1):
+
+```r
+arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
+```
+
 Just make sure that the entire dataset was downloaded :)
 
 ```sh
@@ -104,6 +110,7 @@ final_df = final_df.sort_values(['year', 'counts'], ascending=[True, False])
 
 ## Other Benchmark Implementations
 
+* [DuckDB over Arrow buffers](https://duckdb.org/2021/12/03/duck-arrow.html), cross-posted [on Apache website](https://arrow.apache.org/blog/2021/12/03/arrow-duckdb/).
 * Mark Litwintschiks [leaderboard of databases](https://tech.marksblogg.com/benchmarks.html).
 * Mark Litwintschiks first full-scale [Redshift variant](https://tech.marksblogg.com/all-billion-nyc-taxi-rides-redshift.html).
 * [SnowFlake](https://www.tropos.io/blog/how-to/analyzing-2-billion-taxi-rides-in-snowflake/).
