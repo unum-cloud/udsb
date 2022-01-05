@@ -14,6 +14,7 @@ A better version can be acquired in the form of **pre-processed Parquet** files,
 arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
 ```
 
+Apache Arrow has more notes on [working with datasets](https://arrow.apache.org/docs/r/articles/dataset.html) and [NYC Taxi Rides specifically](https://arrow.apache.org/docs/r/articles/dataset.html#example-nyc-taxi-data).
 Just make sure that the entire dataset was downloaded :)
 
 ```sh
