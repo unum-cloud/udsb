@@ -17,10 +17,18 @@
 #   3. compute the correlation matrix of all pairs of stocks
 #   4. apply iterative Markov Clustering Algorithm
 
+# Difference between CuPy and NumPy:
+# https://docs.cupy.dev/en/stable/user_guide/difference.html
+
 # More links:
 # https://www.kaggle.com/qks1lver/amex-nyse-nasdaq-stock-histories?select=fh_5yrs.csv
 # https://github.com/GuyAllard/markov_clustering/blob/master/markov_clustering/mcl.py
 # https://github.com/koteth/python_mcl/blob/master/mcl/mcl_clustering.py
+
+# TODO:
+# dynamically swap NumPy and CuPy versions
+# building Tree-Map charts
+# running benchmarks for different number of stocks: 100, 1000, all
 
 
 from typing import List, Tuple, Optional
