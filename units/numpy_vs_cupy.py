@@ -24,10 +24,12 @@
 
 
 from typing import List, Tuple, Optional
+import os
 
 import pandas as pd
 import numpy as np
 import numpy.distutils.system_info as sysinfo
+import kaggle
 
 from timing import timing, StatsRepo
 
@@ -120,14 +122,14 @@ def draw(adj_matrix, weights, cluster_map):
     show()
 
 
-def read_prices(max_entries: Optional[int] = None):
+def read_prices(path: os.PathLike, max_entries: Optional[int] = None):
     '''
     Parses a CSV with stock prices and arranges it into matrix.
     Every row is a separate stock, every column is a different date.
     :return: The matrix and the stock symbols.
     '''
     df = pd.read_csv(
-        'fh_5yrs.csv',
+        path,
         usecols=['date', 'close', 'symbol'],
         nrows=max_entries,
         # parse_dates=['date'],
@@ -174,7 +176,17 @@ def main():
 
     print('Using Numpy with:', sysinfo.get_info('blas'))
 
-    stock_prices, stocks_names = read_prices(1000)
+    # Download with Kaggle API
+    # https://www.kaggle.com/donkeys/kaggle-python-api#dataset_download_file()
+    kaggle.api.authenticate()
+    kaggle.api.dataset_download_file(
+        'qks1lver/amex-nyse-nasdaq-stock-histories',
+        'fh_5yrs.csv'
+        path='tmp/',
+        unzip=True,
+    )
+
+    stock_prices, stocks_names = read_prices('tmp/fh_5yrs.csv', 1000)
     normalized_prices = moving_average(stock_prices, 3)
     correlations = pearson_correlation_matrix(normalized_prices)
     correlated_clusters = mcl(correlations)
