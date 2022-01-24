@@ -35,7 +35,8 @@ from typing import List, Tuple, Optional
 import os
 
 import pandas as pd
-import numpy as np
+import numpy
+# import cupy
 import numpy.distutils.system_info as sysinfo
 import kaggle
 
@@ -190,14 +191,20 @@ def main():
     kaggle.api.dataset_download_file(
         'qks1lver/amex-nyse-nasdaq-stock-histories',
         'fh_5yrs.csv'
-        path='tmp/',
-        unzip=True,
     )
 
-    stock_prices, stocks_names = read_prices('tmp/fh_5yrs.csv', 1000)
-    normalized_prices = moving_average(stock_prices, 3)
-    correlations = pearson_correlation_matrix(normalized_prices)
-    correlated_clusters = mcl(correlations)
+    stock_prices, stocks_names = read_prices('fh_5yrs.csv', 1000)
+    stocks_counts = len(stocks_names)
+    experiment_sizes = [10, 100, 1000, stocks_counts]
+    backends = [numpy, cupy]
+
+    for backend in backends:
+        np = backend
+        for experiment_size in experiment_sizes:
+            normalized_prices = moving_average(
+                stock_prices[:experiment_size, :], 3)
+            correlations = pearson_correlation_matrix(normalized_prices)
+            correlated_clusters = mcl(correlations)
 
     print(correlated_clusters)
     print(StatsRepo.shared())
