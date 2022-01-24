@@ -63,7 +63,7 @@ class StatsRepo:
             StatsRepo.__shared = StatsRepo([])
         return StatsRepo.__shared
 
-    def __init__(self, func_stats: List[FuncStats]):
+    def __init__(self, func_stats: List[FuncStats] = []):
         self.stats = dict()
         for fs in func_stats:
             self.stats[fs.name] = fs
@@ -73,6 +73,9 @@ class StatsRepo:
         result = s.log_callable(callable, *vargs, **kwargs)
         self.stats[name] = s
         return result
+
+    def reset(self):
+        self.stats = dict()
 
     def table(self) -> pandas.DataFrame:
         stats_list = list(self.stats.values())

@@ -33,15 +33,16 @@
 
 from typing import List, Tuple, Optional
 import os
+import pickle
 
 import pandas as pd
 import numpy
-# import cupy
+import cupy
 import numpy.distutils.system_info as sysinfo
-import kaggle
 
 from timing import timing, StatsRepo
 
+np = numpy
 dtype = np.float32
 
 
@@ -61,8 +62,8 @@ def pearson_correlation_matrix(matrix):
 
 @timing
 def converged(matrix1, matrix2) -> bool:
-    # https://numpy.org/doc/stable/reference/generated/numpy.allclose.html
-    return np.allclose(matrix1, matrix2)
+    # https://numpy.org/doc/stable/reference/generated/numpy.alladjclose.html
+    return np.alladjclose(matrix1, matrix2)
 
 
 @timing
@@ -131,34 +132,59 @@ def draw(adj_matrix, weights, cluster_map):
     show()
 
 
+def from_pickle(path: os.PathLike):
+    with open(path, 'rb') as handle:
+        return pickle.load(handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def to_pickle(v, path: os.PathLike):
+    with open(path, 'wb') as handle:
+        return pickle.dump(v, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
 def read_prices(path: os.PathLike, max_entries: Optional[int] = None):
     '''
     Parses a CSV with stock prices and arranges it into matrix.
     Every row is a separate stock, every column is a different date.
-    :return: The matrix and the stock symbols.
+    For every stock we also accumulate the total trading volume.
+
+    :return: The matrix and the stock symbols and total trades.
     '''
-    df = pd.read_csv(
-        path,
-        usecols=['date', 'close', 'symbol'],
-        nrows=max_entries,
-        # parse_dates=['date'],
-    )
-    all_names = sorted(df['symbol'].unique())
-    all_dates = sorted(df['date'].unique())
-    matrix = np.zeros(
-        shape=(len(all_names), len(all_dates)),
-        dtype=dtype,
-        order='C',
-    )
+    if os.path.exists('tmp/numpy_vs_cupy_mat.pickle'):
+        matrix = from_pickle('tmp/numpy_vs_cupy_matrix.pickle')
+        volumes = from_pickle('tmp/numpy_vs_cupy_volumes.pickle')
+        names = from_pickle('tmp/numpy_vs_cupy_names.pickle')
 
-    name2idx = dict([(x, i) for i, x in enumerate(all_names)])
-    date2idx = dict([(x, i) for i, x in enumerate(all_dates)])
-    for i, entry in df.iterrows():
-        row = name2idx[entry['symbol']]
-        col = date2idx[entry['date']]
-        matrix[row, col] = entry['close']
+    else:
 
-    return np.matrix(matrix), all_names
+        df = pd.read_csv(
+            path,
+            usecols=['date', 'adjclose', 'symbol', 'volume'],
+            nrows=max_entries,
+            # parse_dates=['date'],
+        )
+        names = sorted(df['symbol'].unique())
+        dates = sorted(df['date'].unique())
+        volumes = np.zeros(len(names))
+        matrix = np.zeros(
+            shape=(len(names), len(dates)),
+            dtype=dtype,
+            order='C',
+        )
+
+        name2idx = dict([(x, i) for i, x in enumerate(names)])
+        date2idx = dict([(x, i) for i, x in enumerate(dates)])
+        for i, entry in df.iterrows():
+            row = name2idx[entry['symbol']]
+            col = date2idx[entry['date']]
+            matrix[row, col] = entry['adjclose']
+            volumes[row] += entry['volume'] * entry['adjclose']
+
+        to_pickle(matrix, 'tmp/numpy_vs_cupy_matrix.pickle')
+        to_pickle(volumes, 'tmp/numpy_vs_cupy_volumes.pickle')
+        to_pickle(names, 'tmp/numpy_vs_cupy_names.pickle')
+
+    return np.matrix(matrix), volumes, names
 
 
 def mcl(matrix, max_loop: int = 10, expand_factor: float = 2, inflate_factor: float = 2, loop_strength: float = 1):
@@ -183,20 +209,23 @@ def mcl(matrix, max_loop: int = 10, expand_factor: float = 2, inflate_factor: fl
 
 def main():
 
-    print('Using Numpy with:', sysinfo.get_info('blas'))
+    print('Using Numpy with:', sysinfo.get_info('blas')['libraries'])
+    print('Found CUDA devices:', cupy.cuda.runtime.getDeviceCount())
 
     # Download with Kaggle API
     # https://www.kaggle.com/donkeys/kaggle-python-api#dataset_download_file()
-    kaggle.api.authenticate()
-    kaggle.api.dataset_download_file(
-        'qks1lver/amex-nyse-nasdaq-stock-histories',
-        'fh_5yrs.csv'
-    )
+    # kaggle.api.authenticate()
+    # kaggle.api.dataset_download_file(
+    #     'qks1lver/amex-nyse-nasdaq-stock-histories',
+    #     'fh_5yrs.csv'
+    # )
 
-    stock_prices, stocks_names = read_prices('fh_5yrs.csv', 1000)
-    stocks_counts = len(stocks_names)
-    experiment_sizes = [10, 100, 1000, stocks_counts]
+    stock_prices, stock_vols, stock_names = read_prices('fh_5yrs.csv')
+    stock_counts = len(stock_names)
+    experiment_sizes = [10, 100, 1000, stock_counts]
     backends = [numpy, cupy]
+    stats = StatsRepo.shared()
+    all_results = pd.DataFrame()
 
     for backend in backends:
         np = backend
@@ -206,8 +235,16 @@ def main():
             correlations = pearson_correlation_matrix(normalized_prices)
             correlated_clusters = mcl(correlations)
 
+            part_results = stats.table()
+            part_results['experiment_size'] = experiment_size
+            part_results['backend'] = backend.__name__
+            all_results = pd.concat(
+                [all_results, part_results], ignore_index=True)
+            print(part_results)
+            stats.reset()
+
     print(correlated_clusters)
-    print(StatsRepo.shared())
+    all_results.to_csv('numpy_vs_cupy.csv')
 
 
 if __name__ == '__main__':
