@@ -1,294 +1,294 @@
 [
     {
         "operation": "matrix_multiply",
-        "seconds": 10.0000035763,
-        "iterations": 100545,
+        "seconds": 10.0000755787,
+        "iterations": 82725,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "matrix_multiply",
-        "seconds": 10.0001475811,
-        "iterations": 65608,
+        "seconds": 10.0000166893,
+        "iterations": 49474,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "matrix_multiply",
-        "seconds": 10.0002439022,
-        "iterations": 14841,
+        "seconds": 10.000702858,
+        "iterations": 10873,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "matrix_multiply",
-        "seconds": 10.0009717941,
-        "iterations": 2313,
+        "seconds": 10.0005686283,
+        "iterations": 1598,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "matrix_multiply",
-        "seconds": 10.0215029716,
-        "iterations": 336,
+        "seconds": 10.0314805508,
+        "iterations": 210,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "matrix_multiply",
-        "seconds": 10.2012460232,
-        "iterations": 43,
+        "seconds": 10.2480130196,
+        "iterations": 27,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0000243187,
-        "iterations": 124781,
+        "seconds": 10.0000224113,
+        "iterations": 113402,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0000948906,
-        "iterations": 56156,
+        "seconds": 10.000089407,
+        "iterations": 54607,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0001847744,
-        "iterations": 24182,
+        "seconds": 10.00041008,
+        "iterations": 24228,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0010693073,
-        "iterations": 7182,
+        "seconds": 10.000544548,
+        "iterations": 7210,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0040075779,
-        "iterations": 1852,
+        "seconds": 10.0037229061,
+        "iterations": 1857,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "moving_average",
-        "seconds": 10.0161607265,
-        "iterations": 468,
+        "seconds": 10.0097923279,
+        "iterations": 469,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 10.0005278587,
-        "iterations": 13694,
+        "seconds": 10.0005538464,
+        "iterations": 12481,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 10.0010876656,
-        "iterations": 2203,
+        "seconds": 10.0018241405,
+        "iterations": 2223,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 10.0158326626,
-        "iterations": 316,
+        "seconds": 10.030279398,
+        "iterations": 319,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 10.0396654606,
-        "iterations": 40,
+        "seconds": 10.2120571136,
+        "iterations": 41,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 11.9892041683,
+        "seconds": 11.8989264965,
         "iterations": 6,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "pearson_correlations",
-        "seconds": 15.9413027763,
+        "seconds": 15.8207280636,
         "iterations": 1,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.0000391006,
-        "iterations": 205744,
+        "seconds": 10.000020504,
+        "iterations": 199967,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.000048399,
-        "iterations": 120774,
+        "seconds": 10.0000355244,
+        "iterations": 121175,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.0002522469,
-        "iterations": 36509,
+        "seconds": 10.0000085831,
+        "iterations": 36603,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.0011920929,
-        "iterations": 8036,
+        "seconds": 10.0002727509,
+        "iterations": 7996,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.0029909611,
-        "iterations": 1657,
+        "seconds": 10.0011386871,
+        "iterations": 1636,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "fft2d",
-        "seconds": 10.0107767582,
+        "seconds": 10.004124403,
         "iterations": 521,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 10.0713658333,
-        "iterations": 119,
+        "seconds": 10.0139505863,
+        "iterations": 118,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 10.1536226273,
+        "seconds": 10.1739063263,
         "iterations": 28,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 10.8183305264,
+        "seconds": 10.7998621464,
         "iterations": 5,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 14.2167930603,
+        "seconds": 14.1810016632,
         "iterations": 1,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 94.0533509254,
+        "seconds": 93.8619735241,
         "iterations": 1,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "singular_decomposition",
-        "seconds": 656.7017595768,
+        "seconds": 658.4721889496,
         "iterations": 1,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.0000400543,
-        "iterations": 47231,
+        "seconds": 10.0000567436,
+        "iterations": 46049,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.0001423359,
-        "iterations": 34025,
+        "seconds": 10.0002872944,
+        "iterations": 33805,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.0004742146,
-        "iterations": 16334,
+        "seconds": 10.0004541874,
+        "iterations": 16037,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.001105547,
-        "iterations": 5471,
+        "seconds": 10.0002801418,
+        "iterations": 5459,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.0046494007,
-        "iterations": 1501,
+        "seconds": 10.0028533936,
+        "iterations": 1500,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "flat_median",
-        "seconds": 10.0186698437,
+        "seconds": 10.0236084461,
         "iterations": 387,
         "size": 16384,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.0001792908,
-        "iterations": 52324,
+        "seconds": 10.0000360012,
+        "iterations": 52122,
         "size": 512,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.0002632141,
-        "iterations": 36664,
+        "seconds": 10.000184536,
+        "iterations": 36370,
         "size": 1024,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.0000309944,
-        "iterations": 16873,
+        "seconds": 10.0000622272,
+        "iterations": 16611,
         "size": 2048,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.00014925,
-        "iterations": 5514,
+        "seconds": 10.0008397102,
+        "iterations": 5512,
         "size": 4096,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.0001990795,
+        "seconds": 10.0010054111,
         "iterations": 1506,
         "size": 8192,
         "backend": "cupy"
     },
     {
         "operation": "flat_sort",
-        "seconds": 10.0128855705,
+        "seconds": 10.0123167038,
         "iterations": 387,
         "size": 16384,
         "backend": "cupy"

@@ -1,1 +1,296 @@
-[{"operation":"matrix_multiply","seconds":10.0006349087,"iterations":12096,"size":512,"backend":"numpy"},{"operation":"matrix_multiply","seconds":10.0003447533,"iterations":3666,"size":1024,"backend":"numpy"},{"operation":"matrix_multiply","seconds":10.0090413094,"iterations":591,"size":2048,"backend":"numpy"},{"operation":"matrix_multiply","seconds":10.0017967224,"iterations":110,"size":4096,"backend":"numpy"},{"operation":"matrix_multiply","seconds":10.0711658001,"iterations":17,"size":8192,"backend":"numpy"},{"operation":"matrix_multiply","seconds":11.0931718349,"iterations":2,"size":16384,"backend":"numpy"},{"operation":"moving_average","seconds":10.000287056,"iterations":11428,"size":512,"backend":"numpy"},{"operation":"moving_average","seconds":10.0002865791,"iterations":2828,"size":1024,"backend":"numpy"},{"operation":"moving_average","seconds":10.0052809715,"iterations":494,"size":2048,"backend":"numpy"},{"operation":"moving_average","seconds":10.069003582,"iterations":122,"size":4096,"backend":"numpy"},{"operation":"moving_average","seconds":10.2635593414,"iterations":32,"size":8192,"backend":"numpy"},{"operation":"moving_average","seconds":10.3742525578,"iterations":9,"size":16384,"backend":"numpy"},{"operation":"pearson_correlations","seconds":10.0001235008,"iterations":5507,"size":512,"backend":"numpy"},{"operation":"pearson_correlations","seconds":10.0072696209,"iterations":1121,"size":1024,"backend":"numpy"},{"operation":"pearson_correlations","seconds":10.0136699677,"iterations":218,"size":2048,"backend":"numpy"},{"operation":"pearson_correlations","seconds":10.0005090237,"iterations":35,"size":4096,"backend":"numpy"},{"operation":"pearson_correlations","seconds":11.6359679699,"iterations":4,"size":8192,"backend":"numpy"},{"operation":"pearson_correlations","seconds":22.1480412483,"iterations":1,"size":16384,"backend":"numpy"},{"operation":"fft2d","seconds":10.0009880066,"iterations":2584,"size":512,"backend":"numpy"},{"operation":"fft2d","seconds":10.0203561783,"iterations":379,"size":1024,"backend":"numpy"},{"operation":"fft2d","seconds":10.2087852955,"iterations":35,"size":2048,"backend":"numpy"},{"operation":"fft2d","seconds":11.0723538399,"iterations":6,"size":4096,"backend":"numpy"},{"operation":"fft2d","seconds":15.8312764168,"iterations":2,"size":8192,"backend":"numpy"},{"operation":"fft2d","seconds":31.9335157871,"iterations":1,"size":16384,"backend":"numpy"},{"operation":"singular_decomposition","seconds":10.0327939987,"iterations":147,"size":512,"backend":"numpy"},{"operation":"singular_decomposition","seconds":10.0251412392,"iterations":38,"size":1024,"backend":"numpy"},{"operation":"singular_decomposition","seconds":11.2174067497,"iterations":9,"size":2048,"backend":"numpy"},{"operation":"singular_decomposition","seconds":13.088093996,"iterations":2,"size":4096,"backend":"numpy"},{"operation":"singular_decomposition","seconds":47.9520690441,"iterations":1,"size":8192,"backend":"numpy"},{"operation":"singular_decomposition","seconds":418.6989688873,"iterations":1,"size":16384,"backend":"numpy"},{"operation":"flat_median","seconds":10.0012459755,"iterations":4231,"size":512,"backend":"numpy"},{"operation":"flat_median","seconds":10.001799345,"iterations":1123,"size":1024,"backend":"numpy"},{"operation":"flat_median","seconds":10.015912056,"iterations":278,"size":2048,"backend":"numpy"},{"operation":"flat_median","seconds":10.0306534767,"iterations":76,"size":4096,"backend":"numpy"},{"operation":"flat_median","seconds":10.599697113,"iterations":16,"size":8192,"backend":"numpy"},{"operation":"flat_median","seconds":10.808068037,"iterations":5,"size":16384,"backend":"numpy"},{"operation":"flat_sort","seconds":10.008440733,"iterations":597,"size":512,"backend":"numpy"},{"operation":"flat_sort","seconds":10.028090477,"iterations":134,"size":1024,"backend":"numpy"},{"operation":"flat_sort","seconds":10.0550761223,"iterations":31,"size":2048,"backend":"numpy"},{"operation":"flat_sort","seconds":10.0133743286,"iterations":7,"size":4096,"backend":"numpy"},{"operation":"flat_sort","seconds":12.2245237827,"iterations":2,"size":8192,"backend":"numpy"},{"operation":"flat_sort","seconds":26.0939648151,"iterations":1,"size":16384,"backend":"numpy"}]
+[
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0006349087,
+        "iterations": 12096,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0003447533,
+        "iterations": 3666,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0090413094,
+        "iterations": 591,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0017967224,
+        "iterations": 110,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0711658001,
+        "iterations": 17,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 11.0931718349,
+        "iterations": 2,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.000287056,
+        "iterations": 11428,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0002865791,
+        "iterations": 2828,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0052809715,
+        "iterations": 494,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.069003582,
+        "iterations": 122,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.2635593414,
+        "iterations": 32,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.3742525578,
+        "iterations": 9,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0001235008,
+        "iterations": 5507,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0072696209,
+        "iterations": 1121,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0136699677,
+        "iterations": 218,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0005090237,
+        "iterations": 35,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 11.6359679699,
+        "iterations": 4,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 22.1480412483,
+        "iterations": 1,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.0009880066,
+        "iterations": 2584,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.0203561783,
+        "iterations": 379,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.2087852955,
+        "iterations": 35,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 11.0723538399,
+        "iterations": 6,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 15.8312764168,
+        "iterations": 2,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 31.9335157871,
+        "iterations": 1,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.0327939987,
+        "iterations": 147,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.0251412392,
+        "iterations": 38,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 11.2174067497,
+        "iterations": 9,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 13.088093996,
+        "iterations": 2,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 47.9520690441,
+        "iterations": 1,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 418.6989688873,
+        "iterations": 1,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0012459755,
+        "iterations": 4231,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.001799345,
+        "iterations": 1123,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.015912056,
+        "iterations": 278,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0306534767,
+        "iterations": 76,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.599697113,
+        "iterations": 16,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.808068037,
+        "iterations": 5,
+        "size": 16384,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.008440733,
+        "iterations": 597,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.028090477,
+        "iterations": 134,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0550761223,
+        "iterations": 31,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0133743286,
+        "iterations": 7,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 12.2245237827,
+        "iterations": 2,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 26.0939648151,
+        "iterations": 1,
+        "size": 16384,
+        "backend": "numpy"
+    }
+]
