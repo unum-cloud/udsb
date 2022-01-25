@@ -13,29 +13,30 @@
 # Difference between CuPy and NumPy:
 # https://docs.cupy.dev/en/stable/user_guide/difference.html
 
+import os
 import time
 from dataclasses import dataclass
 from typing import Generator
 
 import pandas as pd
-import numpy
-import cupy
-import numpy.distutils.system_info as sysinfo
+import fire
 
-np = numpy
-dtype = np.float32
+numpy = None
+cupy = None
+backend = None
+dtype = None
 
 
 def generate_random_matrix(side: int):
     # https://numpy.org/doc/stable/reference/random/generated/numpy.random.rand.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.random.rand.html
-    return np.random.rand(side, side).astype(dtype) if numpy == np else np.random.rand(side, side, dtype=dtype)
+    return backend.random.rand(side, side).astype(dtype) if numpy == backend else backend.random.rand(side, side, dtype=dtype)
 
 
 def moving_average(matrix):
     window: int = 3
     # https://stackoverflow.com/a/57897124
-    ret = np.cumsum(matrix, axis=1, dtype=dtype)
+    ret = backend.cumsum(matrix, axis=1, dtype=dtype)
     ret[:, window:] = ret[:, window:] - ret[:, :-window]
     return ret[:, window - 1:] / window
 
@@ -43,37 +44,37 @@ def moving_average(matrix):
 def pearson_correlations(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.corrcoef.html
-    return np.corrcoef(matrix, rowvar=True, dtype=dtype) if numpy == np else np.corrcoef(matrix, rowvar=True)
+    return backend.corrcoef(matrix, rowvar=True, dtype=dtype) if numpy == backend else backend.corrcoef(matrix, rowvar=True)
 
 
 def fft2d(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.fft.fft2.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.fft.fft2.html
-    return np.fft.fft2(matrix)
+    return backend.fft.fft2(matrix)
 
 
 def matrix_multiply(matrix1):
     # https://numpy.org/doc/stable/reference/generated/numpy.matmul.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.matmul.html
-    return np.matmul(matrix1, matrix1 - np.ones(matrix1.shape, dtype=matrix1.dtype))
+    return backend.matmul(matrix1, matrix1 - backend.ones(matrix1.shape, dtype=matrix1.dtype))
 
 
 def singular_decomposition(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.linalg.svd.html
-    return np.linalg.svd(matrix)
+    return backend.linalg.svd(matrix)
 
 
 def flat_sort(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.sort.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.sort.html
-    return np.sort(matrix, axis=None)
+    return backend.sort(matrix, axis=None)
 
 
 def flat_median(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.median.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.median.html
-    return np.median(matrix, axis=None)
+    return backend.median(matrix, axis=None)
 
 
 @dataclass
@@ -103,7 +104,7 @@ def run_all_benchmarks() -> Generator[Sample, None, None]:
             start = time.time()
             while True:
                 func(mat)
-                if np == cupy:
+                if backend != numpy:
                     cupy.cuda.stream.get_current_stream().synchronize()
                 s.iterations += 1
                 s.seconds = time.time() - start
@@ -114,29 +115,46 @@ def run_all_benchmarks() -> Generator[Sample, None, None]:
             yield s
 
 
-def main():
+def main(cuda_device: int = -1, filename: os.PathLike = 'numpy_vs_cupy.json'):
 
-    print('Using Numpy with:', sysinfo.get_info('blas')['libraries'])
-    print('Found CUDA devices:', cupy.cuda.runtime.getDeviceCount())
+    # Swap the backend, if GPU is selected
+    global backend
+    global numpy
+    global cupy
+    global dtype
+    cuda_device = int(cuda_device)
 
-    backends = [
-        numpy,
-        cupy,
-    ]
+    if cuda_device >= 0:
+        import cupy
+        backend = cupy
+        devices = cupy.cuda.runtime.getDeviceCount()
+        assert devices > 0, "No CUDA-powered device found"
+        print('Found {} CUDA devices'.format(devices))
 
-    all_results = pd.DataFrame()
-    global np
+        cupy.cuda.runtime.setDevice(cuda_device)
+        specs = cupy.cuda.runtime.getDeviceProperties(cuda_device)
+        name = specs['name'].decode()
+        print('Will run on: {}'.format(name))
 
-    for backend in backends:
-        np = backend
-        samples = list(run_all_benchmarks())
-        samples = [s.__dict__ for s in samples]
-        samples = pd.DataFrame(samples)
-        samples['backend'] = backend.__name__
-        all_results = pd.concat([all_results, samples], ignore_index=True)
+    else:
+        import numpy
+        import numpy.distutils.system_info as sysinfo
+        backend = numpy
+        libs = set(sysinfo.get_info('blas')['libraries'])
+        print('Using Numpy with BLAS versions:', *libs)
+    dtype = backend.float32
 
-    all_results.to_json('numpy_vs_cupy.json', orient='records')
+    samples = list(run_all_benchmarks())
+    samples = [s.__dict__ for s in samples]
+    samples = pd.DataFrame(samples)
+    samples['backend'] = backend.__name__
+
+    # Merge with older results, if present
+    if os.path.exists(filename):
+        old_results = pd.read_json(filename, orient='records')
+        samples = pd.concat([old_results, samples], ignore_index=True)
+    samples.to_json(filename, orient='records')
 
 
 if __name__ == '__main__':
-    main()
+    fire.Fire(main)
