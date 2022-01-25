@@ -1,1 +1,296 @@
-[{"name":"generate_random_matrix","calls":9,"runtime_share":0.9292168782,"total_duration":0.094202,"mean_duration":0.0104668889,"size":1000,"backend":"numpy"},{"name":"moving_average","calls":9,"runtime_share":0.4777474052,"total_duration":0.048433,"mean_duration":0.0053814444,"size":1000,"backend":"numpy"},{"name":"pearson_correlations","calls":9,"runtime_share":1.4809844045,"total_duration":0.150139,"mean_duration":0.0166821111,"size":1000,"backend":"numpy"},{"name":"markov_clustering","calls":9,"runtime_share":28.89039656,"total_duration":2.928846,"mean_duration":0.3254273333,"size":1000,"backend":"numpy"},{"name":"matrix_multiply","calls":9,"runtime_share":0.7917805311,"total_duration":0.080269,"mean_duration":0.0089187778,"size":1000,"backend":"numpy"},{"name":"singular_decomposition","calls":9,"runtime_share":67.429874221,"total_duration":6.835895,"mean_duration":0.7595438889,"size":1000,"backend":"numpy"},{"name":"generate_random_matrix","calls":3,"runtime_share":1.1721176698,"total_duration":0.141884,"mean_duration":0.0472946667,"size":2000,"backend":"numpy"},{"name":"moving_average","calls":3,"runtime_share":0.5135511752,"total_duration":0.062165,"mean_duration":0.0207216667,"size":2000,"backend":"numpy"},{"name":"pearson_correlations","calls":3,"runtime_share":0.9679528866,"total_duration":0.11717,"mean_duration":0.0390566667,"size":2000,"backend":"numpy"},{"name":"markov_clustering","calls":3,"runtime_share":26.7005305608,"total_duration":3.23208,"mean_duration":1.07736,"size":2000,"backend":"numpy"},{"name":"matrix_multiply","calls":3,"runtime_share":0.5219279289,"total_duration":0.063179,"mean_duration":0.0210596667,"size":2000,"backend":"numpy"},{"name":"singular_decomposition","calls":3,"runtime_share":70.1239197788,"total_duration":8.48845,"mean_duration":2.8294833333,"size":2000,"backend":"numpy"},{"name":"generate_random_matrix","calls":1,"runtime_share":0.5093738086,"total_duration":0.123198,"mean_duration":0.123198,"size":4000,"backend":"numpy"},{"name":"moving_average","calls":1,"runtime_share":0.3157424655,"total_duration":0.076366,"mean_duration":0.076366,"size":4000,"backend":"numpy"},{"name":"pearson_correlations","calls":1,"runtime_share":0.6405314244,"total_duration":0.15492,"mean_duration":0.15492,"size":4000,"backend":"numpy"},{"name":"markov_clustering","calls":1,"runtime_share":23.0674046036,"total_duration":5.579121,"mean_duration":5.579121,"size":4000,"backend":"numpy"},{"name":"matrix_multiply","calls":1,"runtime_share":1.0652287318,"total_duration":0.257638,"mean_duration":0.257638,"size":4000,"backend":"numpy"},{"name":"singular_decomposition","calls":1,"runtime_share":74.4017189661,"total_duration":17.994924,"mean_duration":17.994924,"size":4000,"backend":"numpy"},{"name":"generate_random_matrix","calls":1,"runtime_share":0.2164306708,"total_duration":0.394509,"mean_duration":0.394509,"size":8000,"backend":"numpy"},{"name":"moving_average","calls":1,"runtime_share":0.1629589766,"total_duration":0.297041,"mean_duration":0.297041,"size":8000,"backend":"numpy"},{"name":"pearson_correlations","calls":1,"runtime_share":0.3739705006,"total_duration":0.681672,"mean_duration":0.681672,"size":8000,"backend":"numpy"},{"name":"markov_clustering","calls":1,"runtime_share":10.9213697167,"total_duration":19.907431,"mean_duration":19.907431,"size":8000,"backend":"numpy"},{"name":"matrix_multiply","calls":1,"runtime_share":0.3994050503,"total_duration":0.728034,"mean_duration":0.728034,"size":8000,"backend":"numpy"},{"name":"singular_decomposition","calls":1,"runtime_share":87.9258650849,"total_duration":160.270931,"mean_duration":160.270931,"size":8000,"backend":"numpy"},{"name":"generate_random_matrix","calls":1,"runtime_share":0.6888415558,"total_duration":6.732411,"mean_duration":6.732411,"size":16000,"backend":"numpy"},{"name":"moving_average","calls":1,"runtime_share":0.6301264117,"total_duration":6.158557,"mean_duration":6.158557,"size":16000,"backend":"numpy"},{"name":"pearson_correlations","calls":1,"runtime_share":0.6550114935,"total_duration":6.401772,"mean_duration":6.401772,"size":16000,"backend":"numpy"},{"name":"markov_clustering","calls":1,"runtime_share":10.3217222559,"total_duration":100.879623,"mean_duration":100.879623,"size":16000,"backend":"numpy"},{"name":"matrix_multiply","calls":1,"runtime_share":0.512275702,"total_duration":5.00674,"mean_duration":5.00674,"size":16000,"backend":"numpy"},{"name":"singular_decomposition","calls":1,"runtime_share":87.1920225812,"total_duration":852.173518,"mean_duration":852.173518,"size":16000,"backend":"numpy"},{"name":"generate_random_matrix","calls":28,"runtime_share":2.9339072488,"total_duration":0.300141,"mean_duration":0.0107193214,"size":1000,"backend":"cupy"},{"name":"moving_average","calls":28,"runtime_share":0.0975554634,"total_duration":0.00998,"mean_duration":0.0003564286,"size":1000,"backend":"cupy"},{"name":"pearson_correlations","calls":28,"runtime_share":5.2660204546,"total_duration":0.538718,"mean_duration":0.0192399286,"size":1000,"backend":"cupy"},{"name":"markov_clustering","calls":28,"runtime_share":0.4351677475,"total_duration":0.044518,"mean_duration":0.0015899286,"size":1000,"backend":"cupy"},{"name":"matrix_multiply","calls":28,"runtime_share":0.0335872317,"total_duration":0.003436,"mean_duration":0.0001227143,"size":1000,"backend":"cupy"},{"name":"singular_decomposition","calls":28,"runtime_share":91.233761854,"total_duration":9.333285,"mean_duration":0.3333316071,"size":1000,"backend":"cupy"},{"name":"generate_random_matrix","calls":7,"runtime_share":0.0073192189,"total_duration":0.000812,"mean_duration":0.000116,"size":2000,"backend":"cupy"},{"name":"moving_average","calls":7,"runtime_share":0.0158102339,"total_duration":0.001754,"mean_duration":0.0002505714,"size":2000,"backend":"cupy"},{"name":"pearson_correlations","calls":7,"runtime_share":0.024301249,"total_duration":0.002696,"mean_duration":0.0003851429,"size":2000,"backend":"cupy"},{"name":"markov_clustering","calls":7,"runtime_share":0.0911206698,"total_duration":0.010109,"mean_duration":0.0014441429,"size":2000,"backend":"cupy"},{"name":"matrix_multiply","calls":7,"runtime_share":0.0070578182,"total_duration":0.000783,"mean_duration":0.0001118571,"size":2000,"backend":"cupy"},{"name":"singular_decomposition","calls":7,"runtime_share":99.8543908102,"total_duration":11.077926,"mean_duration":1.5825608571,"size":2000,"backend":"cupy"},{"name":"generate_random_matrix","calls":2,"runtime_share":0.0024446871,"total_duration":0.000465,"mean_duration":0.0002325,"size":4000,"backend":"cupy"},{"name":"moving_average","calls":2,"runtime_share":0.0047474247,"total_duration":0.000903,"mean_duration":0.0004515,"size":4000,"backend":"cupy"},{"name":"pearson_correlations","calls":2,"runtime_share":0.0091215745,"total_duration":0.001735,"mean_duration":0.0008675,"size":4000,"backend":"cupy"},{"name":"markov_clustering","calls":2,"runtime_share":0.0148784183,"total_duration":0.00283,"mean_duration":0.001415,"size":4000,"backend":"cupy"},{"name":"matrix_multiply","calls":2,"runtime_share":0.002134501,"total_duration":0.000406,"mean_duration":0.000203,"size":4000,"backend":"cupy"},{"name":"singular_decomposition","calls":2,"runtime_share":99.9666733944,"total_duration":19.0145,"mean_duration":9.50725,"size":4000,"backend":"cupy"},{"name":"generate_random_matrix","calls":1,"runtime_share":0.0008761657,"total_duration":0.000537,"mean_duration":0.000537,"size":8000,"backend":"cupy"},{"name":"moving_average","calls":1,"runtime_share":0.0016723833,"total_duration":0.001025,"mean_duration":0.001025,"size":8000,"backend":"cupy"},{"name":"pearson_correlations","calls":1,"runtime_share":0.002636655,"total_duration":0.001616,"mean_duration":0.001616,"size":8000,"backend":"cupy"},{"name":"markov_clustering","calls":1,"runtime_share":0.0032338182,"total_duration":0.001982,"mean_duration":0.001982,"size":8000,"backend":"cupy"},{"name":"matrix_multiply","calls":1,"runtime_share":0.0009104291,"total_duration":0.000558,"mean_duration":0.000558,"size":8000,"backend":"cupy"},{"name":"singular_decomposition","calls":1,"runtime_share":99.9906705487,"total_duration":61.28406,"mean_duration":61.28406,"size":8000,"backend":"cupy"},{"name":"generate_random_matrix","calls":1,"runtime_share":0.0002333264,"total_duration":0.001007,"mean_duration":0.001007,"size":16000,"backend":"cupy"},{"name":"moving_average","calls":1,"runtime_share":0.0005389447,"total_duration":0.002326,"mean_duration":0.002326,"size":16000,"backend":"cupy"},{"name":"pearson_correlations","calls":1,"runtime_share":0.000937013,"total_duration":0.004044,"mean_duration":0.004044,"size":16000,"backend":"cupy"},{"name":"markov_clustering","calls":1,"runtime_share":0.0006269924,"total_duration":0.002706,"mean_duration":0.002706,"size":16000,"backend":"cupy"},{"name":"matrix_multiply","calls":1,"runtime_share":0.0003107157,"total_duration":0.001341,"mean_duration":0.001341,"size":16000,"backend":"cupy"},{"name":"singular_decomposition","calls":1,"runtime_share":99.9973530077,"total_duration":431.572759,"mean_duration":431.572759,"size":16000,"backend":"cupy"}]
+[
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0013489723,
+        "iterations": 2671,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0057795048,
+        "iterations": 1227,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0160732269,
+        "iterations": 209,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0008420944,
+        "iterations": 11433,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0029771328,
+        "iterations": 2841,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0183711052,
+        "iterations": 497,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0010817051,
+        "iterations": 3741,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0012931824,
+        "iterations": 846,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0216550827,
+        "iterations": 196,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.003455162,
+        "iterations": 2572,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.0205652714,
+        "iterations": 399,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.2229557037,
+        "iterations": 36,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.114376545,
+        "iterations": 46,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.2744436264,
+        "iterations": 13,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.7841670513,
+        "iterations": 3,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.001696825,
+        "iterations": 4317,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0063297749,
+        "iterations": 970,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0166027546,
+        "iterations": 273,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0081002712,
+        "iterations": 591,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.072678566,
+        "iterations": 135,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0814828873,
+        "iterations": 31,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0000736713,
+        "iterations": 91566,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0001854897,
+        "iterations": 49595,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "matrix_multiply",
+        "seconds": 10.0003335476,
+        "iterations": 10177,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0000367165,
+        "iterations": 132980,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0000283718,
+        "iterations": 56049,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "moving_average",
+        "seconds": 10.0002286434,
+        "iterations": 24095,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0005502701,
+        "iterations": 13996,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.001090765,
+        "iterations": 2218,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "pearson_correlations",
+        "seconds": 10.0154380798,
+        "iterations": 317,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.0000369549,
+        "iterations": 197027,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.0000419617,
+        "iterations": 122910,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "fft2d",
+        "seconds": 10.000191927,
+        "iterations": 36478,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.026771307,
+        "iterations": 119,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.3314437866,
+        "iterations": 29,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "singular_decomposition",
+        "seconds": 10.7734932899,
+        "iterations": 5,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0000762939,
+        "iterations": 46898,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.000067234,
+        "iterations": 34230,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_median",
+        "seconds": 10.0002095699,
+        "iterations": 16291,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0001118183,
+        "iterations": 52729,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0001149178,
+        "iterations": 36818,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sort",
+        "seconds": 10.0000832081,
+        "iterations": 16750,
+        "size": 2048,
+        "backend": "cupy"
+    }
+]
