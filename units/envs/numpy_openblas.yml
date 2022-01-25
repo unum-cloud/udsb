@@ -1,0 +1,10 @@
+name: numpy_openblas
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - 'blas=*=openblas'
+  - numpy
+  - scipy
+  - pandas
+  - fire

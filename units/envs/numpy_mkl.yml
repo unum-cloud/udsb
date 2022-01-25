@@ -1,0 +1,10 @@
+name: numpy_mkl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - 'blas=*=mkl'
+  - numpy
+  - scipy
+  - pandas
+  - fire

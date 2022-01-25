@@ -1,0 +1,10 @@
+name: numpy_blis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - 'blas=*=blis'
+  - numpy
+  - scipy
+  - pandas
+  - fire

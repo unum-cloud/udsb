@@ -77,6 +77,12 @@ def flat_median(matrix):
     return backend.median(matrix, axis=None)
 
 
+def flat_sum(matrix):
+    # https://numpy.org/doc/stable/reference/generated/numpy.sum.html
+    # https://docs.cupy.dev/en/stable/reference/generated/cupy.sum.html
+    return backend.sum(matrix, axis=None, dtype=dtype)
+
+
 @dataclass
 class Sample:
     operation: str = ''
@@ -87,7 +93,7 @@ class Sample:
 
 def run_all_benchmarks() -> Generator[Sample, None, None]:
     max_seconds = 10.0
-    sizes = [512 * 2**i for i in range(0, 3)]
+    sizes = [512 * 2**i for i in range(0, 6)]
     funcs = [
         matrix_multiply, moving_average,
         pearson_correlations, fft2d, singular_decomposition,
