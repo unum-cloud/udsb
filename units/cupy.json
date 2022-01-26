@@ -292,5 +292,47 @@
         "iterations": 387,
         "size": 16384,
         "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0000579357,
+        "iterations": 117300,
+        "size": 512,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0000331402,
+        "iterations": 33240,
+        "size": 1024,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.00121665,
+        "iterations": 4258,
+        "size": 2048,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0017769337,
+        "iterations": 1071,
+        "size": 4096,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0322372913,
+        "iterations": 269,
+        "size": 8192,
+        "backend": "cupy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.1405336857,
+        "iterations": 68,
+        "size": 16384,
+        "backend": "cupy"
     }
 ]

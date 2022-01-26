@@ -97,7 +97,7 @@ def run_all_benchmarks() -> Generator[Sample, None, None]:
     funcs = [
         matrix_multiply, moving_average,
         pearson_correlations, fft2d, singular_decomposition,
-        flat_median, flat_sort,
+        flat_median, flat_sort, flat_sum
     ]
 
     for func in funcs:

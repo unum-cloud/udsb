@@ -292,5 +292,47 @@
         "iterations": 1,
         "size": 16384,
         "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0000333786,
+        "iterations": 187822,
+        "size": 512,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0000109673,
+        "iterations": 50721,
+        "size": 1024,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0001363754,
+        "iterations": 11178,
+        "size": 2048,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0024013519,
+        "iterations": 2623,
+        "size": 4096,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0150051117,
+        "iterations": 665,
+        "size": 8192,
+        "backend": "numpy"
+    },
+    {
+        "operation": "flat_sum",
+        "seconds": 10.0032298565,
+        "iterations": 166,
+        "size": 16384,
+        "backend": "numpy"
     }
 ]
