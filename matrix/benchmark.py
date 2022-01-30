@@ -53,10 +53,10 @@ def fft2d(matrix):
     return backend.fft.fft2(matrix)
 
 
-def matrix_multiply(matrix1):
+def matrix_multiply(matrix):
     # https://numpy.org/doc/stable/reference/generated/numpy.matmul.html
     # https://docs.cupy.dev/en/stable/reference/generated/cupy.matmul.html
-    return backend.matmul(matrix1, matrix1 - backend.ones(matrix1.shape, dtype=matrix1.dtype))
+    return backend.matmul(matrix, matrix - backend.ones(matrix.shape, dtype=matrix.dtype))
 
 
 def singular_decomposition(matrix):
