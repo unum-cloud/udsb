@@ -121,7 +121,7 @@ def run_all_benchmarks() -> Generator[Sample, None, None]:
             yield s
 
 
-def main(cuda_device: int = -1, filename: os.PathLike = 'numpy_vs_cupy.json'):
+def main(cuda_device: int = -1, filename: os.PathLike = 'benchmark.json'):
 
     # Swap the backend, if GPU is selected
     global backend
