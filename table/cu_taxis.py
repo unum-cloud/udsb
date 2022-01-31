@@ -1,10 +1,13 @@
 
 import cudf
 
-import pa_taxis
+from pa_taxis import PaTaxis
 
 
-class CuTaxis(pa_taxis.PaTaxis):
+class CuTaxis(PaTaxis):
+    """
+        cuDF adaptation for on-GPU acceleration.
+    """
 
     def __init__(self) -> None:
         super().__init__(backend=cudf)
