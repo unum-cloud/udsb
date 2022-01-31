@@ -13,12 +13,21 @@ def taxi_rides_paths() -> List[str]:
 
 
 class PaTaxis:
+    """
+    """
 
     def __init__(self) -> None:
         paths = taxi_rides_paths()
         files = [pd.read_parquet(p) for p in paths]
+        # Concatenate
         # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
         self.df = pd.concat(files, ignore_index=True)
+        self.cleanup()
+
+    def cleanup(self):
+        # Passenger count can't be zero or negative
+        self.df['passenger_count'] = self.df['passenger_count'].mask(
+            self.df['passenger_count'].lt(1), 1)
 
     def query1(self):
         selected_df = self.df[['vendor_id']]
