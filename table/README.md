@@ -14,6 +14,13 @@ A better version can be acquired in the form of **pre-processed Parquet** files,
 arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
 ```
 
+Or:
+
+```sh
+aws s3 ls --recursive s3://ursa-labs-taxi-data/ --recursive --human-readable --summarize
+aws s3 sync s3://ursa-labs-taxi-data/ NYCTaxiRides
+```
+
 Apache Arrow has more notes on [working with datasets](https://arrow.apache.org/docs/r/articles/dataset.html) and [NYC Taxi Rides specifically](https://arrow.apache.org/docs/r/articles/dataset.html#example-nyc-taxi-data).
 Just make sure that the entire dataset was downloaded :)
 
@@ -24,6 +31,9 @@ $ find . -name '*.csv' | xargs wc -l
 ```
 
 Great, 1.1 Billion Taxi Rides. Now we can start processing.
+There is a slight difference between different representation of the dataset.
+The URSA Labs files don't have a `cab_type` column.
+The most similar we found was the `vendor_id`.
 
 ## The Queries
 
