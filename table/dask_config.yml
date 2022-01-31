@@ -1,0 +1,12 @@
+
+# Possible logging levels: warning, error, info, critical
+logging:
+  bokeh: critical
+  worker: critical
+  distributed: critical
+  distributed.client: critical 
+  distributed.preloading: critical
+  distributed.nanny: critical
+
+array:
+  chunk-size: 128 MiB
