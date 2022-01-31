@@ -17,6 +17,7 @@ class Sample:
     seconds: float = 0.0
     iterations: int = 0
     size: int = 0
+    error: str = ''
 
 
 def run_backend(class_: type, class_name: str, paths: List[str]) -> Generator[Sample, None, None]:
@@ -51,13 +52,20 @@ def run_backend(class_: type, class_name: str, paths: List[str]) -> Generator[Sa
 
         start = time.time()
         while True:
-            func()
+            try:
+                func()
+            except Exception as e:
+                s.error = str(e)
+                break
+
             s.iterations += 1
             s.seconds = time.time() - start
             if s.seconds > max_seconds:
                 break
 
         yield s
+
+    instance = None
 
 
 def run_backends(backend_names: List[str],  paths: List[str]) -> Generator[Sample, None, None]:
@@ -86,7 +94,16 @@ def run_backends_and_sizes(backend_names: List[str]) -> Generator[Sample, None, 
     all_sizes = [os.path.getsize(p) for p in all_paths]
     total_size = sum(all_sizes)
 
-    size_categories = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 1.0]
+    size_categories = [
+        0.01,
+        0.02,
+        0.04,
+        0.08,
+        0.16,
+        # 0.32,
+        # 0.64,
+        # 1.0,
+    ]
     for size_category in size_categories:
         part_paths = []
         part_size = 0
@@ -106,13 +123,26 @@ def main(backend_names: List[str] = [], filename: os.PathLike = 'benchmark.json'
 
     # Validate passed argument
     if backend_names is None or len(backend_names) == 0:
-        backend_names = ['pandas', 'modin', 'cudf', 'dask_cudf']
+        backend_names = [
+            'pandas',
+            'modin',
+            'cudf',
+            # 'dask_cudf',
+        ]
     if isinstance(backend_names, str):
         backend_names = backend_names.split(',')
     backend_names = [n.lower() for n in backend_names]
 
     # Benchmark and track results
-    samples = list(run_backends_and_sizes(backend_names))
+    samples = []
+    try:
+        for x in run_backends_and_sizes(backend_names):
+            if len(x.error) == 0:
+                samples.append(x)
+    except KeyboardInterrupt:
+        pass
+
+    # Format into a table
     samples = [s.__dict__ for s in samples]
     samples = pd.DataFrame(samples)
 
