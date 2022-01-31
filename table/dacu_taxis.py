@@ -1,4 +1,11 @@
+import os
+import yaml
+
+import dask
+import dask.distributed  # Imports new config values
 import dask_cudf
+import dask.config
+
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
 
@@ -14,11 +21,20 @@ class DaCuTaxis(PaTaxis):
     """
 
     def __init__(self, **kwargs) -> None:
+        # Dask loves spawning zombi processes:
+        # https://docs.dask.org/en/stable/configuration.html
+        # fn = os.path.join(os.path.dirname(__file__), 'dask_config.yml')
+        # defaults = yaml.safe_load(open(fn).read())
+        # dask.config.update_defaults(defaults)
         self.cluster = LocalCUDACluster(
             # enable_nvlink=True,
+            # log_spilling=False,
         )
         self.client = Client(self.cluster)
         super().__init__(backend=dask_cudf, **kwargs)
+
+    def __del__(self):
+        self.client.shutdown()
 
     def query1(self):
         return self.client.compute(super().query1(), sync=True)

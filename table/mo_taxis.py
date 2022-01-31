@@ -4,7 +4,7 @@ from modin.config import Engine
 
 from pa_taxis import PaTaxis
 
-ray.init()
+ray.init(include_dashboard=False)
 Engine.put('ray')
 
 

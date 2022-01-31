@@ -9,7 +9,7 @@ import pandas
 def taxi_rides_paths() -> List[str]:
     dir = pathlib.Path(__file__).parent.resolve()
     pattern = os.path.join(dir, 'tmp/**/*.parquet')
-    return glob.glob(pattern, recursive=True)
+    return sorted(glob.glob(pattern, recursive=True))
 
 
 class PaTaxis:
