@@ -23,7 +23,8 @@ class PaTaxis:
     def query1(self):
         selected_df = self.df[['vendor_id']]
         grouped_df = selected_df.groupby('vendor_id')
-        final_df = grouped_df.size().reset_index(name='counts')
+        final_df = grouped_df.size().reset_index()
+        final_df.rename(columns={final_df.columns[-1]: 'counts'}, inplace=True)
         return final_df
 
     def query2(self):
@@ -43,12 +44,15 @@ class PaTaxis:
             'year': years,
         })
         grouped_df = selected_df.groupby(['passenger_count', 'year'])
-        final_df = grouped_df.size().reset_index(name='counts')
+        final_df = grouped_df.size().reset_index()
+        final_df.rename(columns={final_df.columns[-1]: 'counts'}, inplace=True)
         return final_df
 
     def query4(self):
         selected_df = self.df[[
-            'passenger_count', 'pickup_at', 'trip_distance',
+            'passenger_count',
+            'pickup_at',
+            'trip_distance',
         ]]
         distances = selected_df['trip_distance'].round().astype(int)
         years = pd.to_datetime(
@@ -66,7 +70,9 @@ class PaTaxis:
             'year',
             'trip_distance',
         ])
-        final_df = grouped_df.size().reset_index(name='counts').copy()
+        final_df = grouped_df.size().reset_index()
+        final_df.rename(
+            columns={final_df.columns[-1]: 'counts'}, inplace=True).copy()
         final_df = final_df.sort_values(
             ['year', 'counts'],
             ascending=[True, False],
