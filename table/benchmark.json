@@ -1,1 +1,522 @@
-[{"operation":"construct","backend":"PaTaxis","seconds":10.0545210838,"iterations":2,"size":0},{"operation":"q1","backend":"PaTaxis","seconds":10.5016798973,"iterations":7,"size":0},{"operation":"q2","backend":"PaTaxis","seconds":10.3055365086,"iterations":26,"size":0},{"operation":"q3","backend":"PaTaxis","seconds":10.6312739849,"iterations":4,"size":0},{"operation":"q4","backend":"PaTaxis","seconds":11.8748562336,"iterations":4,"size":0},{"operation":"construct","backend":"MoTaxis","seconds":11.0461885929,"iterations":2,"size":0},{"operation":"q1","backend":"MoTaxis","seconds":10.1244211197,"iterations":27,"size":0},{"operation":"q2","backend":"MoTaxis","seconds":10.1281504631,"iterations":11,"size":0},{"operation":"q3","backend":"MoTaxis","seconds":10.6747641563,"iterations":5,"size":0},{"operation":"q4","backend":"MoTaxis","seconds":11.3818044662,"iterations":3,"size":0},{"operation":"construct","backend":"CuTaxis","seconds":10.3174009323,"iterations":19,"size":0},{"operation":"q1","backend":"CuTaxis","seconds":10.0089886189,"iterations":550,"size":0},{"operation":"q2","backend":"CuTaxis","seconds":10.0348484516,"iterations":277,"size":0},{"operation":"q3","backend":"CuTaxis","seconds":10.0030481815,"iterations":389,"size":0},{"operation":"q4","backend":"CuTaxis","seconds":10.0013332367,"iterations":293,"size":0},{"operation":"construct","backend":"DaCuTaxis","seconds":10.0395841599,"iterations":236,"size":0},{"operation":"q1","backend":"DaCuTaxis","seconds":10.0764973164,"iterations":21,"size":0},{"operation":"q2","backend":"DaCuTaxis","seconds":10.1381647587,"iterations":21,"size":0},{"operation":"q3","backend":"DaCuTaxis","seconds":10.2112145424,"iterations":21,"size":0},{"operation":"q4","backend":"DaCuTaxis","seconds":10.2151319981,"iterations":20,"size":0},{"operation":"parse","backend":"pandas","seconds":13.5499477386,"iterations":3,"size":0},{"operation":"q1","backend":"pandas","seconds":10.033323288,"iterations":7,"size":0},{"operation":"q2","backend":"pandas","seconds":10.284747839,"iterations":26,"size":0},{"operation":"q3","backend":"pandas","seconds":10.5357999802,"iterations":4,"size":0},{"operation":"q4","backend":"pandas","seconds":11.8493049145,"iterations":4,"size":0},{"operation":"parse","backend":"modin","seconds":10.7786607742,"iterations":2,"size":0},{"operation":"q1","backend":"modin","seconds":10.2469701767,"iterations":28,"size":0},{"operation":"q2","backend":"modin","seconds":10.6981089115,"iterations":12,"size":0},{"operation":"q3","backend":"modin","seconds":10.4709670544,"iterations":5,"size":0},{"operation":"q4","backend":"modin","seconds":12.2828440666,"iterations":3,"size":0},{"operation":"parse","backend":"cudf","seconds":10.213643074,"iterations":18,"size":0},{"operation":"q1","backend":"cudf","seconds":10.002604723,"iterations":528,"size":0},{"operation":"q2","backend":"cudf","seconds":10.0351779461,"iterations":278,"size":0},{"operation":"q3","backend":"cudf","seconds":10.0251405239,"iterations":396,"size":0},{"operation":"q4","backend":"cudf","seconds":10.0070450306,"iterations":289,"size":0},{"operation":"parse","backend":"dask_cudf","seconds":10.0439682007,"iterations":209,"size":0},{"operation":"q1","backend":"dask_cudf","seconds":10.2375974655,"iterations":19,"size":0},{"operation":"q2","backend":"dask_cudf","seconds":10.2518358231,"iterations":19,"size":0},{"operation":"q3","backend":"dask_cudf","seconds":10.355432272,"iterations":19,"size":0},{"operation":"q4","backend":"dask_cudf","seconds":10.078728199,"iterations":18,"size":0}]
+[
+    {
+        "operation": "parse",
+        "backend": "pandas",
+        "seconds": 10.7594475746,
+        "iterations": 6,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "pandas",
+        "seconds": 10.2021489143,
+        "iterations": 13,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "pandas",
+        "seconds": 10.1990501881,
+        "iterations": 50,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "pandas",
+        "seconds": 10.3073494434,
+        "iterations": 8,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "pandas",
+        "seconds": 10.256562233,
+        "iterations": 7,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "modin",
+        "seconds": 10.3954937458,
+        "iterations": 6,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "modin",
+        "seconds": 10.1475427151,
+        "iterations": 25,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "modin",
+        "seconds": 10.089189291,
+        "iterations": 23,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "modin",
+        "seconds": 10.373737812,
+        "iterations": 8,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "modin",
+        "seconds": 12.2378590107,
+        "iterations": 5,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "cudf",
+        "seconds": 10.1330533028,
+        "iterations": 36,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "cudf",
+        "seconds": 10.0805540085,
+        "iterations": 125,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "cudf",
+        "seconds": 10.0105969906,
+        "iterations": 483,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "cudf",
+        "seconds": 10.0153517723,
+        "iterations": 577,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "cudf",
+        "seconds": 10.0171000957,
+        "iterations": 513,
+        "size": 461966527,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "pandas",
+        "seconds": 12.0781724453,
+        "iterations": 3,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "pandas",
+        "seconds": 11.1577124596,
+        "iterations": 7,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "pandas",
+        "seconds": 10.3547525406,
+        "iterations": 26,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "pandas",
+        "seconds": 10.2221093178,
+        "iterations": 4,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "pandas",
+        "seconds": 11.5552699566,
+        "iterations": 4,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "modin",
+        "seconds": 10.5014429092,
+        "iterations": 2,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "modin",
+        "seconds": 10.3829448223,
+        "iterations": 16,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "modin",
+        "seconds": 10.730796814,
+        "iterations": 12,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "modin",
+        "seconds": 10.1219434738,
+        "iterations": 4,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "modin",
+        "seconds": 14.2318470478,
+        "iterations": 3,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "cudf",
+        "seconds": 10.3915462494,
+        "iterations": 20,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "cudf",
+        "seconds": 10.0304419994,
+        "iterations": 76,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "cudf",
+        "seconds": 10.0132679939,
+        "iterations": 267,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "cudf",
+        "seconds": 10.022356987,
+        "iterations": 401,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "cudf",
+        "seconds": 10.0139658451,
+        "iterations": 283,
+        "size": 898372196,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "pandas",
+        "seconds": 16.5534946918,
+        "iterations": 2,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "pandas",
+        "seconds": 11.4126017094,
+        "iterations": 3,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "pandas",
+        "seconds": 10.6091804504,
+        "iterations": 13,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "pandas",
+        "seconds": 10.6397352219,
+        "iterations": 2,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "pandas",
+        "seconds": 12.0479516983,
+        "iterations": 2,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "modin",
+        "seconds": 10.2104203701,
+        "iterations": 1,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "modin",
+        "seconds": 11.0202567577,
+        "iterations": 10,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "modin",
+        "seconds": 10.6048939228,
+        "iterations": 6,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "modin",
+        "seconds": 10.0660865307,
+        "iterations": 2,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "modin",
+        "seconds": 18.8214821815,
+        "iterations": 2,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "cudf",
+        "seconds": 10.4273350239,
+        "iterations": 10,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "cudf",
+        "seconds": 10.2308926582,
+        "iterations": 41,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "cudf",
+        "seconds": 10.0634236336,
+        "iterations": 142,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "cudf",
+        "seconds": 10.0752294064,
+        "iterations": 196,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "cudf",
+        "seconds": 10.0710566044,
+        "iterations": 139,
+        "size": 1844082176,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "pandas",
+        "seconds": 14.0077750683,
+        "iterations": 1,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "pandas",
+        "seconds": 10.2426342964,
+        "iterations": 1,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "pandas",
+        "seconds": 10.1215269566,
+        "iterations": 7,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "pandas",
+        "seconds": 19.4338490963,
+        "iterations": 2,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "pandas",
+        "seconds": 11.0695970058,
+        "iterations": 1,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "modin",
+        "seconds": 18.5279262066,
+        "iterations": 1,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "modin",
+        "seconds": 11.3333508968,
+        "iterations": 6,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "modin",
+        "seconds": 12.3294782639,
+        "iterations": 4,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "modin",
+        "seconds": 18.0177605152,
+        "iterations": 2,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "modin",
+        "seconds": 17.1068460941,
+        "iterations": 1,
+        "size": 3247136293,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "pandas",
+        "seconds": 30.4490661621,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "pandas",
+        "seconds": 20.5700650215,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "pandas",
+        "seconds": 11.6979675293,
+        "iterations": 4,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "pandas",
+        "seconds": 20.2017836571,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "pandas",
+        "seconds": 22.4636409283,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "parse",
+        "backend": "modin",
+        "seconds": 37.0366945267,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q1",
+        "backend": "modin",
+        "seconds": 12.1880614758,
+        "iterations": 3,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q2",
+        "backend": "modin",
+        "seconds": 12.8696241379,
+        "iterations": 2,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q3",
+        "backend": "modin",
+        "seconds": 19.1942458153,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    },
+    {
+        "operation": "q4",
+        "backend": "modin",
+        "seconds": 35.5178906918,
+        "iterations": 1,
+        "size": 6648173847,
+        "error": ""
+    }
+]
