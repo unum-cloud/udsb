@@ -31,9 +31,40 @@ $ find . -name '*.csv' | xargs wc -l
 ```
 
 Great, 1.1 Billion Taxi Rides. Now we can start processing.
+
+## Preprocessing
+
 There is a slight difference between different representation of the dataset.
-The URSA Labs files don't have a `cab_type` column.
-The most similar we found was the `vendor_id`.
+
+* The URSA Labs files don't have a `cab_type` column. The most similar we found was the `vendor_id`.
+* The `passenger_count` may contain negative or zero values, which is obviously impossible. So we replace those with ones.
+
+## Implementation Details
+
+* Pandas supports `reset_index(name='')` on series, but not on frames. Other libraries mostly don't have that so we rename afterwards for higher compatiability.
+* In queries 3 and 4 we could have fetched/converted data from the main source in just a single run, but to allow lazy evaluation of `WHERE`-like sampling queries, we split it into two step.
+* Major problem in Dask is the lack of compatiable constructors, the most essential function of any class. You are generally expected to start with Pandas and cuDF and later [convert those](https://docs.dask.org/en/stable/generated/dask.dataframe.from_pandas.html#dask.dataframe.from_pandas).
+
+---
+
+Dask lacks functions on `Series`, like `to_datetime`.
+For that you must reference the parent `DataFrame` itself and manually `map_partitions` with wanted functor.
+Implementing it manually would look like this:
+
+```python
+def to_year(self, df, column_name: str):
+    return df.map_partitions(
+        cudf.to_datetime,
+        format='%Y-%m-%d %H:%M:%S',
+        meta=(column_name, pandas.Timestamp),
+    ).compute()
+```
+
+Luckily, there is a neater way: `df[column_name].astype('datetime64[s]')`.
+
+---
+
+Modin [didn't support](https://modin.readthedocs.io/en/stable/supported_apis/series_supported.html) the `Series.mask` we used for cleanup.
 
 ## The Queries
 
