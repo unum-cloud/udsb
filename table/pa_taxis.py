@@ -16,11 +16,15 @@ class PaTaxis:
     """
     """
 
-    def __init__(self, backend=pandas) -> None:
+    def __init__(
+        self,
+        backend=pandas,
+        paths: List[str] = taxi_rides_paths(),
+    ) -> None:
+
         self.backend = backend
-        paths = taxi_rides_paths()
         files = [self.backend.read_parquet(p) for p in paths]
-        # Concatenate
+        # Concatenate all files
         # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
         self.df = self.backend.concat(files, ignore_index=True)
         self.cleanup()
@@ -47,7 +51,9 @@ class PaTaxis:
         return self.backend.DataFrame(columns)
 
     def query1(self):
-        pulled_df = self.df[['vendor_id']]
+        pulled_df = self.df[['vendor_id']].copy()
+        # Grouping strings is a lot slower, than converting to categorical series:
+        pulled_df['vendor_id'] = pulled_df['vendor_id'].astype('category')
         grouped_df = pulled_df.groupby('vendor_id')
         final_df = grouped_df.size().reset_index()
         final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})

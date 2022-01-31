@@ -10,8 +10,8 @@ Engine.put('ray')
 
 class MoTaxis(PaTaxis):
 
-    def __init__(self) -> None:
-        super().__init__(modin.pandas)
+    def __init__(self, **kwargs) -> None:
+        super().__init__(modin.pandas, **kwargs)
 
     def cleanup(self):
         # Modin doesn't natively support masking and defaults ot Pandas.
