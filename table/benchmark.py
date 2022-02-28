@@ -7,7 +7,7 @@ from typing import Generator, List
 import fire
 import pandas as pd
 
-from pa_taxis import taxi_rides_paths
+from via_pandas import taxi_rides_paths
 
 
 @dataclass
@@ -71,20 +71,20 @@ def run_backend(class_: type, class_name: str, paths: List[str]) -> Generator[Sa
 def run_backends(backend_names: List[str],  paths: List[str]) -> Generator[Sample, None, None]:
 
     if 'pandas' in backend_names:
-        from pa_taxis import PaTaxis
-        yield from run_backend(PaTaxis, 'pandas', paths)
+        from via_pandas import ViaPandas
+        yield from run_backend(ViaPandas, 'pandas', paths)
 
     if 'modin' in backend_names:
-        from mo_taxis import MoTaxis
-        yield from run_backend(MoTaxis, 'modin', paths)
+        from via_modin import ViaModin
+        yield from run_backend(ViaModin, 'modin', paths)
 
     if 'cudf' in backend_names:
-        from cu_taxis import CuTaxis
-        yield from run_backend(CuTaxis, 'cudf', paths)
+        from via_cudf import ViaCuDF
+        yield from run_backend(ViaCuDF, 'cudf', paths)
 
     if 'dask_cudf' in backend_names:
-        from dacu_taxis import DaCuTaxis
-        yield from run_backend(DaCuTaxis, 'dask_cudf', paths)
+        from via_dask_cudf import ViaDaskCuDF
+        yield from run_backend(ViaDaskCuDF, 'dask_cudf', paths)
 
 
 def run_backends_and_sizes(backend_names: List[str]) -> Generator[Sample, None, None]:
@@ -124,10 +124,10 @@ def main(backend_names: List[str] = [], filename: os.PathLike = 'benchmark.json'
     # Validate passed argument
     if backend_names is None or len(backend_names) == 0:
         backend_names = [
-            'pandas',
-            'modin',
-            'cudf',
-            # 'dask_cudf',
+            # 'pandas',
+            # 'modin',
+            # 'cudf',
+            'dask_cudf',
         ]
     if isinstance(backend_names, str):
         backend_names = backend_names.split(',')

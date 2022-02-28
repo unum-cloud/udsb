@@ -6,13 +6,13 @@ import dask.distributed  # Imports new config values
 import dask_cudf
 import dask.config
 
-from dask_cuda import LocalCUDACluster
+from dask_cudf import LocalCUDACluster
 from dask.distributed import Client
 
-from pa_taxis import PaTaxis
+from via_pandas import ViaPandas
 
 
-class DaCuTaxis(PaTaxis):
+class ViaDaskCuDF(ViaPandas):
     """
         Dask-cuDF adaptation for Multi-GPU accleration.
 
@@ -50,4 +50,4 @@ class DaCuTaxis(PaTaxis):
 
 
 if __name__ == '__main__':
-    DaCuTaxis().log()
+    ViaDaskCuDF().log()

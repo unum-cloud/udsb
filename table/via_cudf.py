@@ -1,12 +1,12 @@
 
 import cudf
 
-from pa_taxis import PaTaxis
+from via_pandas import ViaPandas
 
 
-class CuTaxis(PaTaxis):
+class ViaCuDF(ViaPandas):
     """
-        cuDF adaptation for on-GPU acceleration.
+        CuDF adaptation for on-GPU acceleration.
     """
 
     def __init__(self, **kwargs) -> None:
@@ -14,4 +14,4 @@ class CuTaxis(PaTaxis):
 
 
 if __name__ == '__main__':
-    CuTaxis().log()
+    ViaCuDF().log()

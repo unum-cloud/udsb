@@ -2,13 +2,13 @@ import ray
 import modin.pandas
 from modin.config import Engine
 
-from pa_taxis import PaTaxis
+from via_pandas import ViaPandas
 
 ray.init(include_dashboard=False)
 Engine.put('ray')
 
 
-class MoTaxis(PaTaxis):
+class ViaModin(ViaPandas):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(modin.pandas, **kwargs)
@@ -20,4 +20,4 @@ class MoTaxis(PaTaxis):
 
 
 if __name__ == '__main__':
-    MoTaxis().log()
+    ViaModin().log()

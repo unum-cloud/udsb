@@ -12,7 +12,7 @@ def taxi_rides_paths() -> List[str]:
     return sorted(glob.glob(pattern, recursive=True))
 
 
-class PaTaxis:
+class ViaPandas:
     """
     """
 
@@ -108,4 +108,4 @@ class PaTaxis:
 
 
 if __name__ == '__main__':
-    PaTaxis().log()
+    ViaPandas().log()
