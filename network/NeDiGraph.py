@@ -1,11 +1,13 @@
 import networkx as nx
+import pandas as pd
 
 
 class NeDiGraph:
 
-    def __init__(self, edgelist):
+    def from_edgelist(self, df):
         self.graph = nx.DiGraph()
-        self.graph.add_weighted_edges_from(edgelist)
+        self.graph = nx.from_pandas_edgelist(
+            df, source='source', target='target', edge_attr='weight')
 
     def pagerank(self):
         return nx.pagerank(self.graph)

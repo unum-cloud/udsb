@@ -1,70 +1,12 @@
-# In this comparison we should compare:
-#   1. naive single-threaded NumPy
-#   2. MKL-accelerated NumPy
-#   3. CUDA-accelerated CuPy
-#   4. CUDA and Tensor Cores-accelerated CuPy
-#
-# Workloads:
-#   * generating big random matrix
-#   * multiplying big matrices
-#   * moving average computation
-#   * generating big random matrix
-#
-# Difference between CuPy and NumPy:
-# https://docs.retworkx.dev/en/stable/user_guide/difference.html
-
-import os
 import time
-from dataclasses import dataclass
-from typing import Generator
-from enum import Enum
-
-
+from threading import Thread
 import pandas as pd
-import fire
-
-from preprocess import *
-
-networkx = None
-retworkx = None
-cugraph = None
-backend = None
-
-
-def sssp(g):
-    pass
-
-
-def pagerank(g):
-    if backend == networkx:
-        # https://networkx.org/documentation/stable/reference/algorithms/link_analysis.html#module-networkx.algorithms.link_analysis.pagerank_alg
-        # https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.pagerank_alg.pagerank.html#networkx.algorithms.link_analysis.pagerank_alg.pagerank
-        try:
-            backend.algorithms.link_analysis.pagerank_alg.pagerank(
-                g,
-                tol=0,
-                max_iter=100,
-            )
-        except backend.exception.PowerIterationFailedConvergence:
-            pass
-
-
-def louvain(g):
-    pass
-
-
-def wcc(g):
-    # https://qiskit.org/documentation/retworkx/apiref/retworkx.weakly_connected_components.html#retworkx.weakly_connected_components
-    return backend.weakly_connected_components(g)
-
-
-def force_atlas(g):
-    pass
-
-
-def floyd_warshall(g):
-    # https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.dense.floyd_warshall.html#networkx.algorithms.shortest_paths.dense.floyd_warshall
-    return networkx.algorithms.shortest_paths.dense.floyd_warshall(g)
+from dataclasses import dataclass
+import timeout_decorator
+import fetch_datasets
+from NeDiGraph import NeDiGraph
+from ReDiGraph import ReDiGraph
+from CuDiGraph import CuDiGraph
 
 
 @dataclass
@@ -72,89 +14,71 @@ class Sample:
     operation: str = ''
     dataset: str = ''
     seconds: float = 0.0
-    iterations: int = 0
-    size: int = 0
+    backend: str = ''
 
 
-def run_all_benchmarks() -> Generator[Sample, None, None]:
-    max_seconds = 10.0
-    datasets = [
-        colaborators_astrophysics,
-    ]
-    funcs = [
-        pagerank, louvain,
-        sssp, wcc, force_atlas,
-    ]
-
-    for dataset_generator in datasets:
-        dataset: Dataset = dataset_generator()
-
-        for func in funcs:
-            s = Sample()
-            s.operation = func.__name__
-            s.dataset = dataset.url
-
-            start = time.time()
-            while True:
-                func(dataset)
-                if backend == cugraph:
-                    cugraph.cuda.stream.get_current_stream().synchronize()
-                s.iterations += 1
-                s.seconds = time.time() - start
-                if s.seconds > max_seconds:
-                    break
-
-            print(s)
-            yield s
+samples = []
 
 
-class Backend(Enum):
-    python = 0
-    rust = 1
-    cuda = 2
-    cudas = 3
+@timeout_decorator.timeout(600, use_signals=False)
+def timeout_function(func):
+    return func()
 
 
-def main(backend_name: Backend = Backend.rust, filename: os.PathLike = 'benchmark.json'):
-
-    # Swap the backend, if GPU is selected
-    global backend
-    global networkx
-    global retworkx
-    global dtype
-
-    if backend_name == Backend.rust:
-        import retworkx
-        backend = retworkx
-
-    elif backend_name == Backend.python:
-        import networkx
-        backend = networkx
-
+def get_sample(func, dataset_title, backend_name, function_title):
+    print(
+        f"Starting {backend_name} {function_title} operation in {dataset_title} dataset")
+    start = time.time()
+    if backend_name != 'Cugraph':
+        try:
+            if not timeout_function(func):
+                return
+            print(
+                f"Finish {backend_name} {function_title} operation in {dataset_title} dataset")
+        except:
+            print(
+                f"Timeout for {backend_name} {function_title} operation in {dataset_title} dataset")
     else:
-        import retworkx
-        backend = retworkx
-        cuda_device = int(cuda_device)
-        devices = cugraph.cuda.runtime.getDeviceCount()
-        assert devices > 0, "No CUDA-powered device found"
-        print('Found {} CUDA devices'.format(devices))
+        if not func():
+            return
+        print(
+            f"Finish {backend_name} {function_title} operation in {dataset_title} dataset")
 
-        cugraph.cuda.runtime.setDevice(cuda_device)
-        specs = cugraph.cuda.runtime.getDeviceProperties(cuda_device)
-        name = specs['name'].decode()
-        print('Will run on: {}'.format(name))
+    s = Sample()
+    s.operation = function_title
+    s.dataset = dataset_title
+    s.backend = backend_name
+    s.seconds = time.time() - start
+    samples.append(s)
 
-    samples = list(run_all_benchmarks())
-    samples = [s.__dict__ for s in samples]
-    samples = pd.DataFrame(samples)
-    samples['backend'] = backend.__name__
 
-    # Merge with older results, if present
-    if os.path.exists(filename):
-        old_results = pd.read_json(filename, orient='records')
-        samples = pd.concat([old_results, samples], ignore_index=True)
-    samples.to_json(filename, orient='records')
+def run_all_benchmarks():
+    # fetch_datasets.download_datasets()
+    datasets = {'twitch_gamers': 'Twitch Gamers', 'citation_patents': 'Patent and Citation',
+                'live_journal': 'LiveJournal', 'stack': 'Stack'}
+    for dataset_name, dataset_title in datasets.items():
+        df = fetch_datasets.dataset_to_edges(dataset_name)
+        backends = {"Cugraph": CuDiGraph(), "Networkx": NeDiGraph(),
+                    "Retworkx": ReDiGraph()}
+        for backend_name, obj in backends.items():
+            obj.from_edgelist(df)
+            functions = {"Pagerank": obj.pagerank, "Weakly Connected Components": obj.wcc,
+                         "Floyd Warshall": obj.floyd_warshall, "Community Detection": obj.community, "Force Layout": obj.force_layout}
+            threads = []
+            for function_title, func in functions.items():
+                t = Thread(target=get_sample, args=(
+                    func, dataset_title, backend_name, function_title))
+                threads.append(t)
+                t.start()
+            for thread in threads:
+                thread.join()
+
+
+def main():
+    run_all_benchmarks()
+    pd.DataFrame(samples).to_json(
+        "network/results.json", orient='records')
 
 
 if __name__ == '__main__':
-    fire.Fire(main)
+    main()

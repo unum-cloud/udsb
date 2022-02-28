@@ -4,12 +4,12 @@ import requests
 import pandas as pd
 from tqdm import tqdm
 
-dataset_save_path = '/home/TaxiRideDatasets'
+dataset_save_path = '/home/davit/TaxiRideDatasets'
 dataset_urls = {
     'twitch_gamers': 'https://snap.stanford.edu/data/twitch_gamers.zip',  # 80 MB
     'citation_patents': 'https://snap.stanford.edu/data/cit-Patents.txt.gz',  # 260 MB
     'live_journal': 'https://snap.stanford.edu/data/soc-LiveJournal1.txt.gz',  # 1 GB
-    'gplus': 'https://snap.stanford.edu/data/gplus_combined.txt.gz',  # 1.3 GB
+    # 'gplus': 'https://snap.stanford.edu/data/gplus_combined.txt.gz',  # 1.3 GB
     'stack': 'https://snap.stanford.edu/data/sx-stackoverflow.txt.gz',  # 1.6 GB
     'orkut': 'https://snap.stanford.edu/data/bigdata/communities/com-orkut.ungraph.txt.gz',  # 1.7 GB
     'neuron': 'https://snap.stanford.edu/biodata/datasets/10023/files/CC-Neuron_cci.tsv.gz',  # 1.9 GB
@@ -18,6 +18,7 @@ dataset_urls = {
 
 
 def download_datasets():
+    print("Downloading datasets")
     for name, url in dataset_urls.items():
         path = os.path.join(dataset_save_path, name + '.' + url.split('.')[-1])
         response = requests.get(url, stream=True)
@@ -35,16 +36,23 @@ def download_datasets():
         progress_bar.close()
 
 
-def datasets_to_edges():
-    for name, url in dataset_urls.items():
-        path = os.path.join(dataset_save_path, name + '.' + url.split('.')[-1])
-        if name == "twitch_gamers":
-            with zipfile.ZipFile(path, 'r') as zip_ref:
-                df = pd.read_csv(zip_ref.open('large_twitch_edges.csv', 'r'))
-        elif name == "gplus":
-            df = pd.read_csv(path, compression='gzip',
-                             sep=' ', header=0, skiprows=None)
-        else:
-            df = pd.read_csv(path, compression='gzip',
-                             sep='\t', header=3, skiprows=None)
-        yield [tuple(row) + (1,) for row in df.values]
+def dataset_to_edges(name: str):
+    url = dataset_urls.get(name, None)
+    if url == None:
+        print("Wrong dataset name")
+        return
+    path = os.path.join(dataset_save_path, name + '.' + url.split('.')[-1])
+    if name == "twitch_gamers":
+        with zipfile.ZipFile(path, 'r') as zip_ref:
+            df = pd.read_csv(zip_ref.open('large_twitch_edges.csv', 'r'))
+    elif name == "gplus" or name == "stack":
+        df = pd.read_csv(path, compression='gzip',
+                         sep=' ', header=0, skiprows=None)
+    else:
+        df = pd.read_csv(path, compression='gzip',
+                         sep='\t', header=3, skiprows=None)
+    df = df.rename(columns={df.columns[0]: 'source', df.columns[1]: 'target'})
+    if len(df.columns) == 2:
+        df['weight'] = 1
+    df = df.rename(columns={df.columns[-1]: 'weight'})
+    return df
