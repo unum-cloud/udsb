@@ -1,7 +1,8 @@
 import os
 import time
 from dataclasses import dataclass
-from typing import Callable, List, Iterable
+from typing import Callable, List, Iterable, Optional
+import logging
 
 import pandas as pd
 
@@ -86,6 +87,7 @@ def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
     filename: os.PathLike = 'bench.json',
+    logger: logging.Logger = logging.Logger(),
 ):
 
     # Retrieve previous results
@@ -100,7 +102,7 @@ def run_persisted_benchmarks(
 
             # Skip benchmarks we have already run.
             if list_contains_benchmark(samples, bench):
-                print('Skipping:', bench)
+                logger.info('Skipping:', bench)
                 continue
 
             # Skip benchmarks that will take too long.
@@ -111,17 +113,22 @@ def run_persisted_benchmarks(
                 if previous.seconds > max_seconds and previous.iterations == 1:
                     continue
 
-            print('Will run:', bench)
+            logger.info('Will run:', bench)
             sample = bench(max_seconds=max_seconds)
             if len(sample.error) == 0:
                 samples.append(sample)
-                print('-- finished:', sample)
+                logger.info('-- completed:', sample)
+            else:
+                logger.error('-- failed:', sample.error)
 
     # If the time run out - gracefully save intermediate results!
     except KeyboardInterrupt:
         pass
+    logger.info(f'Finished with {len(samples)} benchmarks')
 
     # Format into a table
     samples = [s.__dict__ for s in samples]
     samples = pd.DataFrame(samples)
     samples.to_json(filename, orient='records')
+
+    logger.info(f'Saved everything to:\n{os.path.abspath(filename)}')
