@@ -19,25 +19,25 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
     def q1():
         global current_instance
         if not isinstance(current_instance, class_):
-            raise Exception()
+            raise Exception('Uninitialized instance!')
         return current_instance.query1()
 
     def q2():
         global current_instance
         if not isinstance(current_instance, class_):
-            raise Exception()
+            raise Exception('Uninitialized instance!')
         return current_instance.query2()
 
     def q3():
         global current_instance
         if not isinstance(current_instance, class_):
-            raise Exception()
+            raise Exception('Uninitialized instance!')
         return current_instance.query3()
 
     def q4():
         global current_instance
         if not isinstance(current_instance, class_):
-            raise Exception()
+            raise Exception('Uninitialized instance!')
         return current_instance.query4()
 
     funcs = [parse, q1, q2, q3, q4]
@@ -83,7 +83,7 @@ def benchmarks_for_backends(backend_names: List[str],  paths: List[str]) -> Gene
         yield from benchmarks_for_backend(ViaPySpark, 'PySpark', paths)
 
 
-def available_benchmarks(backend_names: List[str] = []) -> Generator[Bench, None, None]:
+def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, None, None]:
 
     # Validate passed argument
     if backend_names is None or len(backend_names) == 0:
@@ -104,6 +104,7 @@ def available_benchmarks(backend_names: List[str] = []) -> Generator[Bench, None
     all_sizes = [os.path.getsize(p) for p in all_paths]
     total_size = sum(all_sizes)
 
+    # Size categories are just different fractions of the entire dataset
     size_categories = [
         0.01,
         0.02,
