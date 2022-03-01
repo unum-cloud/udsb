@@ -1,5 +1,5 @@
 import os
-os.environ['RAY_DISABLE_IMPORT_WARNING'] = 1  # nopep8
+os.environ['RAY_DISABLE_IMPORT_WARNING'] = '1'  # nopep8
 
 import ray
 import modin.pandas
