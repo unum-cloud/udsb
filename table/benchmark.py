@@ -7,6 +7,7 @@ from xmlrpc.client import Boolean
 
 import fire
 import pandas as pd
+import humanize
 
 from via_pandas import taxi_rides_paths
 
@@ -29,7 +30,8 @@ class Sample:
     def __repr__(self) -> str:
         suffix = self.error if len(
             self.error) else f'{self.iterations} iterations'
-        return f'{self.backend}.{self.operation}({self.size_bytes}): {suffix}'
+        size = humanize.naturalsize(self.size_bytes)
+        return f'{self.backend}.{self.operation}({size}): {suffix}'
 
 
 @dataclass
@@ -42,7 +44,8 @@ class Bench:
     func: Callable[[], NoneType]
 
     def __repr__(self) -> str:
-        return f'{self.backend}.{self.operation}({self.size_bytes})'
+        size = humanize.naturalsize(self.size_bytes)
+        return f'{self.backend}.{self.operation}({size})'
 
     def __call__(self) -> Sample:
         s = Sample()
@@ -75,25 +78,25 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
     def q1():
         global current_instance
         if not isinstance(current_instance, class_):
-            current_instance = class_(paths=paths)
+            raise Exception()
         return current_instance.query1()
 
     def q2():
         global current_instance
         if not isinstance(current_instance, class_):
-            current_instance = class_(paths=paths)
+            raise Exception()
         return current_instance.query2()
 
     def q3():
         global current_instance
         if not isinstance(current_instance, class_):
-            current_instance = class_(paths=paths)
+            raise Exception()
         return current_instance.query3()
 
     def q4():
         global current_instance
         if not isinstance(current_instance, class_):
-            current_instance = class_(paths=paths)
+            raise Exception()
         return current_instance.query4()
 
     funcs = [parse, q1, q2, q3, q4]
@@ -147,9 +150,9 @@ def benchmarks_for_all_sizes(backend_names: List[str]) -> Generator[Bench, None,
     size_categories = [
         0.01,
         0.02,
-        # 0.04,
-        # 0.08,
-        # 0.16,
+        0.04,
+        0.08,
+        0.16,
         # 0.32,
         # 0.64,
         # 1.0,
