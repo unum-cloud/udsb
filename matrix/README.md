@@ -1,4 +1,4 @@
-# Unit Benchmarks for Nvidia Rapids Ecosystem
+# Linear Algebra oriented
 
 ## Installation
 

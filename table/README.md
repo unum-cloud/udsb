@@ -156,10 +156,3 @@ final_df = final_df.sort_values(['year', 'counts'], ascending=[True, False])
 * Mark Litwintschiks [leaderboard of databases](https://tech.marksblogg.com/benchmarks.html).
 * Mark Litwintschiks first full-scale [Redshift variant](https://tech.marksblogg.com/all-billion-nyc-taxi-rides-redshift.html).
 * [SnowFlake](https://www.tropos.io/blog/how-to/analyzing-2-billion-taxi-rides-in-snowflake/).
-
-## TODO
-
-* Use the original repo to download and fill Postgres on the benchmarking machine
-* Export the entire state in Parquet files
-* Benchmark same with Monin
-* Benchmark same with Dask-cuDF

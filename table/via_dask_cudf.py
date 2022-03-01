@@ -8,7 +8,7 @@ import dask.config
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
 
-from via_pandas import ViaPandas, taxi_rides_paths
+from table.via_pandas import ViaPandas, taxi_rides_paths
 
 
 class ViaDaskCuDF(ViaPandas):

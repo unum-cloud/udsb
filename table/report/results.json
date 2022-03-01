@@ -478,5 +478,237 @@
         "seconds": 92.2579052448,
         "iterations": 1,
         "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "parse",
+        "size_bytes": 3247136293,
+        "seconds": 31.74832654,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q1",
+        "size_bytes": 3247136293,
+        "seconds": 10.8044149876,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q2",
+        "size_bytes": 3247136293,
+        "seconds": 10.1149559021,
+        "iterations": 6,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q3",
+        "size_bytes": 3247136293,
+        "seconds": 11.4610488415,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q4",
+        "size_bytes": 3247136293,
+        "seconds": 13.3579425812,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "parse",
+        "size_bytes": 3247136293,
+        "seconds": 21.5995151997,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q1",
+        "size_bytes": 3247136293,
+        "seconds": 11.1733081341,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q2",
+        "size_bytes": 3247136293,
+        "seconds": 10.2286982536,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q3",
+        "size_bytes": 3247136293,
+        "seconds": 10.6494836807,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q4",
+        "size_bytes": 3247136293,
+        "seconds": 21.0156629086,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "cudf",
+        "operation": "q1",
+        "size_bytes": 3247136293,
+        "seconds": 10.0969715118,
+        "iterations": 20,
+        "error": ""
+    },
+    {
+        "backend": "cudf",
+        "operation": "q2",
+        "size_bytes": 3247136293,
+        "seconds": 10.0707838535,
+        "iterations": 80,
+        "error": ""
+    },
+    {
+        "backend": "cudf",
+        "operation": "q3",
+        "size_bytes": 3247136293,
+        "seconds": 10.0508217812,
+        "iterations": 64,
+        "error": ""
+    },
+    {
+        "backend": "cudf",
+        "operation": "q4",
+        "size_bytes": 3247136293,
+        "seconds": 10.1121382713,
+        "iterations": 52,
+        "error": ""
+    },
+    {
+        "backend": "sqlite",
+        "operation": "parse",
+        "size_bytes": 3247136293,
+        "seconds": 778.889529705,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "sqlite",
+        "operation": "q1",
+        "size_bytes": 3247136293,
+        "seconds": 38.9075374603,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "sqlite",
+        "operation": "q2",
+        "size_bytes": 3247136293,
+        "seconds": 45.772567749,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "sqlite",
+        "operation": "q3",
+        "size_bytes": 3247136293,
+        "seconds": 95.3922569752,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "sqlite",
+        "operation": "q4",
+        "size_bytes": 3247136293,
+        "seconds": 162.1663060188,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "parse",
+        "size_bytes": 6648173847,
+        "seconds": 66.0406732559,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q1",
+        "size_bytes": 6648173847,
+        "seconds": 22.303839922,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q2",
+        "size_bytes": 6648173847,
+        "seconds": 12.8197865486,
+        "iterations": 4,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q3",
+        "size_bytes": 6648173847,
+        "seconds": 23.2125718594,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "pandas",
+        "operation": "q4",
+        "size_bytes": 6648173847,
+        "seconds": 23.59846735,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "parse",
+        "size_bytes": 6648173847,
+        "seconds": 44.2482788563,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q1",
+        "size_bytes": 6648173847,
+        "seconds": 14.0938527584,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q2",
+        "size_bytes": 6648173847,
+        "seconds": 14.3044650555,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q3",
+        "size_bytes": 6648173847,
+        "seconds": 23.4509656429,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "modin",
+        "operation": "q4",
+        "size_bytes": 6648173847,
+        "seconds": 42.8314585686,
+        "iterations": 1,
+        "error": ""
     }
 ]

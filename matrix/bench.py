@@ -19,24 +19,16 @@ from dataclasses import dataclass
 from typing import Generator
 
 import pandas as pd
-# import fire
 
-from matrix import Matrix
-from nu_matrix import NuMatrix
-from cu_matrix import CuMatrix
+from shared import Bench
+
 
 numpy = None
 obj = None
+enabled_backend = ''
 
-@dataclass
-class Sample:
-    operation: str = ''
-    seconds: float = 0.0
-    iterations: int = 0
-    size: int = 0
 
-def run_all_benchmarks(obj) -> Generator[Sample, None, None]:
-    max_seconds = 10.0
+def run_all_benchmarks(obj) -> Generator[Bench, None, None]:
     sizes = [512 * 2**i for i in range(0, 6)]
     funcs = [
         obj.matrix_multiply, obj.moving_average,
@@ -55,7 +47,7 @@ def run_all_benchmarks(obj) -> Generator[Sample, None, None]:
             while True:
                 func(mat)
                 if obj.backend != numpy:
-                   obj.backend.cuda.stream.get_current_stream().synchronize()
+                    obj.backend.cuda.stream.get_current_stream().synchronize()
                 s.iterations += 1
                 s.seconds = time.time() - start
                 if s.seconds > max_seconds:
@@ -63,6 +55,7 @@ def run_all_benchmarks(obj) -> Generator[Sample, None, None]:
 
             print(s)
             yield s
+
 
 def main(cuda_device: int = -1, filename: os.PathLike = 'benchmark.json'):
     # Swap the backend, if GPU is selected
@@ -81,7 +74,7 @@ def main(cuda_device: int = -1, filename: os.PathLike = 'benchmark.json'):
 
     else:
         obj = CuMatrix()
-        #obj.backend.distutils.system_info as sysinfo
+        # obj.backend.distutils.system_info as sysinfo
         #libs = set(sysinfo.get_info('blas')['libraries'])
         #print('Using Numpy with BLAS versions:', *libs)
     #dtype = backend.float32
