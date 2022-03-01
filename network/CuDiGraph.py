@@ -1,4 +1,3 @@
-
 import cugraph as cg
 
 
@@ -22,4 +21,4 @@ class CuDiGraph:
         return cg.force_atlas2(self.graph)
 
     def floyd_warshall(self):
-        return
+        raise NotImplementedError()

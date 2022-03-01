@@ -9,16 +9,16 @@ class ReDiGraph:
             [tuple(x) for x in df.to_records(index=False)])
 
     def pagerank(self):
-        return
+        raise NotImplementedError()
+
+    def community(self):
+        raise NotImplementedError()
 
     def wcc(self):
         return rx.weakly_connected_components(self.graph)
 
-    def floyd_warshall(self):
-        return rx.digraph_floyd_warshall(self.graph)
-
-    def community(self):
-        return
-
     def force_layout(self):
         return rx.spring_layout(self.graph)
+
+    def floyd_warshall(self):
+        return rx.digraph_floyd_warshall(self.graph)

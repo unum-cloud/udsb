@@ -1,8 +1,8 @@
 import time
-from threading import Thread
 import pandas as pd
 from dataclasses import dataclass
 import timeout_decorator
+
 import fetch_datasets
 from NeDiGraph import NeDiGraph
 from ReDiGraph import ReDiGraph
@@ -17,66 +17,53 @@ class Sample:
     backend: str = ''
 
 
-samples = []
+def run(func):
+    start = time.time()
+    try:
+        func()
+    except NotImplementedError:
+        return 0
+    return time.time() - start
 
 
 @timeout_decorator.timeout(600, use_signals=False)
-def timeout_function(func):
-    return func()
-
-
-def get_sample(func, dataset_title, backend_name, function_title):
-    print(
-        f"Starting {backend_name} {function_title} operation in {dataset_title} dataset")
-    start = time.time()
-    if backend_name != 'Cugraph':
-        try:
-            if not timeout_function(func):
-                return
-            print(
-                f"Finish {backend_name} {function_title} operation in {dataset_title} dataset")
-        except:
-            print(
-                f"Timeout for {backend_name} {function_title} operation in {dataset_title} dataset")
-    else:
-        if not func():
-            return
-        print(
-            f"Finish {backend_name} {function_title} operation in {dataset_title} dataset")
-
-    s = Sample()
-    s.operation = function_title
-    s.dataset = dataset_title
-    s.backend = backend_name
-    s.seconds = time.time() - start
-    samples.append(s)
+def run_with_timeout(func):
+    return run(func)
 
 
 def run_all_benchmarks():
-    # fetch_datasets.download_datasets()
-    datasets = {'twitch_gamers': 'Twitch Gamers', 'citation_patents': 'Patent and Citation',
-                'live_journal': 'LiveJournal', 'stack': 'Stack'}
+    fetch_datasets.download_datasets()
+    datasets = {'bitcoin_alpha': 'Bitcoin Alpha', 'facebook': 'Facebook',  'twitch_gamers': 'Twitch Gamers', 'citation_patents': 'Patent and Citation',
+                'live_journal': 'LiveJournal', 'stack': 'Stack', 'orkut': 'Orkut'}
     for dataset_name, dataset_title in datasets.items():
         df = fetch_datasets.dataset_to_edges(dataset_name)
-        backends = {"Cugraph": CuDiGraph(), "Networkx": NeDiGraph(),
-                    "Retworkx": ReDiGraph()}
+        backends = {"CuGraph": CuDiGraph(), "NetworkX": NeDiGraph(),
+                    "RetworkX": ReDiGraph()}
         for backend_name, obj in backends.items():
             obj.from_edgelist(df)
-            functions = {"Pagerank": obj.pagerank, "Weakly Connected Components": obj.wcc,
+            functions = {"PageRank": obj.pagerank, "Weakly Connected Components": obj.wcc,
                          "Floyd Warshall": obj.floyd_warshall, "Community Detection": obj.community, "Force Layout": obj.force_layout}
-            threads = []
             for function_title, func in functions.items():
-                t = Thread(target=get_sample, args=(
-                    func, dataset_title, backend_name, function_title))
-                threads.append(t)
-                t.start()
-            for thread in threads:
-                thread.join()
+                print(
+                    f"Starting {backend_name} {function_title} operation in {dataset_title} dataset")
+                s = Sample()
+                s.operation = function_title
+                s.dataset = dataset_title
+                s.backend = backend_name
+                if backend_name != 'CuGraph':
+                    try:
+                        s.seconds = run_with_timeout(func)
+                    except:
+                        print(
+                            f"Timeout for {backend_name} {function_title} operation in {dataset_title} dataset")
+                        s.seconds = 600
+                else:
+                    s.seconds = run(func)
+                yield s
 
 
 def main():
-    run_all_benchmarks()
-    pd.DataFrame(samples).to_json(
+    pd.DataFrame(run_all_benchmarks()).to_json(
         "network/results.json", orient='records')
 
 
