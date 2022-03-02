@@ -83,11 +83,20 @@ def find_previous_size(samples: List[Sample], bench: Bench) -> Optional[Sample]:
     return last_size
 
 
+def default_logger() -> logging.Logger:
+    logging.basicConfig(
+        level=os.environ.get('LOGLEVEL', 'INFO'),
+        format='%(asctime)s: %(message)s',
+        datefmt='%H:%M:%s',
+    )
+    return logging.getLogger()
+
+
 def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
     filename: os.PathLike = 'bench.json',
-    logger: logging.Logger = logging.getLogger(),
+    logger: logging.Logger = default_logger(),
 ):
 
     # Retrieve previous results

@@ -117,10 +117,4 @@ if __name__ == '__main__':
 
     print('Available backends: ', backends)
     print('Available datasets: ', datasets)
-
-    logging.basicConfig(
-        level=os.environ.get('LOGLEVEL', 'INFO'),
-        format='%(asctime)s: %(message)s',
-        datefmt='%H:%M:%s',
-    )
     run_persisted_benchmarks(benches, 10, results_path)

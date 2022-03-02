@@ -26,32 +26,19 @@ from shared import Bench, run_persisted_benchmarks
 
 def benchmarks_for_backend(class_: type, class_name: str, size: int) -> Generator[Bench, None, None]:
 
-    obj = None
-
-    def generate():
-        nonlocal obj
-        obj = class_(side=size)
-
-    funcs = [generate]
-    funcs.append([
-        lambda obj=obj: obj.matrix_multiply(),
-        lambda obj=obj: obj.moving_average(),
-        lambda obj=obj: obj.pearson_correlations(),
-        lambda obj=obj: obj.fft2d(),
-        lambda obj=obj: obj.singular_decomposition(),
-        lambda obj=obj: obj.flat_median(),
-        lambda obj=obj: obj.flat_sort(),
-        lambda obj=obj: obj.flat_sum(),
-    ])
-
-    funcs_names = [
-        'Generate Random Matrix',
-        'Matrix Multiply', 'Rows Moving Average', 'Pearson Correlation of Rows',
-        '2D FFT', 'Singular Values Decomposition',
-        'Array Median', 'Array Sorting', 'Array Summation',
+    funcs = [
+        ('Generate', lambda: globals().update({'m': class_(side=size)})),
+        ('Matrix Multiply', lambda: globals()['m'].matrix_multiply()),
+        ('Moving Averages', lambda: globals()['m'].moving_average()),
+        ('Pearson Correlation', lambda: globals()['m'].pearson_correlations()),
+        ('2D FFT', lambda: globals()['m'].fft2d()),
+        ('Matrix SVD', lambda: globals()['m'].singular_decomposition()),
+        ('Array Median', lambda: globals()['m'].flat_median()),
+        ('Array Sorting', lambda: globals()['m'].flat_sort()),
+        ('Array Summation', lambda: globals()['m'].flat_sum()),
     ]
 
-    for func, func_name in zip(funcs, funcs_names):
+    for func_name, func in funcs:
         yield Bench(
             operation=func_name,
             backend=class_name,
@@ -59,10 +46,6 @@ def benchmarks_for_backend(class_: type, class_name: str, size: int) -> Generato
             dataset_bytes=(size ** 2)*4,
             func=func,
         )
-
-    if obj is not None:
-        obj.close()
-    obj = None
 
 
 def benchmarks_for_sizes(class_: type, class_name: str, side_sizes: List[int]) -> Generator[Bench, None, None]:
@@ -121,9 +104,4 @@ if __name__ == '__main__':
 
     print('Available backends: ', backends)
     print('Available datasets: ', datasets)
-
-    logging.basicConfig(
-        level=os.environ.get('LOGLEVEL', 'INFO'),
-        format='%(asctime)s: %(message)s',
-    )
     run_persisted_benchmarks(benches, 10, results_path)
