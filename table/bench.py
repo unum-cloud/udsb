@@ -1,6 +1,5 @@
 import os
 import pathlib
-import logging
 from typing import List, Generator
 
 import humanize

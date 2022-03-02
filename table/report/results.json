@@ -1,1 +1,389 @@
-[{"backend":"Pandas","operation":"Parse","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.632983923,"iterations":3,"error":""},{"backend":"Pandas","operation":"Query 1","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.693914175,"iterations":14,"error":""},{"backend":"Pandas","operation":"Query 2","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.1764576435,"iterations":49,"error":""},{"backend":"Pandas","operation":"Query 3","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.3454623222,"iterations":8,"error":""},{"backend":"Pandas","operation":"Query 4","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.316747427,"iterations":7,"error":""},{"backend":"Pandas","operation":"Close","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0000002384,"iterations":21923435,"error":""},{"backend":"Modin","operation":"Parse","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.3413882256,"iterations":6,"error":""},{"backend":"Modin","operation":"Query 1","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.3377108574,"iterations":25,"error":""},{"backend":"Modin","operation":"Query 2","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0336053371,"iterations":23,"error":""},{"backend":"Modin","operation":"Query 3","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.6688961983,"iterations":8,"error":""},{"backend":"Modin","operation":"Query 4","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0614829063,"iterations":4,"error":""},{"backend":"Modin","operation":"Close","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0000002384,"iterations":22131261,"error":""},{"backend":"CuDF","operation":"Parse","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.2385334969,"iterations":32,"error":""},{"backend":"CuDF","operation":"Query 1","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0717544556,"iterations":127,"error":""},{"backend":"CuDF","operation":"Query 2","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0018248558,"iterations":481,"error":""},{"backend":"CuDF","operation":"Query 3","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0156168938,"iterations":434,"error":""},{"backend":"CuDF","operation":"Query 4","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0132570267,"iterations":377,"error":""},{"backend":"CuDF","operation":"Close","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0000004768,"iterations":22310465,"error":""},{"backend":"SQLite","operation":"Parse","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":90.4485347271,"iterations":1,"error":""},{"backend":"SQLite","operation":"Query 1","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":13.9020342827,"iterations":3,"error":""},{"backend":"SQLite","operation":"Query 2","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.2906823158,"iterations":2,"error":""},{"backend":"SQLite","operation":"Query 3","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":11.6698348522,"iterations":1,"error":""},{"backend":"SQLite","operation":"Query 4","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":19.2894551754,"iterations":1,"error":""},{"backend":"SQLite","operation":"Close","dataset":"462.0 MB","dataset_bytes":461966527,"seconds":10.0000007153,"iterations":16880442,"error":""},{"backend":"Pandas","operation":"Parse","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":15.2326254845,"iterations":2,"error":""},{"backend":"Pandas","operation":"Query 1","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":11.2105619907,"iterations":7,"error":""},{"backend":"Pandas","operation":"Query 2","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.185012579,"iterations":26,"error":""},{"backend":"Pandas","operation":"Query 3","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0699195862,"iterations":4,"error":""},{"backend":"Pandas","operation":"Query 4","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":11.420948267,"iterations":4,"error":""},{"backend":"Pandas","operation":"Close","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0000002384,"iterations":21730542,"error":""},{"backend":"Modin","operation":"Parse","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.300283432,"iterations":2,"error":""},{"backend":"Modin","operation":"Query 1","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.5853152275,"iterations":16,"error":""},{"backend":"Modin","operation":"Query 2","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.6576206684,"iterations":12,"error":""},{"backend":"Modin","operation":"Query 3","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.2645812035,"iterations":4,"error":""},{"backend":"Modin","operation":"Query 4","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":14.195015192,"iterations":3,"error":""},{"backend":"Modin","operation":"Close","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0000004768,"iterations":22054167,"error":""},{"backend":"CuDF","operation":"Parse","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0091130733,"iterations":21,"error":""},{"backend":"CuDF","operation":"Query 1","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0590925217,"iterations":76,"error":""},{"backend":"CuDF","operation":"Query 2","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0018298626,"iterations":263,"error":""},{"backend":"CuDF","operation":"Query 3","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0131390095,"iterations":234,"error":""},{"backend":"CuDF","operation":"Query 4","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0074882507,"iterations":185,"error":""},{"backend":"CuDF","operation":"Close","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0000004768,"iterations":22215838,"error":""},{"backend":"SQLite","operation":"Close","dataset":"898.4 MB","dataset_bytes":898372196,"seconds":10.0000004768,"iterations":22277531,"error":""}]
+[
+    {
+        "backend": "Pandas",
+        "operation": "Parse",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.632983923,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 1",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.693914175,
+        "iterations": 14,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 2",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.1764576435,
+        "iterations": 49,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 3",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.3454623222,
+        "iterations": 8,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 4",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.316747427,
+        "iterations": 7,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Close",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0000002384,
+        "iterations": 21923435,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Parse",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.3413882256,
+        "iterations": 6,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 1",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.3377108574,
+        "iterations": 25,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 2",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0336053371,
+        "iterations": 23,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 3",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.6688961983,
+        "iterations": 8,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 4",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0614829063,
+        "iterations": 4,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Close",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0000002384,
+        "iterations": 22131261,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Parse",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.2385334969,
+        "iterations": 32,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 1",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0717544556,
+        "iterations": 127,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 2",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0018248558,
+        "iterations": 481,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 3",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0156168938,
+        "iterations": 434,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 4",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0132570267,
+        "iterations": 377,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Close",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0000004768,
+        "iterations": 22310465,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Parse",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 90.4485347271,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Query 1",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 13.9020342827,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Query 2",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.2906823158,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Query 3",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 11.6698348522,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Query 4",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 19.2894551754,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Close",
+        "dataset": "462.0 MB",
+        "dataset_bytes": 461966527,
+        "seconds": 10.0000007153,
+        "iterations": 16880442,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Parse",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 15.2326254845,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 1",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 11.2105619907,
+        "iterations": 7,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 2",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.185012579,
+        "iterations": 26,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 3",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0699195862,
+        "iterations": 4,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Query 4",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 11.420948267,
+        "iterations": 4,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Close",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0000002384,
+        "iterations": 21730542,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Parse",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.300283432,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 1",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.5853152275,
+        "iterations": 16,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 2",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.6576206684,
+        "iterations": 12,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 3",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.2645812035,
+        "iterations": 4,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Query 4",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 14.195015192,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Close",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0000004768,
+        "iterations": 22054167,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Parse",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0091130733,
+        "iterations": 21,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 1",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0590925217,
+        "iterations": 76,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 2",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0018298626,
+        "iterations": 263,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 3",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0131390095,
+        "iterations": 234,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Query 4",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0074882507,
+        "iterations": 185,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Close",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0000004768,
+        "iterations": 22215838,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Close",
+        "dataset": "898.4 MB",
+        "dataset_bytes": 898372196,
+        "seconds": 10.0000004768,
+        "iterations": 22277531,
+        "error": ""
+    }
+]
