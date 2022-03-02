@@ -87,7 +87,7 @@ def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
     filename: os.PathLike = 'bench.json',
-    logger: logging.Logger = logging.Logger(),
+    logger: logging.Logger = logging.getLogger(),
 ):
 
     # Retrieve previous results

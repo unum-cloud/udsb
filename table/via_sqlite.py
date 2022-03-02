@@ -3,7 +3,7 @@ import sqlite3
 
 import pandas as pd
 
-from table.via_pandas import taxi_rides_paths, ViaPandas
+from via_pandas import taxi_rides_paths, ViaPandas
 
 
 class ViaSQLite(ViaPandas):

@@ -1,11 +1,13 @@
 import os
+import pathlib
+import logging
 from typing import List, Generator
 
 import humanize
 import numpy as np
 
 from shared import Bench, run_persisted_benchmarks
-from table.via_pandas import taxi_rides_paths
+from via_pandas import taxi_rides_paths
 
 current_instance = None
 
@@ -59,27 +61,27 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
 def benchmarks_for_backends(backend_names: List[str],  paths: List[str]) -> Generator[Bench, None, None]:
 
     if 'Pandas' in backend_names:
-        from table.via_pandas import ViaPandas
+        from via_pandas import ViaPandas
         yield from benchmarks_for_backend(ViaPandas, 'Pandas', paths)
 
     if 'Modin' in backend_names:
-        from table.via_modin import ViaModin
+        from via_modin import ViaModin
         yield from benchmarks_for_backend(ViaModin, 'Modin', paths)
 
     if 'CuDF' in backend_names:
-        from table.via_cudf import ViaCuDF
+        from via_cudf import ViaCuDF
         yield from benchmarks_for_backend(ViaCuDF, 'CuDF', paths)
 
     if 'SQLite' in backend_names:
-        from table.via_sqlite import ViaSQLite
+        from via_sqlite import ViaSQLite
         yield from benchmarks_for_backend(ViaSQLite, 'SQLite', paths)
 
-    if 'Dask-CuDF' in backend_names:
-        from table.via_dask_cudf import ViaDaskCuDF
-        yield from benchmarks_for_backend(ViaDaskCuDF, 'Dask-CuDF', paths)
+    if 'Dask->CuDF' in backend_names:
+        from via_dask_cudf import ViaDaskCuDF
+        yield from benchmarks_for_backend(ViaDaskCuDF, 'Dask->CuDF', paths)
 
     if 'PySpark' in backend_names:
-        from table.via_spark import ViaPySpark
+        from via_spark import ViaPySpark
         yield from benchmarks_for_backend(ViaPySpark, 'PySpark', paths)
 
 
@@ -93,11 +95,11 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
             'CuDF',
             'SQLite',
             # 'PySpark',
-            # 'Dask-CuDF',
+            # 'Dask->CuDF',
+            # 'Dask+CuDF',
         ]
     if isinstance(backend_names, str):
         backend_names = backend_names.split(',')
-    backend_names = [n.lower() for n in backend_names]
 
     # Prepare different dataset sizes
     all_paths = taxi_rides_paths()
@@ -134,7 +136,13 @@ if __name__ == '__main__':
     benches = list(available_benchmarks())
     backends = np.unique([x.backend for x in benches])
     datasets = np.unique([x.dataset for x in benches])
+    results_path = os.path.join(
+        pathlib.Path(__file__).resolve().parent,
+        'report/results.json'
+    )
 
     print('Available backends: ', backends)
     print('Available datasets: ', datasets)
-    run_persisted_benchmarks(benches, 10, 'table/report/results.json')
+
+    logging.basicConfig(level=os.environ.get('LOGLEVEL', 'INFO'))
+    run_persisted_benchmarks(benches, 10, results_path)
