@@ -7,7 +7,7 @@ from via_numpy import ViaNumPy
 class ViaCuPy(ViaNumPy):
 
     def __init__(self, side: int):
-        ViaNumPy.__init__(self, cupy)
+        ViaNumPy.__init__(self, side=side, backend=cupy)
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.random.rand.html
         x = cupy.random.rand(side, side, dtype=numpy.float32)
         cupy.cuda.stream.get_current_stream().synchronize()
@@ -15,7 +15,7 @@ class ViaCuPy(ViaNumPy):
 
     def moving_average(self):
         #
-        x = super().moving_average(self.mat)
+        x = super().moving_average()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
@@ -27,36 +27,36 @@ class ViaCuPy(ViaNumPy):
 
     def fft2d(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.fft.fft2.html
-        x = super().fft2d(self.mat)
+        x = super().fft2d()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
     def matrix_multiply(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.matmul.html
-        x = super().matrix_multiply(self.mat)
+        x = super().matrix_multiply()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
     def singular_decomposition(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.linalg.svd.html
-        x = super().singular_decomposition(self.mat)
+        x = super().singular_decomposition()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
     def flat_sort(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.sort.html
-        x = super().flat_sort(self.mat)
+        x = super().flat_sort()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
     def flat_median(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.median.html
-        x = super().flat_median(self.mat)
+        x = super().flat_median()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x
 
     def flat_sum(self):
         # https://docs.cupy.dev/en/stable/reference/generated/cupy.sum.html
-        x = super().flat_sum(self.mat)
+        x = super().flat_sum()
         cupy.cuda.stream.get_current_stream().synchronize()
         return x

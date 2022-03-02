@@ -17,6 +17,7 @@ import logging
 import os
 import pathlib
 from dataclasses import dataclass
+from sys import argv
 from typing import Generator, Optional, List
 
 import numpy as np
@@ -69,8 +70,8 @@ def available_benchmarks(
         assert devices > 0, 'No CUDA-powered device found'
         logger.info('Found {} CUDA devices'.format(devices))
 
-        cupy.runtime.setDevice(cuda_device)
-        specs = cupy.runtime.getDeviceProperties(cuda_device)
+        cupy.cuda.runtime.setDevice(cuda_device)
+        specs = cupy.cuda.runtime.getDeviceProperties(cuda_device)
         name = specs['name'].decode()
         logger.info('Will run on: {}'.format(name))
 
@@ -94,7 +95,8 @@ def available_benchmarks(
 
 
 if __name__ == '__main__':
-    benches = list(available_benchmarks())
+    gpu = argv[1] if len(argv) == 2 else -1
+    benches = list(available_benchmarks(gpu))
     backends = np.unique([x.backend for x in benches])
     datasets = np.unique([x.dataset for x in benches])
     results_path = os.path.join(

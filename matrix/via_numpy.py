@@ -40,7 +40,7 @@ class ViaNumPy:
 
     def matrix_multiply(self):
         # https://numpy.org/doc/stable/reference/generated/numpy.matmul.html
-        return self.backend.matmul(self.mat, self.mat - self.backend.ones(self.mat.shape, dtype=matrix.dtype))
+        return self.backend.matmul(self.mat, self.mat - self.backend.ones(self.mat.shape, dtype=self.mat.dtype))
 
     def singular_decomposition(self):
         # https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html
@@ -56,7 +56,7 @@ class ViaNumPy:
 
     def flat_sum(self):
         # https://numpy.org/doc/stable/reference/generated/numpy.sum.html
-        return self.backend.sum(self.mat, axis=None, dtype=matrix.dtype)
+        return self.backend.sum(self.mat, axis=None, dtype=self.mat.dtype)
 
     def close(self):
         pass
