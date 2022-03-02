@@ -14,36 +14,24 @@ current_instance = None
 
 def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> Generator[Bench, None, None]:
 
+    obj = None
+    funcs = []
+
     def parse():
-        global current_instance
-        current_instance = class_(paths=paths)
+        nonlocal obj
+        obj = class_(paths=paths)
 
-    def q1():
-        global current_instance
-        if not isinstance(current_instance, class_):
-            raise Exception('Uninitialized instance!')
-        return current_instance.query1()
+    funcs.append(parse)
+    funcs.append(lambda obj=obj: obj.query1())
+    funcs.append(lambda obj=obj: obj.query2())
+    funcs.append(lambda obj=obj: obj.query3())
+    funcs.append(lambda obj=obj: obj.query4())
 
-    def q2():
-        global current_instance
-        if not isinstance(current_instance, class_):
-            raise Exception('Uninitialized instance!')
-        return current_instance.query2()
+    funcs_names = [
+        'Parse Parquet',
+        'Query 1', 'Query 2', 'Query 3', 'Query 4',
+    ]
 
-    def q3():
-        global current_instance
-        if not isinstance(current_instance, class_):
-            raise Exception('Uninitialized instance!')
-        return current_instance.query3()
-
-    def q4():
-        global current_instance
-        if not isinstance(current_instance, class_):
-            raise Exception('Uninitialized instance!')
-        return current_instance.query4()
-
-    funcs = [parse, q1, q2, q3, q4]
-    funcs_names = ['Parse', 'Query 1', 'Query 2', 'Query 3', 'Query 4']
     for func, func_name in zip(funcs, funcs_names):
 
         yield Bench(
@@ -54,8 +42,9 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
             func=func,
         )
 
-    global current_instance
-    current_instance = None
+    if obj is not None:
+        obj.close()
+    obj = None
 
 
 def benchmarks_for_backends(backend_names: List[str],  paths: List[str]) -> Generator[Bench, None, None]:
