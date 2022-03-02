@@ -1,4 +1,4 @@
-name: numpy_mkl
+name: adsb_mkl
 channels:
   - conda-forge
   - defaults

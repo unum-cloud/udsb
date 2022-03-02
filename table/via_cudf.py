@@ -1,7 +1,7 @@
 
 import cudf
 
-from table.via_pandas import ViaPandas
+from via_pandas import ViaPandas
 
 
 class ViaCuDF(ViaPandas):

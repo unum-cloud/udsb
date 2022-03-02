@@ -42,7 +42,7 @@ def run_all_benchmarks():
         for backend_name, obj in backends.items():
             obj.from_edgelist(df)
             functions = {"PageRank": obj.pagerank, "Weakly Connected Components": obj.wcc,
-                         "Floyd Warshall": obj.floyd_warshall, "Community Detection": obj.community, "Force Layout": obj.force_layout}
+                         "Floyd Warshall": obj.pairwise_distances, "Community Detection": obj.community, "Force Layout": obj.force_layout}
             for function_title, func in functions.items():
                 print(
                     f"Starting {backend_name} {function_title} operation in {dataset_title} dataset")

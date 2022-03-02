@@ -4,3 +4,5 @@ __pycache__
 *.csv
 tmp/
 dask-worker-space/
+cufile.log
+.vscode/

@@ -3,7 +3,7 @@ import sqlite3
 
 import pandas as pd
 
-from table.via_pandas import taxi_rides_paths, ViaPandas
+from via_pandas import taxi_rides_paths, ViaPandas
 
 
 class ViaSQLite(ViaPandas):
@@ -73,6 +73,10 @@ class ViaSQLite(ViaPandas):
         c = self.connenction.cursor()
         c.execute(q)
         return c.fetchall()
+
+    def close(self):
+        self.connenction.close()
+        self.connection = None
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ import ray
 import modin.pandas
 from modin.config import Engine
 
-from table.via_pandas import ViaPandas
+from via_pandas import ViaPandas
 
 ray.init(include_dashboard=False)
 Engine.put('ray')

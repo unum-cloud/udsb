@@ -1,4 +1,4 @@
-name: numpy_openblas
+name: adsb_openblas
 channels:
   - conda-forge
   - defaults

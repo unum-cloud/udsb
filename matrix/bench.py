@@ -13,83 +13,95 @@
 # Difference between CuPy and NumPy:
 # https://docs.cupy.dev/en/stable/user_guide/difference.html
 
+import logging
 import os
-import time
+import pathlib
 from dataclasses import dataclass
-from typing import Generator
+from typing import Generator, Optional, List
 
-import pandas as pd
+import numpy as np
 
-from shared import Bench
-
-
-numpy = None
-obj = None
-enabled_backend = ''
+from shared import Bench, run_persisted_benchmarks
 
 
-def run_all_benchmarks(obj) -> Generator[Bench, None, None]:
-    sizes = [512 * 2**i for i in range(0, 6)]
+def benchmarks_for_backend(class_: type, class_name: str, size: int) -> Generator[Bench, None, None]:
+
     funcs = [
-        obj.matrix_multiply, obj.moving_average,
-        obj.pearson_correlations, obj.fft2d, obj.singular_decomposition,
-        obj.flat_median, obj.flat_sort, obj.flat_sum
+        ('Generate', lambda: globals().update({'m': class_(side=size)})),
+        ('Matrix Multiply', lambda: globals()['m'].matrix_multiply()),
+        ('Moving Averages', lambda: globals()['m'].moving_average()),
+        ('Pearson Correlation', lambda: globals()['m'].pearson_correlations()),
+        ('2D FFT', lambda: globals()['m'].fft2d()),
+        ('Matrix SVD', lambda: globals()['m'].singular_decomposition()),
+        ('Array Median', lambda: globals()['m'].flat_median()),
+        ('Array Sorting', lambda: globals()['m'].flat_sort()),
+        ('Array Summation', lambda: globals()['m'].flat_sum()),
     ]
 
-    for func in funcs:
-        for size in sizes:
-            s = Sample()
-            s.operation = func.__name__
-            s.size = size
-
-            mat = obj.generate_random_matrix(size)
-            start = time.time()
-            while True:
-                func(mat)
-                if obj.backend != numpy:
-                    obj.backend.cuda.stream.get_current_stream().synchronize()
-                s.iterations += 1
-                s.seconds = time.time() - start
-                if s.seconds > max_seconds:
-                    break
-
-            print(s)
-            yield s
+    for func_name, func in funcs:
+        yield Bench(
+            operation=func_name,
+            backend=class_name,
+            dataset=f'{size}x{size}',
+            dataset_bytes=(size ** 2)*4,
+            func=func,
+        )
 
 
-def main(cuda_device: int = -1, filename: os.PathLike = 'benchmark.json'):
+def benchmarks_for_sizes(class_: type, class_name: str, side_sizes: List[int]) -> Generator[Bench, None, None]:
+    for size in side_sizes:
+        yield from benchmarks_for_backend(class_, class_name, size)
+
+
+def available_benchmarks(
+    cuda_device: int = -1,
+    class_name: Optional[str] = None,
+    logger: logging.Logger = logging.getLogger(),
+) -> Generator[Bench, None, None]:
+
     # Swap the backend, if GPU is selected
     cuda_device = int(cuda_device)
+    sizes = [512 * 2**i for i in range(0, 6)]
 
     if cuda_device >= 0:
-        obj = NuMatrix()
-        devices = obj.backend.cuda.runtime.getDeviceCount()
-        assert devices > 0, "No CUDA-powered device found"
-        print('Found {} CUDA devices'.format(devices))
+        import cupy
+        devices = cupy.cuda.runtime.getDeviceCount()
+        assert devices > 0, 'No CUDA-powered device found'
+        logger.info('Found {} CUDA devices'.format(devices))
 
-        obj.backend.cuda.runtime.setDevice(cuda_device)
-        specs = obj.backend.cuda.runtime.getDeviceProperties(cuda_device)
+        cupy.runtime.setDevice(cuda_device)
+        specs = cupy.runtime.getDeviceProperties(cuda_device)
         name = specs['name'].decode()
-        print('Will run on: {}'.format(name))
+        logger.info('Will run on: {}'.format(name))
+
+        if class_name is None:
+            class_name = 'CuPy'
+
+        from via_cupy import ViaCuPy
+        yield from benchmarks_for_sizes(ViaCuPy, class_name, sizes)
 
     else:
-        obj = CuMatrix()
-        # obj.backend.distutils.system_info as sysinfo
-        #libs = set(sysinfo.get_info('blas')['libraries'])
-        #print('Using Numpy with BLAS versions:', *libs)
-    #dtype = backend.float32
+        import numpy.distutils.system_info as sysinfo
+        libs = set(sysinfo.get_info('blas')['libraries'])
+        libs_str = ','.join(libs)
+        logger.info(f'Using NumPy with BLAS versions: {libs_str}')
 
-    samples = list(run_all_benchmarks(obj))
-    samples = [s.__dict__ for s in samples]
-    samples = pd.DataFrame(samples)
-    samples['backend'] = obj.backend.__name__
+        if class_name is None:
+            class_name = 'NumPy'
 
-    # Merge with older results, if present
-    if os.path.exists(filename):
-        old_results = pd.read_json(filename, orient='records')
-        samples = pd.concat([old_results, samples], ignore_index=True)
-    samples.to_json(filename, orient='records')
+        from via_numpy import ViaNumPy
+        yield from benchmarks_for_sizes(ViaNumPy, class_name, sizes)
 
 
 if __name__ == '__main__':
-    main()
+    benches = list(available_benchmarks())
+    backends = np.unique([x.backend for x in benches])
+    datasets = np.unique([x.dataset for x in benches])
+    results_path = os.path.join(
+        pathlib.Path(__file__).resolve().parent,
+        'report/results.json'
+    )
+
+    print('Available backends: ', backends)
+    print('Available datasets: ', datasets)
+    run_persisted_benchmarks(benches, 10, results_path)

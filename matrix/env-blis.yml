@@ -1,4 +1,4 @@
-name: numpy_blis
+name: adsb_numpy_blis
 channels:
   - conda-forge
   - defaults

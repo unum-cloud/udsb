@@ -1,6 +1,6 @@
 from typing import List
 
-from table.via_pandas import taxi_rides_paths, ViaPandas
+from via_pandas import taxi_rides_paths, ViaPandas
 
 
 class ViaPySpark(ViaPandas):
