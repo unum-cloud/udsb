@@ -1,1 +1,470 @@
-[{"backend":"CuPy","operation":"Generate","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0000383854,"iterations":218879,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0000507832,"iterations":89462,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"512x512","dataset_bytes":1048576,"seconds":10.000056982,"iterations":125339,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0005073547,"iterations":14021,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"512x512","dataset_bytes":1048576,"seconds":10.000015974,"iterations":199250,"error":""},{"backend":"CuPy","operation":"Matrix SVD","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0699491501,"iterations":118,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0000166893,"iterations":46894,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0001020432,"iterations":52138,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"512x512","dataset_bytes":1048576,"seconds":10.0000290871,"iterations":114563,"error":""},{"backend":"CuPy","operation":"Generate","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0000765324,"iterations":115742,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0001938343,"iterations":50904,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0000040531,"iterations":55476,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0045089722,"iterations":2203,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0000181198,"iterations":119366,"error":""},{"backend":"CuPy","operation":"Matrix SVD","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0793690681,"iterations":28,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0000712872,"iterations":33801,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0001928806,"iterations":36434,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"1024x1024","dataset_bytes":4194304,"seconds":10.0002863407,"iterations":32832,"error":""},{"backend":"CuPy","operation":"Generate","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0002315044,"iterations":32752,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0007266998,"iterations":10842,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.000187397,"iterations":24031,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0212771893,"iterations":316,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0001068115,"iterations":36474,"error":""},{"backend":"CuPy","operation":"Matrix SVD","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.8083994389,"iterations":5,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0003488064,"iterations":16146,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0002682209,"iterations":16674,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"2048x2048","dataset_bytes":16777216,"seconds":10.0018684864,"iterations":4223,"error":""},{"backend":"CuPy","operation":"Generate","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0007727146,"iterations":8677,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0043570995,"iterations":1594,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0000116825,"iterations":7172,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0442759991,"iterations":40,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0003650188,"iterations":7954,"error":""},{"backend":"CuPy","operation":"Matrix SVD","dataset":"4096x4096","dataset_bytes":67108864,"seconds":14.1768994331,"iterations":1,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0004246235,"iterations":5465,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.000490427,"iterations":5519,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"4096x4096","dataset_bytes":67108864,"seconds":10.0014970303,"iterations":1062,"error":""},{"backend":"CuPy","operation":"Generate","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0039377213,"iterations":2202,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0256278515,"iterations":209,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0021455288,"iterations":1850,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0024507046,"iterations":5,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0000214577,"iterations":1699,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0008220673,"iterations":1504,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0004043579,"iterations":1509,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"8192x8192","dataset_bytes":268435456,"seconds":10.0026674271,"iterations":266,"error":""},{"backend":"CuPy","operation":"Generate","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0105614662,"iterations":554,"error":""},{"backend":"CuPy","operation":"Matrix Multiply","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.3266501427,"iterations":27,"error":""},{"backend":"CuPy","operation":"Moving Averages","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0206136703,"iterations":468,"error":""},{"backend":"CuPy","operation":"Pearson Correlation","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":15.9507138729,"iterations":1,"error":""},{"backend":"CuPy","operation":"2D FFT","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0182635784,"iterations":522,"error":""},{"backend":"CuPy","operation":"Array Median","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0143585205,"iterations":387,"error":""},{"backend":"CuPy","operation":"Array Sorting","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0082266331,"iterations":387,"error":""},{"backend":"CuPy","operation":"Array Summation","dataset":"16384x16384","dataset_bytes":1073741824,"seconds":10.0707006454,"iterations":67,"error":""}]
+[
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000383854,
+        "iterations": 218879,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000507832,
+        "iterations": 89462,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.000056982,
+        "iterations": 125339,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0005073547,
+        "iterations": 14021,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.000015974,
+        "iterations": 199250,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0699491501,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000166893,
+        "iterations": 46894,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0001020432,
+        "iterations": 52138,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000290871,
+        "iterations": 114563,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000765324,
+        "iterations": 115742,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001938343,
+        "iterations": 50904,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000040531,
+        "iterations": 55476,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0045089722,
+        "iterations": 2203,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000181198,
+        "iterations": 119366,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0793690681,
+        "iterations": 28,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000712872,
+        "iterations": 33801,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001928806,
+        "iterations": 36434,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0002863407,
+        "iterations": 32832,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0002315044,
+        "iterations": 32752,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0007266998,
+        "iterations": 10842,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.000187397,
+        "iterations": 24031,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0212771893,
+        "iterations": 316,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001068115,
+        "iterations": 36474,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.8083994389,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0003488064,
+        "iterations": 16146,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0002682209,
+        "iterations": 16674,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0018684864,
+        "iterations": 4223,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0007727146,
+        "iterations": 8677,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0043570995,
+        "iterations": 1594,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0000116825,
+        "iterations": 7172,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0442759991,
+        "iterations": 40,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0003650188,
+        "iterations": 7954,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 14.1768994331,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0004246235,
+        "iterations": 5465,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.000490427,
+        "iterations": 5519,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0014970303,
+        "iterations": 1062,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0039377213,
+        "iterations": 2202,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0256278515,
+        "iterations": 209,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0021455288,
+        "iterations": 1850,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0024507046,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0000214577,
+        "iterations": 1699,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0008220673,
+        "iterations": 1504,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0004043579,
+        "iterations": 1509,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0026674271,
+        "iterations": 266,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0105614662,
+        "iterations": 554,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.3266501427,
+        "iterations": 27,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0206136703,
+        "iterations": 468,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 15.9507138729,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0182635784,
+        "iterations": 522,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0143585205,
+        "iterations": 387,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0082266331,
+        "iterations": 387,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0707006454,
+        "iterations": 67,
+        "error": ""
+    }
+]
