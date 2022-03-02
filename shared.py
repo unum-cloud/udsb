@@ -102,7 +102,7 @@ def run_persisted_benchmarks(
 
             # Skip benchmarks we have already run.
             if list_contains_benchmark(samples, bench):
-                logger.info('Skipping:', bench)
+                logger.info(f'Skipping: {bench}')
                 continue
 
             # Skip benchmarks that will take too long.
@@ -113,13 +113,13 @@ def run_persisted_benchmarks(
                 if previous.seconds > max_seconds and previous.iterations == 1:
                     continue
 
-            logger.info('Will run:', bench)
+            logger.info(f'Will run: {bench}')
             sample = bench(max_seconds=max_seconds)
             if len(sample.error) == 0:
                 samples.append(sample)
-                logger.info('-- completed:', sample)
+                logger.info(f'-- completed: {sample}')
             else:
-                logger.error('-- failed:', sample.error)
+                logger.error(f'-- failed: {sample.error}')
 
     # If the time run out - gracefully save intermediate results!
     except KeyboardInterrupt:
