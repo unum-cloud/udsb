@@ -1,1 +1,632 @@
-[{"operation":"PageRank","dataset":"Bitcoin Alpha","seconds":0.0073947906,"backend":"CuGraph"},{"operation":"Weakly Connected Components","dataset":"Bitcoin Alpha","seconds":0.0127191544,"backend":"CuGraph"},{"operation":"Floyd Warshall","dataset":"Bitcoin Alpha","seconds":0.0,"backend":"CuGraph"},{"operation":"Community Detection","dataset":"Bitcoin Alpha","seconds":0.0162196159,"backend":"CuGraph"},{"operation":"Force Layout","dataset":"Bitcoin Alpha","seconds":0.2433285713,"backend":"CuGraph"},{"operation":"PageRank","dataset":"Bitcoin Alpha","seconds":0.0202372074,"backend":"NetworkX"},{"operation":"Weakly Connected Components","dataset":"Bitcoin Alpha","seconds":0.0000178814,"backend":"NetworkX"},{"operation":"Floyd Warshall","dataset":"Bitcoin Alpha","seconds":600.0,"backend":"NetworkX"},{"operation":"Community Detection","dataset":"Bitcoin Alpha","seconds":0.0000267029,"backend":"NetworkX"},{"operation":"Force Layout","dataset":"Bitcoin Alpha","seconds":600.0,"backend":"NetworkX"},{"operation":"PageRank","dataset":"Bitcoin Alpha","seconds":0.0,"backend":"RetworkX"},{"operation":"Weakly Connected Components","dataset":"Bitcoin Alpha","seconds":0.0025191307,"backend":"RetworkX"},{"operation":"Floyd Warshall","dataset":"Bitcoin Alpha","seconds":600.0,"backend":"RetworkX"},{"operation":"Community Detection","dataset":"Bitcoin Alpha","seconds":0.0,"backend":"RetworkX"},{"operation":"Force Layout","dataset":"Bitcoin Alpha","seconds":600.0,"backend":"RetworkX"},{"operation":"PageRank","dataset":"Facebook","seconds":0.0100269318,"backend":"CuGraph"},{"operation":"Weakly Connected Components","dataset":"Facebook","seconds":0.0104796886,"backend":"CuGraph"},{"operation":"Floyd Warshall","dataset":"Facebook","seconds":0.0,"backend":"CuGraph"},{"operation":"Community Detection","dataset":"Facebook","seconds":0.0125153065,"backend":"CuGraph"},{"operation":"Force Layout","dataset":"Facebook","seconds":0.2118792534,"backend":"CuGraph"},{"operation":"PageRank","dataset":"Facebook","seconds":0.165150404,"backend":"NetworkX"},{"operation":"Weakly Connected Components","dataset":"Facebook","seconds":0.0000317097,"backend":"NetworkX"},{"operation":"Floyd Warshall","dataset":"Facebook","seconds":600.0,"backend":"NetworkX"},{"operation":"Community Detection","dataset":"Facebook","seconds":0.0000464916,"backend":"NetworkX"},{"operation":"Force Layout","dataset":"Facebook","seconds":600.0,"backend":"NetworkX"},{"operation":"PageRank","dataset":"Facebook","seconds":0.0,"backend":"RetworkX"},{"operation":"Weakly Connected Components","dataset":"Facebook","seconds":0.0030348301,"backend":"RetworkX"},{"operation":"Floyd Warshall","dataset":"Facebook","seconds":600.0,"backend":"RetworkX"},{"operation":"Community Detection","dataset":"Facebook","seconds":0.0,"backend":"RetworkX"},{"operation":"Force Layout","dataset":"Facebook","seconds":600.0,"backend":"RetworkX"}]
+[
+    {
+        "operation": "PageRank",
+        "dataset": "Facebook",
+        "seconds": 0.0127336979,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Facebook",
+        "seconds": 0.0137283802,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Facebook",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Facebook",
+        "seconds": 0.0137953758,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Facebook",
+        "seconds": 0.2188940048,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Facebook",
+        "seconds": 0.1678950787,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Facebook",
+        "seconds": 0.0001423359,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Facebook",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Facebook",
+        "seconds": 0.0000479221,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Facebook",
+        "seconds": 38.1959071159,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Facebook",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Facebook",
+        "seconds": 0.0038969517,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Facebook",
+        "seconds": 1.6442255974,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Facebook",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Facebook",
+        "seconds": 5.8174378872,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0116512775,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0139875412,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0177574158,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.2648239136,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0243792534,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0000374317,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0000658035,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 32.891669035,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.004740715,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 26.1628556252,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Bitcoin Alpha",
+        "seconds": 20.0320281982,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.231274128,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0497190952,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.2430856228,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Twitch Gamers",
+        "seconds": 1.434664011,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Twitch Gamers",
+        "seconds": 27.68627882,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0000312328,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Twitch Gamers",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0000529289,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Twitch Gamers",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.7509105206,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Twitch Gamers",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Twitch Gamers",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Twitch Gamers",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Patent and Citation",
+        "seconds": 0.327837944,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Patent and Citation",
+        "seconds": 0.1976165771,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Patent and Citation",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Patent and Citation",
+        "seconds": 1.8802790642,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Patent and Citation",
+        "seconds": 126.4559473991,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Patent and Citation",
+        "seconds": 109.3938794136,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Patent and Citation",
+        "seconds": 0.0000314713,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Patent and Citation",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Patent and Citation",
+        "seconds": 0.0000543594,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Patent and Citation",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Patent and Citation",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Patent and Citation",
+        "seconds": 17.7864170074,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Patent and Citation",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Patent and Citation",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Patent and Citation",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "LiveJournal",
+        "seconds": 0.8582046032,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "LiveJournal",
+        "seconds": 0.3112821579,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "LiveJournal",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "LiveJournal",
+        "seconds": 2.6201202869,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "LiveJournal",
+        "seconds": 75.2435770035,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "LiveJournal",
+        "seconds": 214.0922570229,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "LiveJournal",
+        "seconds": 0.0000462532,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "LiveJournal",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "LiveJournal",
+        "seconds": 0.0000593662,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "LiveJournal",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "LiveJournal",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "LiveJournal",
+        "seconds": 9.5080966949,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "LiveJournal",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "LiveJournal",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "LiveJournal",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Stack",
+        "seconds": 0.5168814659,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Stack",
+        "seconds": 0.2543005943,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Stack",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Stack",
+        "seconds": 1.5708315372,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Stack",
+        "seconds": 143.5588033199,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Stack",
+        "seconds": 201.3258798122,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Stack",
+        "seconds": 0.0000486374,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Stack",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Stack",
+        "seconds": 0.0000705719,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Stack",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Stack",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Stack",
+        "seconds": 52.9363086224,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Stack",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Stack",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Stack",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Orkut",
+        "seconds": 2.3972885609,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Orkut",
+        "seconds": 0.6820282936,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Orkut",
+        "seconds": 0.0,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Orkut",
+        "seconds": 8.2226088047,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Orkut",
+        "seconds": 40.0438649654,
+        "backend": "CuGraph"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Orkut",
+        "seconds": 594.6611626148,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Orkut",
+        "seconds": 0.0000412464,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Orkut",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Orkut",
+        "seconds": 0.000041008,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Orkut",
+        "seconds": 600.0,
+        "backend": "NetworkX"
+    },
+    {
+        "operation": "PageRank",
+        "dataset": "Orkut",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Weakly Connected Components",
+        "dataset": "Orkut",
+        "seconds": 15.8042740822,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Floyd Warshall",
+        "dataset": "Orkut",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Community Detection",
+        "dataset": "Orkut",
+        "seconds": 0.0,
+        "backend": "RetworkX"
+    },
+    {
+        "operation": "Force Layout",
+        "dataset": "Orkut",
+        "seconds": 600.0,
+        "backend": "RetworkX"
+    }
+]
