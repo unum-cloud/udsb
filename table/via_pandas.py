@@ -100,6 +100,10 @@ class ViaPandas:
         )
         return final_df
 
+    def close(self):
+        self.df = None
+        self.backend = None
+
     def log(self):
         print('Query 1: Counts by Different Vendors\n', self.query1())
         print('Query 2: Mean Ride Prices\n', self.query2())

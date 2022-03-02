@@ -74,6 +74,10 @@ class ViaSQLite(ViaPandas):
         c.execute(q)
         return c.fetchall()
 
+    def close(self):
+        self.connenction.close()
+        self.connection = None
+
 
 if __name__ == '__main__':
     ViaSQLite().log()

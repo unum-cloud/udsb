@@ -9,30 +9,19 @@ import numpy as np
 from shared import Bench, run_persisted_benchmarks
 from via_pandas import taxi_rides_paths
 
-current_instance = None
-
 
 def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> Generator[Bench, None, None]:
 
-    obj = None
-    funcs = []
-
-    def parse():
-        nonlocal obj
-        obj = class_(paths=paths)
-
-    funcs.append(parse)
-    funcs.append(lambda obj=obj: obj.query1())
-    funcs.append(lambda obj=obj: obj.query2())
-    funcs.append(lambda obj=obj: obj.query3())
-    funcs.append(lambda obj=obj: obj.query4())
-
-    funcs_names = [
-        'Parse Parquet',
-        'Query 1', 'Query 2', 'Query 3', 'Query 4',
+    funcs = [
+        ('Parse', lambda: globals().update({'df': class_(paths=paths)})),
+        ('Query 1', lambda: globals()['df'].query1()),
+        ('Query 2', lambda: globals()['df'].query2()),
+        ('Query 3', lambda: globals()['df'].query3()),
+        ('Query 4', lambda: globals()['df'].query4()),
+        ('Close', lambda: globals()['df'].close()),
     ]
 
-    for func, func_name in zip(funcs, funcs_names):
+    for func_name, func in funcs:
 
         yield Bench(
             operation=func_name,
@@ -41,10 +30,6 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
             dataset_bytes=None,
             func=func,
         )
-
-    if obj is not None:
-        obj.close()
-    obj = None
 
 
 def benchmarks_for_backends(backend_names: List[str],  paths: List[str]) -> Generator[Bench, None, None]:
@@ -133,5 +118,9 @@ if __name__ == '__main__':
     print('Available backends: ', backends)
     print('Available datasets: ', datasets)
 
-    logging.basicConfig(level=os.environ.get('LOGLEVEL', 'INFO'))
+    logging.basicConfig(
+        level=os.environ.get('LOGLEVEL', 'INFO'),
+        format='%(asctime)s: %(message)s',
+        datefmt='%H:%M:%s',
+    )
     run_persisted_benchmarks(benches, 10, results_path)
