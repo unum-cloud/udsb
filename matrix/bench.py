@@ -3,6 +3,7 @@
 #   2. MKL-accelerated NumPy
 #   3. CUDA-accelerated CuPy
 #   4. CUDA and Tensor Cores-accelerated CuPy
+#   5. JAX multi-gpu
 #
 # Workloads:
 #   * generating big random matrix
@@ -19,16 +20,17 @@ import pathlib
 from dataclasses import dataclass
 from sys import argv
 from typing import Generator, Optional, List
+import numpy.distutils.system_info as sysinfo
 
 import numpy as np
 
 from shared import Bench, run_persisted_benchmarks
 
 
-def benchmarks_for_backend(class_: type, class_name: str, size: int) -> Generator[Bench, None, None]:
+def benchmarks_for_backend(class_: type, class_name: str, size: int, **kwargs) -> Generator[Bench, None, None]:
 
     funcs = [
-        ('Generate', lambda: globals().update({'m': class_(side=size)})),
+        ('Generate', lambda: globals().update({'m': class_(side=size, **kwargs)})),
         ('Matrix Multiply', lambda: globals()['m'].matrix_multiply()),
         ('Moving Averages', lambda: globals()['m'].moving_average()),
         ('Pearson Correlation', lambda: globals()['m'].pearson_correlations()),
@@ -49,23 +51,27 @@ def benchmarks_for_backend(class_: type, class_name: str, size: int) -> Generato
         )
 
 
-def benchmarks_for_sizes(class_: type, class_name: str, side_sizes: List[int]) -> Generator[Bench, None, None]:
+def benchmarks_for_sizes(class_: type, class_name: str, side_sizes: List[int], **kwargs) -> Generator[Bench, None, None]:
     for size in side_sizes:
-        yield from benchmarks_for_backend(class_, class_name, size)
+        yield from benchmarks_for_backend(class_, class_name, size, **kwargs)
 
 
 def available_benchmarks(
-    cuda_device: int = -1,
-    class_name: Optional[str] = None,
+    cuda_device: int = 0,
     logger: logging.Logger = logging.getLogger(),
 ) -> Generator[Bench, None, None]:
 
     # Swap the backend, if GPU is selected
-    cuda_device = int(cuda_device)
     sizes = [512 * 2**i for i in range(0, 6)]
 
-    if cuda_device >= 0:
+    try:
         import cupy
+        cuda_device = int(cuda_device)
+        if 'CUPY_ACCELERATORS' not in os.environ.keys():
+            os.environ['CUPY_ACCELERATORS'] = "cub,cutensor"
+        if 'CUPY_TF32' not in os.environ.keys():
+            os.environ['CUPY_TF32'] = '1'
+
         devices = cupy.cuda.runtime.getDeviceCount()
         assert devices > 0, 'No CUDA-powered device found'
         logger.info('Found {} CUDA devices'.format(devices))
@@ -75,28 +81,31 @@ def available_benchmarks(
         name = specs['name'].decode()
         logger.info('Will run on: {}'.format(name))
 
-        if class_name is None:
-            class_name = 'CuPy'
-
         from via_cupy import ViaCuPy
-        yield from benchmarks_for_sizes(ViaCuPy, class_name, sizes)
+        yield from benchmarks_for_sizes(ViaCuPy, 'CuPy', sizes)
+    except ModuleNotFoundError:
+        logger.info('CuPy not found, skipping')
 
-    else:
-        import numpy.distutils.system_info as sysinfo
-        libs = set(sysinfo.get_info('blas')['libraries'])
-        libs_str = ','.join(libs)
-        logger.info(f'Using NumPy with BLAS versions: {libs_str}')
 
-        if class_name is None:
-            class_name = 'NumPy'
+    try:
+        import jax
+        logger.info(f'Using JAX with : {jax.devices()}')
 
-        from via_numpy import ViaNumPy
-        yield from benchmarks_for_sizes(ViaNumPy, class_name, sizes)
+        from via_jax import ViaJAX
+        yield from benchmarks_for_sizes(ViaJAX, 'JAX', sizes)
+    except ModuleNotFoundError:
+        logger.info('JAX not found, skipping')
+
+    libs = set(sysinfo.get_info('blas')['libraries'])
+    libs_str = ','.join(libs)
+    logger.info(f'Using NumPy with BLAS versions: {libs_str}')
+
+    from via_numpy import ViaNumPy
+    yield from benchmarks_for_sizes(ViaNumPy, 'NumPy', sizes)
 
 
 if __name__ == '__main__':
-    gpu = argv[1] if len(argv) == 2 else -1
-    benches = list(available_benchmarks(gpu))
+    benches = list(available_benchmarks())
     backends = np.unique([x.backend for x in benches])
     datasets = np.unique([x.dataset for x in benches])
     results_path = os.path.join(
