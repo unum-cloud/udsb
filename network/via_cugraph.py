@@ -1,18 +1,14 @@
-import pandas as pd
+import cudf
 import cugraph as cg
 
 
 class ViaCuGraph:
 
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, path: str):
+        df = cudf.read_csv(path, sep=' ', header=None,
+                           dtype=['int64', 'int64'])
         self.g = cg.Graph()
-        self.g.from_pandas_edgelist(
-            df,
-            source='source',
-            destination='target',
-            edge_attr='weight',
-            renumber=False,
-        )
+        self.g.from_cudf_edgelist(df, source='0', destination='1')
 
     def pagerank(self):
         return cg.pagerank(self.g)

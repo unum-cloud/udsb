@@ -1,16 +1,12 @@
-import pandas as pd
 import networkx as nx
 
 
 class ViaNetworkX:
 
-    def __init__(self, df: pd.DataFrame):
-        self.g = nx.from_pandas_edgelist(
-            df,
-            source='source',
-            target='target',
-            edge_attr='weight',
-        )
+    def __init__(self, path: str):
+        # https://networkx.org/documentation/stable/reference/index.html
+        self.g = nx.read_edgelist(path, delimiter=" ",
+                                  create_using=nx.DiGraph())
 
     def pagerank(self):
         return nx.pagerank(self.g)
@@ -19,7 +15,7 @@ class ViaNetworkX:
         return nx.algorithms.community.girvan_newman(self.g)
 
     def wcc(self):
-        return nx.weakly_connected_components(self.g)
+        return list(nx.weakly_connected_components(self.g))
 
     def force_layout(self):
         return nx.spring_layout(self.g)

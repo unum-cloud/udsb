@@ -1,71 +1,89 @@
-import time
-import pandas as pd
-from dataclasses import dataclass
-import timeout_decorator
-
+from typing import List, Generator
+import numpy as np
+import pathlib
+import os
+from shared import Bench, run_persisted_benchmarks
 import fetch_datasets
-from NeDiGraph import NeDiGraph
-from ReDiGraph import ReDiGraph
-from CuDiGraph import CuDiGraph
 
 
-@dataclass
-class Sample:
-    operation: str = ''
-    dataset: str = ''
-    seconds: float = 0.0
-    backend: str = ''
+def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generator[Bench, None, None]:
+
+    funcs = [
+        ('Parse', lambda: globals().update(
+            {'df': class_(path=path)})),
+        ('PageRank', lambda: globals()['df'].pagerank()),
+        ('Community Detection', lambda: globals()['df'].community()),
+        ('Weakly Connected Compenents', lambda: globals()['df'].wcc()),
+        # ('Pairwise Distances', lambda: globals()['df'].pairwise_distances()),
+        ('Force Layout', lambda: globals()['df'].force_layout()),
+        ('Close', lambda: globals()['df'].close()),
+    ]
+
+    for func_name, func in funcs:
+
+        yield Bench(
+            operation=func_name,
+            backend=class_name,
+            dataset=None,
+            dataset_bytes=None,
+            func=func,
+        )
 
 
-def run(func):
-    start = time.time()
-    try:
-        func()
-    except NotImplementedError:
-        return 0
-    return time.time() - start
+def benchmarks_for_backends(backend_names: List[str],  path: str) -> Generator[Bench, None, None]:
+
+    if 'CuGraph' in backend_names:
+        from via_cugraph import ViaCuGraph
+        yield from benchmarks_for_backend(ViaCuGraph, 'CuGraph', path)
+
+    if 'NetworkX' in backend_names:
+        from via_networkx import ViaNetworkX
+        yield from benchmarks_for_backend(ViaNetworkX, 'NetworkX', path)
+
+    if 'RetworkX' in backend_names:
+        from via_retworkx import ViaRetworkX
+        yield from benchmarks_for_backend(ViaRetworkX, 'RetworkX', path)
+
+    if 'Snap' in backend_names:
+        from via_snap import ViaSnap
+        yield from benchmarks_for_backend(ViaSnap, 'Snap', path)
+
+    if 'IGraph' in backend_names:
+        from via_igraph import ViaIGraph
+        yield from benchmarks_for_backend(ViaIGraph, 'IGraph', path)
 
 
-@timeout_decorator.timeout(600, use_signals=False)
-def run_with_timeout(func):
-    return run(func)
+def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, None, None]:
 
+    # Validate passed argument
+    if backend_names is None or len(backend_names) == 0:
+        backend_names = [
+            'CuGraph',
+            'NetworkX',
+            'RetworkX',
+            'Snap',
+            'IGraph'
+        ]
+    if isinstance(backend_names, str):
+        backend_names = backend_names.split(',')
 
-def run_all_benchmarks():
-    fetch_datasets.download_datasets()
-    datasets = {'bitcoin_alpha': 'Bitcoin Alpha', 'facebook': 'Facebook',  'twitch_gamers': 'Twitch Gamers', 'citation_patents': 'Patent and Citation',
-                'live_journal': 'LiveJournal', 'stack': 'Stack', 'orkut': 'Orkut'}
-    for dataset_name, dataset_title in datasets.items():
-        df = fetch_datasets.dataset_to_edges(dataset_name)
-        backends = {"CuGraph": CuDiGraph(), "NetworkX": NeDiGraph(),
-                    "RetworkX": ReDiGraph()}
-        for backend_name, obj in backends.items():
-            obj.from_edgelist(df)
-            functions = {"PageRank": obj.pagerank, "Weakly Connected Components": obj.wcc,
-                         "Floyd Warshall": obj.pairwise_distances, "Community Detection": obj.community, "Force Layout": obj.force_layout}
-            for function_title, func in functions.items():
-                print(
-                    f"Starting {backend_name} {function_title} operation in {dataset_title} dataset")
-                s = Sample()
-                s.operation = function_title
-                s.dataset = dataset_title
-                s.backend = backend_name
-                if backend_name != 'CuGraph':
-                    try:
-                        s.seconds = run_with_timeout(func)
-                    except:
-                        print(
-                            f"Timeout for {backend_name} {function_title} operation in {dataset_title} dataset")
-                        s.seconds = 600
-                else:
-                    s.seconds = run(func)
-                yield s
-
-
-def main():
-    pd.DataFrame(run_all_benchmarks()).to_json(
-        "network/results.json", orient='records')
+    for path in fetch_datasets.get_all_paths():
+        for s in benchmarks_for_backends(backend_names, path):
+            s.dataset = os.path.basename(path).split('.')[0]
+            s.dataset_bytes = os.path.getsize(path)
+            yield s
 
 
 if __name__ == '__main__':
-    main()
+    fetch_datasets.download_datasets()
+    benches = list(available_benchmarks())
+    backends = np.unique([x.backend for x in benches])
+    datasets = np.unique([x.dataset for x in benches])
+    results_path = os.path.join(
+        pathlib.Path(__file__).resolve().parent,
+        'report/results.json'
+    )
+
+    print('Available backends: ', backends)
+    print('Available datasets: ', datasets)
+    run_persisted_benchmarks(benches, 10, results_path)
