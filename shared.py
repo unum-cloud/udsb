@@ -124,8 +124,8 @@ def run_persisted_benchmarks(
 
             logger.info(f'Will run: {bench}')
             sample = bench(max_seconds=max_seconds)
+            samples.append(sample)
             if len(sample.error) == 0:
-                samples.append(sample)
                 logger.info(f'-- completed: {sample}')
             else:
                 logger.error(f'-- failed: {sample.error}')
