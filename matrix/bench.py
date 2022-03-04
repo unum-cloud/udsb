@@ -102,6 +102,7 @@ def available_benchmarks(
 
         from via_jax import ViaJAX
         yield from benchmarks_for_sizes(ViaJAX, 'JAX', sizes)
+        yield from benchmarks_for_sizes(ViaJAX, 'JAX Single', sizes, device_count=1)
     except ModuleNotFoundError:
         logger.info('JAX not found, skipping')
 
