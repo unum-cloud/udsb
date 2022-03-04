@@ -53,6 +53,10 @@ def benchmarks_for_backends(backend_names: List[str],  paths: List[str]) -> Gene
         from via_dask_cudf import ViaDaskCuDF
         yield from benchmarks_for_backend(ViaDaskCuDF, 'Dask->CuDF', paths)
 
+    if 'Dask+CuDF' in backend_names:
+        from via_dask_cudf import ViaDaskCuDFUnified
+        yield from benchmarks_for_backend(ViaDaskCuDFUnified, 'Dask+CuDF', paths)
+
     if 'PySpark' in backend_names:
         from via_spark import ViaPySpark
         yield from benchmarks_for_backend(ViaPySpark, 'PySpark', paths)
@@ -67,9 +71,9 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
             'Modin',
             'CuDF',
             'SQLite',
-            # 'PySpark',
-            # 'Dask->CuDF',
-            # 'Dask+CuDF',
+            'PySpark',
+            'Dask->CuDF',
+            'Dask+CuDF',
         ]
     if isinstance(backend_names, str):
         backend_names = backend_names.split(',')
