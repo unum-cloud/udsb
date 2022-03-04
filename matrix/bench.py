@@ -79,15 +79,24 @@ def available_benchmarks(
         cupy.cuda.runtime.setDevice(cuda_device)
         specs = cupy.cuda.runtime.getDeviceProperties(cuda_device)
         name = specs['name'].decode()
-        logger.info('Will run on: {}'.format(name))
+        logger.info('Using CuPy with : {}'.format(name))
 
         from via_cupy import ViaCuPy
         yield from benchmarks_for_sizes(ViaCuPy, 'CuPy', sizes)
     except ModuleNotFoundError:
         logger.info('CuPy not found, skipping')
 
-
     try:
+        import torch
+        logger.info(f'Using Torch with : {torch.cuda.get_device_name()}')
+
+        from via_torch import ViaTorch
+        yield from benchmarks_for_sizes(ViaTorch, 'Torch', sizes)
+    except ModuleNotFoundError:
+        logger.info('Torch not found, skipping')
+    
+    try:
+        os.environ['XLA_PYTHON_CLIENT_PREALLOCATE']='false'
         import jax
         logger.info(f'Using JAX with : {jax.devices()}')
 
