@@ -8,12 +8,14 @@ class ViaSnap:
         self.g = snap.LoadEdgeListStr(snap.TNGraph, path)
 
     def pagerank(self):
+        # https://snap.stanford.edu/snappy/doc/reference/GetPageRank.html
         return self.g.GetPageRank().values()
 
     def community(self):
         raise NotImplementedError()  # Only for Undirected graphs
 
     def wcc(self):
+        # https://snap.stanford.edu/snappy/doc/reference/GetWccs.html?highlight=wcc
         wcc = []
         for connections in self.g.GetWccs():
             wcc.append(list(connections))
@@ -23,6 +25,7 @@ class ViaSnap:
         raise NotImplementedError()
 
     def pairwise_distances(self):
+        # https://snap.stanford.edu/snappy/doc/reference/GetShortPathAll.html?highlight=getshortpathall#GetShortPathAll
         distances = []
         for node in self.g.Nodes():
             shortestPath, NIdToDistH = self.g.GetShortPathAll(
