@@ -1,0 +1,2360 @@
+[
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000188351,
+        "iterations": 169486,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.000071764,
+        "iterations": 96534,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000174046,
+        "iterations": 121398,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0004534721,
+        "iterations": 13945,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000503063,
+        "iterations": 189229,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0213205814,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000452995,
+        "iterations": 46684,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0001091957,
+        "iterations": 51881,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000531673,
+        "iterations": 114257,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000054836,
+        "iterations": 114907,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001413822,
+        "iterations": 63851,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001115799,
+        "iterations": 55158,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0010242462,
+        "iterations": 2201,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000252724,
+        "iterations": 119445,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0349433422,
+        "iterations": 28,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0002331734,
+        "iterations": 33725,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000276566,
+        "iterations": 36468,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0002677441,
+        "iterations": 32704,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0003054142,
+        "iterations": 32664,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0004520416,
+        "iterations": 14815,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0000092983,
+        "iterations": 23961,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0293068886,
+        "iterations": 315,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0000350475,
+        "iterations": 36816,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.8557987213,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001411438,
+        "iterations": 16174,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0003333092,
+        "iterations": 16696,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0013859272,
+        "iterations": 4221,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0006361008,
+        "iterations": 8670,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.002907753,
+        "iterations": 2405,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0005633831,
+        "iterations": 7151,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0916838646,
+        "iterations": 40,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0005438328,
+        "iterations": 8141,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 14.1506605148,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0006365776,
+        "iterations": 5458,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0014932156,
+        "iterations": 5508,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0082712173,
+        "iterations": 1062,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0026152134,
+        "iterations": 2200,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0211808681,
+        "iterations": 326,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0035891533,
+        "iterations": 1847,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0353853703,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0057609081,
+        "iterations": 1596,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0046329498,
+        "iterations": 1501,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0058386326,
+        "iterations": 1506,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0060825348,
+        "iterations": 266,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0088784695,
+        "iterations": 553,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0921037197,
+        "iterations": 40,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.019194603,
+        "iterations": 467,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 15.9730436802,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.018168211,
+        "iterations": 522,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Median",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0255789757,
+        "iterations": 387,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Sorting",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0192263126,
+        "iterations": 387,
+        "error": ""
+    },
+    {
+        "backend": "CuPy",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.075088501,
+        "iterations": 67,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0003027916,
+        "iterations": 9483,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000154972,
+        "iterations": 42751,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000305176,
+        "iterations": 176579,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000724792,
+        "iterations": 75064,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000188351,
+        "iterations": 294652,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0185685158,
+        "iterations": 456,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000531673,
+        "iterations": 72484,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000650883,
+        "iterations": 96673,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000023842,
+        "iterations": 452407,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0010962486,
+        "iterations": 2484,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0005998611,
+        "iterations": 15219,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000472069,
+        "iterations": 122256,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000402927,
+        "iterations": 50071,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000209808,
+        "iterations": 141058,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0266869068,
+        "iterations": 132,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001320839,
+        "iterations": 29760,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000209808,
+        "iterations": 46245,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000185966,
+        "iterations": 446371,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.007117033,
+        "iterations": 615,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0004901886,
+        "iterations": 3335,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001380444,
+        "iterations": 44561,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001125336,
+        "iterations": 11539,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0002205372,
+        "iterations": 38276,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.2516813278,
+        "iterations": 31,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0010674,
+        "iterations": 7451,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001490116,
+        "iterations": 10085,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0000088215,
+        "iterations": 266092,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0779616833,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0152304173,
+        "iterations": 629,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0007162094,
+        "iterations": 13390,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0025188923,
+        "iterations": 2056,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0008983612,
+        "iterations": 8178,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 11.6957097054,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0018999577,
+        "iterations": 1753,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0003657341,
+        "iterations": 2813,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0000758171,
+        "iterations": 106286,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.3029592037,
+        "iterations": 32,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0020916462,
+        "iterations": 131,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.002797842,
+        "iterations": 3397,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0238041878,
+        "iterations": 282,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0020985603,
+        "iterations": 1602,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix SVD",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 18.9916148186,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0210764408,
+        "iterations": 431,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0042796135,
+        "iterations": 691,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0000796318,
+        "iterations": 30320,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.2296435833,
+        "iterations": 8,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.1556248665,
+        "iterations": 24,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0098161697,
+        "iterations": 895,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0927584171,
+        "iterations": 37,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0052556992,
+        "iterations": 511,
+        "error": ""
+    },
+    {
+        "backend": "Torch",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.000064373,
+        "iterations": 8176,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0377571583,
+        "iterations": 48,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0006160736,
+        "iterations": 694,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.039126873,
+        "iterations": 159,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000391006,
+        "iterations": 48654,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0001657009,
+        "iterations": 50190,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0036761761,
+        "iterations": 911,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.000095129,
+        "iterations": 42518,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0001029968,
+        "iterations": 51532,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0011489391,
+        "iterations": 540,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.026352644,
+        "iterations": 123,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0086596012,
+        "iterations": 759,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0027582645,
+        "iterations": 141,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001375675,
+        "iterations": 45669,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001778603,
+        "iterations": 50365,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.029140234,
+        "iterations": 324,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0002355576,
+        "iterations": 37017,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000994205,
+        "iterations": 50679,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0169739723,
+        "iterations": 497,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0562472343,
+        "iterations": 123,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0124473572,
+        "iterations": 756,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0416367054,
+        "iterations": 136,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001385212,
+        "iterations": 45309,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0000011921,
+        "iterations": 51667,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0084671974,
+        "iterations": 97,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0000412464,
+        "iterations": 31457,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0001213551,
+        "iterations": 52453,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0089817047,
+        "iterations": 466,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0687363148,
+        "iterations": 117,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0093655586,
+        "iterations": 635,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0035068989,
+        "iterations": 130,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0001239777,
+        "iterations": 47478,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0001628399,
+        "iterations": 50855,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.20855093,
+        "iterations": 27,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0009975433,
+        "iterations": 8017,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0001158714,
+        "iterations": 51139,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.017752409,
+        "iterations": 459,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0489945412,
+        "iterations": 116,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.018112421,
+        "iterations": 442,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0132870674,
+        "iterations": 111,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.000590086,
+        "iterations": 13890,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.000010252,
+        "iterations": 29170,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 11.0189607143,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0042591095,
+        "iterations": 1516,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.000371933,
+        "iterations": 16905,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0149953365,
+        "iterations": 459,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0129840374,
+        "iterations": 116,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0000309944,
+        "iterations": 507,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0555665493,
+        "iterations": 101,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0003764629,
+        "iterations": 2210,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0007464886,
+        "iterations": 6147,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Matrix SVD",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 14.4026203156,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Median",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0015513897,
+        "iterations": 302,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Sorting",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0004296303,
+        "iterations": 3262,
+        "error": ""
+    },
+    {
+        "backend": "JAX",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0166757107,
+        "iterations": 464,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.004355669,
+        "iterations": 121,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0008881092,
+        "iterations": 790,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0077946186,
+        "iterations": 138,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000667572,
+        "iterations": 49555,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000925064,
+        "iterations": 55263,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0239093304,
+        "iterations": 116,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0002129078,
+        "iterations": 35002,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000784397,
+        "iterations": 57436,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0087511539,
+        "iterations": 498,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0413935184,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0158233643,
+        "iterations": 653,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0367264748,
+        "iterations": 132,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000920296,
+        "iterations": 51303,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0001616478,
+        "iterations": 56448,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0274779797,
+        "iterations": 28,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0010969639,
+        "iterations": 8325,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0000431538,
+        "iterations": 57510,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0175511837,
+        "iterations": 481,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0797586441,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0093853474,
+        "iterations": 453,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0152726173,
+        "iterations": 114,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0006334782,
+        "iterations": 14073,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.000164032,
+        "iterations": 29333,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.8119981289,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0025188923,
+        "iterations": 1572,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0002317429,
+        "iterations": 17132,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0137422085,
+        "iterations": 496,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0413527489,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0143697262,
+        "iterations": 578,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0589983463,
+        "iterations": 104,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0042061806,
+        "iterations": 2301,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0001442432,
+        "iterations": 6195,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 14.0896522999,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0223062038,
+        "iterations": 317,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0023531914,
+        "iterations": 3278,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0180268288,
+        "iterations": 490,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0489747524,
+        "iterations": 117,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0054018497,
+        "iterations": 257,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0460476875,
+        "iterations": 105,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0045831203,
+        "iterations": 264,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0017592907,
+        "iterations": 1150,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0356302261,
+        "iterations": 65,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0093147755,
+        "iterations": 600,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.003374815,
+        "iterations": 477,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.061044693,
+        "iterations": 118,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 16.022840023,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0817127228,
+        "iterations": 98,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 16.819504261,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0068335533,
+        "iterations": 198,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Median",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.6006703377,
+        "iterations": 18,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Sorting",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0579731464,
+        "iterations": 103,
+        "error": ""
+    },
+    {
+        "backend": "JAX Single",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0151429176,
+        "iterations": 372,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0008358955,
+        "iterations": 7095,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0005047321,
+        "iterations": 10627,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0008304119,
+        "iterations": 11150,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0020198822,
+        "iterations": 4221,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0006999969,
+        "iterations": 2581,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix SVD",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0660078526,
+        "iterations": 149,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0007367134,
+        "iterations": 4046,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0082399845,
+        "iterations": 581,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "512x512",
+        "dataset_bytes": 1048576,
+        "seconds": 10.0000281334,
+        "iterations": 184997,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0006668568,
+        "iterations": 1733,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0044765472,
+        "iterations": 1938,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0028645992,
+        "iterations": 2793,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0011994839,
+        "iterations": 847,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0129377842,
+        "iterations": 531,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix SVD",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.1951260567,
+        "iterations": 38,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.005181551,
+        "iterations": 1091,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0033946037,
+        "iterations": 133,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "1024x1024",
+        "dataset_bytes": 4194304,
+        "seconds": 10.0002119541,
+        "iterations": 49916,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0129070282,
+        "iterations": 381,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.018437624,
+        "iterations": 324,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0024049282,
+        "iterations": 540,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0237679482,
+        "iterations": 184,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.1653409004,
+        "iterations": 35,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix SVD",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.3951861858,
+        "iterations": 8,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0347754955,
+        "iterations": 244,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0500051975,
+        "iterations": 30,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "2048x2048",
+        "dataset_bytes": 16777216,
+        "seconds": 10.0002403259,
+        "iterations": 11081,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0444073677,
+        "iterations": 93,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.1502947807,
+        "iterations": 50,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0763597488,
+        "iterations": 103,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.3068785667,
+        "iterations": 28,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 11.8835010529,
+        "iterations": 6,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix SVD",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 12.6061863899,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0854971409,
+        "iterations": 64,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.2345187664,
+        "iterations": 7,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "4096x4096",
+        "dataset_bytes": 67108864,
+        "seconds": 10.0002696514,
+        "iterations": 2635,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.3058850765,
+        "iterations": 24,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.5493113995,
+        "iterations": 8,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0550906658,
+        "iterations": 27,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.8345198631,
+        "iterations": 3,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 16.2226610184,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix SVD",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 43.4526305199,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.4601173401,
+        "iterations": 15,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 12.3128318787,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "8192x8192",
+        "dataset_bytes": 268435456,
+        "seconds": 10.0111455917,
+        "iterations": 663,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Generate",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.295091629,
+        "iterations": 6,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Matrix Multiply",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 18.9448869228,
+        "iterations": 2,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Moving Averages",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.8834154606,
+        "iterations": 9,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Pearson Correlation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 25.996789217,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "2D FFT",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 32.3372805119,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Median",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 11.154872179,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Sorting",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 26.4177463055,
+        "iterations": 1,
+        "error": ""
+    },
+    {
+        "backend": "NumPy",
+        "operation": "Array Summation",
+        "dataset": "16384x16384",
+        "dataset_bytes": 1073741824,
+        "seconds": 10.0032064915,
+        "iterations": 164,
+        "error": ""
+    }
+]
