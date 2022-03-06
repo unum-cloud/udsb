@@ -25,9 +25,9 @@ class ViaDaskCuDF(ViaPandas):
         self.cluster = LocalCUDACluster(
             # InfiniBand and UCX
             # https://developer.nvidia.com/blog/high-performance-python-communication-with-ucx-py/
-            protocol="ucx",
+            protocol='ucx',
             enable_nvlink=True,
-            rmm_pool_size="24GB"
+            rmm_pool_size='24GB'
         )
         self.client = Client(self.cluster)
 
@@ -38,7 +38,7 @@ class ViaDaskCuDF(ViaPandas):
             self.backend = dask_cudf
             cast = lambda df: df
 
-        files = [self.backend.read_parquet(p, use_threads=True) for p in paths[80:95]]
+        files = [self.backend.read_parquet(p, use_threads=True) for p in paths]
         df = self.backend.concat(files, ignore_index=True)
 
         # Passenger count can't be a `None`
