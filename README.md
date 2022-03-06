@@ -3,6 +3,14 @@
 A comparison of most commonly used Data-Science Python packages and their alternatives.
 Generally, those alternatives have identical Python interfaces, but come with Multi-Threaded CPU or even GPU backends, implemented in C++, CUDA, Rust and other low-level languages.
 
+To run the default configuration if  very folder - the procedure is similar:
+
+```sh
+cd x
+conda env create -f env.yml
+python bench.py
+```
+
 ## Matrices
 
 For Linear Algebra and Digital Signal Processing we synthetically generate square random matrices, mainly of with single-precision floating point numbers.

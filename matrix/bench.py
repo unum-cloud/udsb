@@ -22,7 +22,6 @@ from sys import argv
 from typing import Generator, Optional, List
 import numpy.distutils.system_info as sysinfo
 
-import numpy as np
 
 from shared import Bench, run_persisted_benchmarks
 
@@ -98,26 +97,31 @@ def available_benchmarks(
     try:
         os.environ['XLA_PYTHON_CLIENT_PREALLOCATE']='false'
         import jax
-        logger.info(f'Using JAX with : {jax.devices()}')
+        devices = jax.devices()
+        logger.info(f'Using JAX with : {devices}')
 
         from via_jax import ViaJAX
-        yield from benchmarks_for_sizes(ViaJAX, 'JAX', sizes)
-        yield from benchmarks_for_sizes(ViaJAX, 'JAX Single', sizes, device_count=1)
+        yield from benchmarks_for_sizes(ViaJAX, f'JAX/{devices}', sizes, device_count=devices)
+        yield from benchmarks_for_sizes(ViaJAX, 'JAX', sizes, device_count=1)
     except ModuleNotFoundError:
         logger.info('JAX not found, skipping')
 
-    libs = set(sysinfo.get_info('blas')['libraries'])
-    libs_str = ','.join(libs)
-    logger.info(f'Using NumPy with BLAS versions: {libs_str}')
+    try:
+        import numpy as np
+        libs = set(sysinfo.get_info('blas')['libraries'])
+        libs_str = ','.join(libs)
+        logger.info(f'Using NumPy with BLAS versions: {libs_str}')
 
-    from via_numpy import ViaNumPy
-    yield from benchmarks_for_sizes(ViaNumPy, 'NumPy', sizes)
+        from via_numpy import ViaNumPy
+        yield from benchmarks_for_sizes(ViaNumPy, 'NumPy', sizes)
+    except ModuleNotFoundError:
+        logger.info('NumPy not found, skipping')
 
 
 if __name__ == '__main__':
     benches = list(available_benchmarks())
-    backends = np.unique([x.backend for x in benches])
-    datasets = np.unique([x.dataset for x in benches])
+    backends = {x.backend for x in benches}
+    datasets = {x.dataset for x in benches}
     results_path = os.path.join(
         pathlib.Path(__file__).resolve().parent,
         'report/results.json'

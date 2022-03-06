@@ -3,7 +3,6 @@ import pathlib
 from typing import List, Generator
 
 import humanize
-import numpy as np
 
 from shared import Bench, run_persisted_benchmarks
 from via_pandas import taxi_rides_paths
@@ -71,7 +70,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
             'Modin',
             'CuDF',
             'SQLite',
-            'PySpark',
+            # 'PySpark',
             'Dask->CuDF',
             'Dask+CuDF',
         ]
@@ -111,11 +110,11 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
 
 if __name__ == '__main__':
     benches = list(available_benchmarks())
-    backends = np.unique([x.backend for x in benches])
-    datasets = np.unique([x.dataset for x in benches])
+    backends = {x.backend for x in benches}
+    datasets = {x.dataset for x in benches}
     results_path = os.path.join(
         pathlib.Path(__file__).resolve().parent,
-        'report/results.json'
+        'report/results10s.json'
     )
 
     print('Available backends: ', backends)
