@@ -41,6 +41,8 @@ class Bench:
     # Runtime callable
     func: Callable[[], NoneType]
 
+    once: bool = False
+
     def __repr__(self) -> str:
         return f'{self.backend}.{self.operation}({self.dataset})'
 
@@ -52,17 +54,22 @@ class Bench:
         s.dataset_bytes = self.dataset_bytes
 
         start = time.time()
-        while True:
-            try:
-                self.func()
-            except Exception as e:
-                s.error = str(e)
-                break
-
-            s.iterations += 1
+        if self.once:
+            self.func()
+            s.iterations = 1
             s.seconds = time.time() - start
-            if s.seconds > max_seconds:
-                break
+        else:
+            while True:
+                try:
+                    self.func()
+                except Exception as e:
+                    s.error = str(e)
+                    break
+
+                s.iterations += 1
+                s.seconds = time.time() - start
+                if s.seconds > max_seconds:
+                    break
 
         return s
 
@@ -118,7 +125,7 @@ def run_persisted_benchmarks(
             # For that find the biggest dataset processed with
             # this backend and check if it's above our threshold.
             previous = find_previous_size(samples, bench)
-            if previous is not None:
+            if previous is not None and not bench.once:
                 if previous.seconds > max_seconds and previous.iterations == 1:
                     continue
 

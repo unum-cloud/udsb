@@ -20,8 +20,8 @@ def benchmarks_for_backend(class_: type, class_name: str, paths: List[str]) -> G
     ]
 
     for func_name, func in funcs:
-
         yield Bench(
+            once=True if func_name in ['Parse', 'Close'] else False,
             operation=func_name,
             backend=class_name,
             dataset=None,
@@ -93,6 +93,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
         0.64,
         1.0,
     ]
+    prev_size = 0
     for size_category in size_categories:
         part_paths = []
         part_size = 0
@@ -102,7 +103,10 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
             if part_size / total_size >= size_category:
                 break
 
-        for s in benchmarks_for_backends(backend_names, part_paths):
+        if prev_size == part_size:
+            continue
+        prev_size = part_size
+        for s in benchmarks_for_backends(backend_names, part_paths):    
             s.dataset_bytes = part_size
             s.dataset = humanize.naturalsize(part_size)
             yield s
