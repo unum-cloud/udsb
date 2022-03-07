@@ -56,7 +56,7 @@ class Bench:
             try:
                 self.func()
             except Exception as e:
-                s.error = str(e)
+                s.error = repr(e)
                 break
 
             s.iterations += 1
