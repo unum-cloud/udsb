@@ -97,12 +97,11 @@ def available_benchmarks(
     try:
         os.environ['XLA_PYTHON_CLIENT_PREALLOCATE']='false'
         import jax
-        devices = jax.devices()
-        logger.info(f'Using JAX with : {devices}')
+        logger.info(f'Using JAX with : {jax.devices()}')
 
         from via_jax import ViaJAX
-        yield from benchmarks_for_sizes(ViaJAX, f'JAX/{devices}', sizes, device_count=devices)
-        yield from benchmarks_for_sizes(ViaJAX, 'JAX', sizes, device_count=1)
+        yield from benchmarks_for_sizes(ViaJAX, f'JAX/{jax.device_count()}', sizes, device_count=jax.device_count())
+        yield from benchmarks_for_sizes(ViaJAX, 'JAX/1', sizes, device_count=1)
     except ModuleNotFoundError:
         logger.info('JAX not found, skipping')
 

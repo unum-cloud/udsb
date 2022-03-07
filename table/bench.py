@@ -70,7 +70,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
             'Modin',
             'CuDF',
             'SQLite',
-            # 'PySpark',
+            'PySpark',
             'Dask->CuDF',
             'Dask+CuDF',
         ]
