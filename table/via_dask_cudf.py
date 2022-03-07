@@ -27,30 +27,34 @@ class ViaDaskCuDF(ViaPandas):
             # https://developer.nvidia.com/blog/high-performance-python-communication-with-ucx-py/
             protocol='ucx',
             enable_nvlink=True,
-            rmm_pool_size='24GB'
+            rmm_pool_size='24GB',
+            # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#spilling-from-device
+            device_memory_limit=0.8 if unified_memory else 0,
+            # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#jit-unspill
+            jit_unspill=True
         )
         self.client = Client(self.cluster)
 
-        if unified_memory:
-            self.backend = dask.dataframe
-            cast = lambda df: dask_cudf.from_dask_dataframe(df)
-        else:
-            self.backend = dask_cudf
-            cast = lambda df: df
-
+        self.backend = dask_cudf
         files = [self.backend.read_parquet(p, use_threads=True) for p in paths]
-        df = self.backend.concat(files, ignore_index=True)
+        self.df = self.backend.concat(files, ignore_index=True)
 
         # Passenger count can't be a `None`
         # Passenger count can't be zero or negative
         # Lazy computed so rmm_pool_size won't be exceded
-        df['passenger_count'] = df['passenger_count'].mask(df['passenger_count'].lt(1), 1)
-        self.df = cast(df)
+        self.df['passenger_count'] = self.df['passenger_count'].mask(self.df['passenger_count'].lt(1), 1)
 
+
+    def __del__(self):
+        self.close()
 
     def close(self):
-        self.client.close()
-        self.cluster.close()
+        if self.client.status != 'closed':
+            self.client.close()
+            self.cluster.close()
+            self.client.io_loop.stop()
+            self.client.loop.stop()
+            self.cluster.loop.stop()
 
     def query1(self):
         pulled_df = self.df[['vendor_id']].copy()
