@@ -16,7 +16,7 @@ def get_all_paths():
     paths = []
     for name, url in dataset_urls.items():
         paths.append(os.path.join(dataset_save_path, name + '.txt'))
-    return sorted(paths)
+    return paths
 
 
 def download_datasets():
