@@ -3,7 +3,7 @@ import pathlib
 import os
 
 from shared import Bench, run_persisted_benchmarks
-import fetch_datasets
+from preprocess import download_datasets, get_all_paths
 
 
 def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generator[Bench, None, None]:
@@ -67,7 +67,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
     if isinstance(backend_names, str):
         backend_names = backend_names.split(',')
 
-    for path in fetch_datasets.get_all_paths():
+    for path in get_all_paths():
         for s in benchmarks_for_backends(backend_names, path):
             s.dataset = os.path.basename(path).split('.')[0]
             s.dataset_bytes = os.path.getsize(path)
@@ -75,7 +75,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
 
 
 if __name__ == '__main__':
-    fetch_datasets.download_datasets()
+    download_datasets()
     benches = list(available_benchmarks())
     backends = {x.backend for x in benches}
     datasets = {x.dataset for x in benches}
