@@ -1,11 +1,9 @@
 import snap
-
-
 class ViaSnap:
 
     def __init__(self, path: str):
         # http://snap.stanford.edu/ringo/doc/tutorial/tutorial.html
-        self.g = snap.LoadEdgeListStr(snap.TNGraph, path)
+        self.g = snap.LoadEdgeList(snap.TNGraph, path)
 
     def pagerank(self):
         # https://snap.stanford.edu/snappy/doc/reference/GetPageRank.html
