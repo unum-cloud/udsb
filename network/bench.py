@@ -1,6 +1,7 @@
 from typing import List, Generator
 import pathlib
 import os
+import psutil
 
 from shared import Bench, run_persisted_benchmarks
 from preprocess import download_datasets, get_all_paths
@@ -14,7 +15,7 @@ def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generato
         ('PageRank', lambda: globals()['df'].pagerank()),
         ('Community Detection', lambda: globals()['df'].community()),
         ('Weakly Connected Compenents', lambda: globals()['df'].wcc()),
-        # ('Pairwise Distances', lambda: globals()['df'].pairwise_distances()),
+        ('Pairwise Distances', lambda: globals()['df'].pairwise_distances()),
         ('Force Layout', lambda: globals()['df'].force_layout()),
         ('Close', lambda: globals()['df'].close()),
     ]
@@ -22,6 +23,7 @@ def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generato
     for func_name, func in funcs:
 
         yield Bench(
+            once=True if func_name == 'Close' else False,
             operation=func_name,
             backend=class_name,
             dataset=None,
@@ -75,6 +77,7 @@ def available_benchmarks(backend_names: List[str] = None) -> Generator[Bench, No
 
 
 if __name__ == '__main__':
+    os.environ['NUMEXPR_MAX_THREADS'] = str(psutil.cpu_count())
     download_datasets()
     benches = list(available_benchmarks())
     backends = {x.backend for x in benches}
@@ -86,4 +89,4 @@ if __name__ == '__main__':
 
     print('Available backends: ', backends)
     print('Available datasets: ', datasets)
-    run_persisted_benchmarks(benches, 10, results_path)
+    run_persisted_benchmarks(benches, 600, results_path)
