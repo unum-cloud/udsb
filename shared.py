@@ -63,7 +63,7 @@ class Bench:
                 try:
                     self.func()
                 except Exception as e:
-                    s.error = str(e)
+                    s.error = repr(e)
                     break
 
                 s.iterations += 1
@@ -127,6 +127,9 @@ def run_persisted_benchmarks(
             previous = find_previous_size(samples, bench)
             if previous is not None and not bench.once:
                 if previous.seconds > max_seconds and previous.iterations == 1:
+                    s = Sample(operation=bench.operation, backend=bench.backend,
+                               dataset=bench.dataset, dataset_bytes=bench.dataset_bytes, error='TimeOut')
+                    samples.append(s)
                     continue
 
             logger.info(f'Will run: {bench}')
