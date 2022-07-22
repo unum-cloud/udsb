@@ -1,12 +1,18 @@
+import os
 import networkx as nx
 
 
 class ViaNetworkX:
 
-    def __init__(self, path: str):
+    def __init__(self, edge_list_path: os.PathLike, ):
+        self.edge_list_path = edge_list_path
+
+    def reinitialize(self):
         # https://networkx.org/documentation/stable/reference/readwrite/generated/networkx.readwrite.edgelist.read_edgelist.html?highlight=read_edgelist
-        self.g = nx.read_edgelist(path, delimiter=" ",
-                                  create_using=nx.DiGraph())
+        self.g = nx.read_edgelist(
+            self.edge_list_path,
+            delimiter=' ',
+            create_using=nx.DiGraph())
 
     def pagerank(self):
         # https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.pagerank_alg.pagerank.html?highlight=pagerank
@@ -30,3 +36,18 @@ class ViaNetworkX:
 
     def close(self):
         self.g = None
+
+    def scan_edges(self):
+        pass
+
+    def scan_vertices(self):
+        pass
+
+    def upsert_edges(self):
+        pass
+
+    def remove_edges(self):
+        pass
+
+    def remove_vertices(self):
+        pass

@@ -10,8 +10,7 @@ from preprocess import download_datasets, get_all_paths
 def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generator[Bench, None, None]:
 
     funcs = [
-        ('Parse', lambda: globals().update(
-            {'df': class_(path=path)})),
+        ('Parse', lambda: globals().update({'df': class_(path=path)})),
         ('PageRank', lambda: globals()['df'].pagerank()),
         ('Community Detection', lambda: globals()['df'].community()),
         ('Weakly Connected Compenents', lambda: globals()['df'].wcc()),

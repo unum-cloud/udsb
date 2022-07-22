@@ -32,7 +32,7 @@ Participating packages:
 * RetworkX
 * CuGraph
 
-## Tabular Data
+## Tabular Data: NYC Taxi Rides
 
 We took the NYC Taxi Rides dataset as our primary dataset and run the classical 4-query benchmark on its subsets.
 Participating packages:

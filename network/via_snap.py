@@ -1,4 +1,6 @@
 import snap
+
+
 class ViaSnap:
 
     def __init__(self, path: str):
