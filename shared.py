@@ -4,10 +4,10 @@ from dataclasses import dataclass
 from typing import Callable, List, Iterable, Optional
 import logging
 
-import pandas as pd
-import numpy as np
 import tabulate
-import plotly.express as px
+import numpy as np
+import pandas as pd
+from plotly import graph_objects as go
 
 
 NoneType = type(None)
@@ -50,7 +50,7 @@ class Bench:
     def __repr__(self) -> str:
         return f'{self.backend}.{self.operation}({self.dataset})'
 
-    def __call__(self, max_seconds: float = 10.0) -> Sample:
+    def __call__(self, max_seconds: float = 10.0, max_iterations: int = 100) -> Sample:
         s = Sample()
         s.operation = self.operation
         s.backend = self.backend
@@ -72,7 +72,7 @@ class Bench:
 
                 s.iterations += 1
                 s.seconds = time.time() - start
-                if s.seconds > max_seconds:
+                if s.seconds > max_seconds or s.iterations == max_iterations:
                     break
 
         return s
@@ -106,6 +106,7 @@ def default_logger() -> logging.Logger:
 def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
+    max_iterations: int = 100,
     filename: os.PathLike = 'bench.json',
     logger: logging.Logger = default_logger(),
 ):
@@ -137,7 +138,8 @@ def run_persisted_benchmarks(
                     continue
 
             logger.info(f'Will run: {bench}')
-            sample = bench(max_seconds=max_seconds)
+            sample = bench(max_seconds=max_seconds,
+                           max_iterations=max_iterations)
             samples.append(sample)
             if len(sample.error) == 0:
                 logger.info(f'-- completed: {sample}')
@@ -157,6 +159,11 @@ def run_persisted_benchmarks(
     logger.info(f'Saved everything to:\n{os.path.abspath(filename)}')
 
 
+def chunks(lst, size):
+    for i in range(0, len(lst), size):
+        yield lst[i:i + size]
+
+
 class Reporter:
 
     def __init__(self,
@@ -168,12 +175,14 @@ class Reporter:
                  backend_baseline):
 
         self.backend_baseline = backend_baseline
-        self.backends = list(benches[backend_colname].unique())
-        self.operations = list(benches[operation_colname].unique())
+        self.backends = [
+            backend for backend in list(benches[backend_colname].unique()) if backend != self.backend_baseline]
+        self.operations = [
+            operation for operation in list(benches[operation_colname].unique())if operation != "Close"]
         self.datasets = list(benches[dataset_colname].unique())
         self.pairwise_speedups: list[list[list[float]]] = []
         benches_dict = {(d[operation_colname], d[backend_colname],
-                         d[dataset_colname]): d for d in benches.to_records()}
+                        d[dataset_colname]): d for d in benches.to_records()}
         for _, operation in enumerate(self.operations):
             cols = []
             for _, backend in enumerate(self.backends):
@@ -210,5 +219,30 @@ class Reporter:
         mat = [[describe(cell) for cell in row]
                for row in self.pairwise_speedups]
         mat = [[self.operations[i]] + content for i, content in enumerate(mat)]
-        print(tabulate.tabulate(mat, headers=[
-              backend for backend in self.backends if backend != self.backend_baseline]))
+        print(tabulate.tabulate(mat, headers=self.backends))
+
+    def draw_heatmap(self):
+        data = [[np.mean(cell) for cell in row]
+                for row in self.pairwise_speedups]
+
+        fig = go.Figure(
+            data=go.Heatmap(
+                z=data,
+                x=self.backends,
+                y=self.operations,
+                colorscale=[[0, '#B8F2FF'],
+                            [0.005, "#82E9FF"],
+                            [0.05, "#47C9FF"],
+                            [0.1, "#266EF6"],
+                            [0.85, "#266EF6"],
+                            [1, "black"]],
+            )
+        )
+
+        fig.update_layout(
+            paper_bgcolor='white',
+            plot_bgcolor='rgba(0,0,0,0)',
+        )
+        fig.update_xaxes(side="top")
+        fig.update_yaxes(gridwidth=5)
+        fig.show()
