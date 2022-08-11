@@ -1,11 +1,21 @@
+import os
 import retworkx as rx
 
 
 class ViaRetworkX:
 
-    def __init__(self, path: str):
+    def __init__(self, edge_list_path: os.PathLike):
+        self.edge_list_path = edge_list_path
+        self.reinitialize()
+        self.half_edges = list(self.g.edges())[0::2]
+        self.half_nodes = list(self.g.nodes())[0::2]
+
+    def reinitialize(self):
         # https://qiskit.org/documentation/retworkx/apiref/retworkx.PyDiGraph.read_edge_list.html?highlight=read_edge_list
-        self.g = rx.PyDiGraph.read_edge_list(path)
+        self.g = rx.PyDiGraph.read_edge_list(self.edge_list_path)
+
+    def parse(self):
+        self.reinitialize()
 
     def pagerank(self):
         raise NotImplementedError()
@@ -27,3 +37,23 @@ class ViaRetworkX:
 
     def close(self):
         self.g = None
+
+    def scan_vertices(self):
+        for node in self.g.nodes():
+            pass
+
+    def scan_edges(self):
+        for edge in self.g.edges():
+            pass
+
+    def upsert_edges(self):
+        self.g.add_edges_from(self.half_edges)
+
+    def remove_edges(self):
+        self.g.remove_edges_from(self.half_edges)
+
+    def upsert_vertices(self):
+        self.g.add_nodes_from(self.half_nodes)
+
+    def remove_vertices(self):
+        self.g.remove_nodes_from(self.half_nodes)
