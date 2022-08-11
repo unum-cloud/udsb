@@ -1,15 +1,25 @@
+import os
 import cudf
 import cugraph as cg
 
 
 class ViaCuGraph:
 
-    def __init__(self, path: str):
+    def __init__(self,  edge_list_path: os.PathLike):
+        self.edge_list_path = edge_list_path
+        self.reinitialize()
+        self.half_edges = list(self.g.edges())[0::2]
+        self.half_nodes = list(self.g.nodes())[0::2]
+
+    def reinitialize(self):
         # https://docs.rapids.ai/api/cugraph/stable/
-        df = cudf.read_csv(path, sep=' ', header=None,
+        df = cudf.read_csv(self.edge_list_path, sep=' ', header=None,
                            dtype=['int64', 'int64'])
         self.g = cg.Graph()
         self.g.from_cudf_edgelist(df, source='0', destination='1')
+
+    def parse(self):
+        self.reinitialize()
 
     def pagerank(self):
         # https://docs.rapids.ai/api/cugraph/stable/api_docs/api/cugraph.link_analysis.pagerank.pagerank.html?highlight=pagerank
