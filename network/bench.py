@@ -9,20 +9,35 @@ from preprocess import download_datasets, get_all_paths
 
 def benchmarks_for_backend(class_: type, class_name: str, path: str) -> Generator[Bench, None, None]:
 
+    def callable(method_name: str):
+        if 'network' not in globals() or 'dataset_path' not in globals() or type(globals()['network']) != class_ or globals()['dataset_path'] != path:
+            globals().update(
+                {'network': class_(edge_list_path=path)})
+            globals().update(
+                {'dataset_path': path})
+        getattr(globals()['network'], method_name)()
+
     funcs = [
-        ('Parse', lambda: globals().update({'df': class_(path=path)})),
-        ('PageRank', lambda: globals()['df'].pagerank()),
-        ('Community Detection', lambda: globals()['df'].community()),
-        ('Weakly Connected Compenents', lambda: globals()['df'].wcc()),
-        ('Pairwise Distances', lambda: globals()['df'].pairwise_distances()),
-        ('Force Layout', lambda: globals()['df'].force_layout()),
-        ('Close', lambda: globals()['df'].close()),
+        ('Parse', lambda: callable('parse')),
+        # ('Scan Edges', lambda: callable('scan_edges')),
+        # ('Scan Nodes', lambda: callable('scan_vertices')),
+        # ('Remove Edges', lambda: callable('remove_edges')),
+        # ('Upsert Edges', lambda: callable('upsert_edges')),
+        # ('Remove Nodes', lambda: callable('remove_vertices')),
+        # ('Upsert Nodes', lambda: callable('upsert_vertices')),
+        ('PageRank', lambda: callable('pagerank')),
+        ('Community Detection', lambda: callable('community')),
+        ('Weakly Connected Compenents', lambda: callable('wcc')),
+        ('Pairwise Distances', lambda: callable('pairwise_distances')),
+        ('Force Layout', lambda: callable('force_layout')),
     ]
 
     for func_name, func in funcs:
 
         yield Bench(
-            once=True if func_name == 'Close' else False,
+            once=True if func_name in ['Close', 'Remove Edges', 'Upsert Edges', 'Remove Nodes',
+                                       'Upsert Nodes', 'Scan Nodes',
+                                       'Scan Edges'] else False,
             operation=func_name,
             backend=class_name,
             dataset=None,
