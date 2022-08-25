@@ -3,7 +3,7 @@
 ```sh
 conda env create -f network/env.yml
 conda activate adsb_network
-conda install -c rapidsai -c nvidia -c numba -c conda-forge cugraph cudf=21.08 python=3.7 cudatoolkit=11.2
+conda install -c rapidsai -c nvidia -c conda-forge cugraph=22.08 python=3.9 cudatoolkit=11.5
 python network/bench.py
 ```
 
