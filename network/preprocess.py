@@ -21,7 +21,7 @@ dataset_urls = {
 
 def get_all_paths():
     paths = []
-    for name, url in dataset_urls.items():
+    for name, _ in dataset_urls.items():
         paths.append(os.path.join(save_path, name + '.txt'))
     return paths
 
@@ -34,7 +34,7 @@ def download_datasets():
         path = os.path.join(save_path, name + '.' + url.split('.')[-1])
         response = requests.get(url, stream=True)
         total_size_in_bytes = int(response.headers.get('content-length', 0))
-        if (os.path.exists(os.path.join(save_path, name+'.txt'))):
+        if (os.path.exists(os.path.join(save_path, name+'.parquet')) and os.path.exists(os.path.join(save_path, name+'.txt'))):
             print('Exists: ', name)
             continue
         block_size = 1024
@@ -49,14 +49,15 @@ def download_datasets():
         # Cleaning
         if name in ['facebook', 'twitter', 'wiki_topcasts']:
             df = pd.read_csv(path, compression='gzip',
-                             sep=' ', header=0, skiprows=None)
+                             sep=' ', names=['source', 'target'], skiprows=None)
         elif name == 'bitcoin_alpha':
             df = pd.read_csv(path, compression='gzip',
-                             sep=',', header=0, skiprows=None)
+                             sep=',', names=['source', 'target'], skiprows=None)
         else:
             df = pd.read_csv(path, compression='gzip',
-                             sep='\t', header=0, comment='#', skiprows=None)
+                             sep='\t', names=['source', 'target'], comment='#', skiprows=None)
         df = df.iloc[:, 0:2]
+        df.to_parquet(os.path.join(save_path, name+'.parquet'))
         df.to_csv(os.path.join(save_path, name+'.txt'), sep=' ',
                   index=False, compression=None, header=False)
         os.remove(path)
