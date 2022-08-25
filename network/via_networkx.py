@@ -1,6 +1,5 @@
 import os
 import networkx as nx
-from shared import chunks
 
 
 class ViaNetworkX:
@@ -8,10 +7,6 @@ class ViaNetworkX:
     def __init__(self, edge_list_path: os.PathLike):
         self.edge_list_path = edge_list_path
         self.reinitialize()
-        # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.edges.html
-        self.half_edges = list(self.g.edges())[0::2]
-        # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.nodes.htmls
-        self.half_nodes = list(self.g.nodes())[0::2]
 
     def reinitialize(self):
         # https://networkx.org/documentation/stable/reference/readwrite/generated/networkx.readwrite.edgelist.read_edgelist.html?highlight=read_edgelist
@@ -56,22 +51,18 @@ class ViaNetworkX:
         for edge in self.g.edges():
             cnt += 1
 
-    def upsert_edges(self):
+    def upsert_edges(self, edges):
         # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.add_edges_from.html
-        for edges in chunks(self.half_edges, 100):
-            self.g.add_edges_from(edges)
+        self.g.remove_edges_from(edges)
 
-    def remove_edges(self):
+    def remove_edges(self, edges):
         # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.remove_edges_from.html
-        for edges in chunks(self.half_edges, 100):
-            self.g.remove_edges_from(edges)
+        self.g.remove_edges_from(edges)
 
-    def upsert_vertices(self):
+    def upsert_vertices(self, nodes):
         # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.add_nodes_from.html
-        for nodes in chunks(self.half_nodes, 100):
-            self.g.add_nodes_from(nodes)
+        self.g.add_nodes_from(nodes)
 
-    def remove_vertices(self):
+    def remove_vertices(self, nodes):
         # https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.remove_nodes_from.html
-        for nodes in chunks(self.half_nodes, 100):
-            self.g.remove_nodes_from(nodes)
+        self.g.remove_nodes_from(nodes)
