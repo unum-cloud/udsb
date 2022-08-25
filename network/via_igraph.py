@@ -3,9 +3,9 @@ import igraph as ig
 
 class ViaIGraph:
 
-    def __init__(self, path: str):
+    def __init__(self, edge_list_path: str):
         # https://www.cs.rhul.ac.uk/home/tamas/development/igraph/tutorial/tutorial.html#igraph-and-the-outside-world
-        self.g = ig.Graph.Read_Ncol(path, directed=True)
+        self.g = ig.Graph.Read_Ncol(edge_list_path, directed=True)
 
     def pagerank(self):
         # https://igraph.org/python/tutorial/latest/tutorial.html#structural-properties-of-graphs
@@ -28,3 +28,28 @@ class ViaIGraph:
 
     def close(self):
         self.g = None
+
+    def scan_vertices(self):
+        cnt = 0
+        for node in self.g.vs():
+            cnt += 1
+
+    def scan_edges(self):
+        cnt = 0
+        for edge in self.g.es():
+            cnt += 1
+
+    def upsert_edges(self, edges):
+        self.g.add_edges((self.g.vs().find(name=str(edge[0])).index, self.g.vs().find(name=str(edge[1])).index)
+                         for edge in edges)
+
+    def remove_edges(self, edges):
+        self.g.delete_edges((self.g.vs().find(name=str(edge[0])).index, self.g.vs().find(name=str(edge[1])).index)
+                            for edge in edges)
+
+    def upsert_vertices(self, nodes):
+        self.g.add_vertices(nodes)
+
+    def remove_vertices(self, nodes):
+        self.g.delete_vertices(self.g.vs.select(
+            lambda vertex: int(vertex['name']) in nodes))
