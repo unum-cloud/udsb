@@ -1,7 +1,7 @@
 import os
 import time
 from dataclasses import dataclass
-from typing import Callable, List, Iterable, Optional
+from typing import List, Iterable, Optional
 import logging
 
 import tabulate
@@ -41,40 +41,34 @@ class Bench:
     operation: str
     dataset: str
     dataset_bytes: int
-
-    # Runtime callable
-    func: Callable[[], NoneType]
-
-    once: bool = False
+    funcs: List
+    max_iterations: int
 
     def __repr__(self) -> str:
         return f'{self.backend}.{self.operation}({self.dataset})'
 
-    def __call__(self, max_seconds: float = 10.0, max_iterations: int = 100) -> Sample:
+    def __call__(self, max_seconds: float = 10.0) -> Sample:
         s = Sample()
         s.operation = self.operation
         s.backend = self.backend
         s.dataset = self.dataset
         s.dataset_bytes = self.dataset_bytes
 
-        start = time.time()
-        if self.once:
-            self.func()
-            s.iterations = 1
-            s.seconds = time.time() - start
-        else:
-            while True:
-                try:
-                    self.func()
-                except Exception as e:
-                    s.error = repr(e)
-                    break
+        seconds = np.zeros(len(self.funcs))
+        while True:
+            try:
+                for idx, func in enumerate(self.funcs):
+                    start = time.perf_counter()
+                    func()
+                    seconds[idx] += time.perf_counter() - start
+            except Exception as e:
+                s.error = repr(e)
+                break
 
-                s.iterations += 1
-                s.seconds = time.time() - start
-                if s.seconds > max_seconds or s.iterations == max_iterations:
-                    break
-
+            s.iterations += 1
+            s.seconds = np.mean(seconds)
+            if s.seconds > max_seconds or s.iterations == self.max_iterations:
+                break
         return s
 
 
@@ -106,7 +100,6 @@ def default_logger() -> logging.Logger:
 def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
-    max_iterations: int = 100,
     filename: os.PathLike = 'bench.json',
     logger: logging.Logger = default_logger(),
 ):
@@ -130,7 +123,7 @@ def run_persisted_benchmarks(
             # For that find the biggest dataset processed with
             # this backend and check if it's above our threshold.
             previous = find_previous_size(samples, bench)
-            if previous is not None and not bench.once:
+            if previous is not None and bench.max_iterations != 1:
                 if previous.seconds > max_seconds and previous.iterations == 1:
                     s = Sample(operation=bench.operation, backend=bench.backend,
                                dataset=bench.dataset, dataset_bytes=bench.dataset_bytes, error='TimeOut')
@@ -138,9 +131,9 @@ def run_persisted_benchmarks(
                     continue
 
             logger.info(f'Will run: {bench}')
-            sample = bench(max_seconds=max_seconds,
-                           max_iterations=max_iterations)
-            samples.append(sample)
+            sample = bench(max_seconds=max_seconds)
+            if sample.operation != 'Init':
+                samples.append(sample)
             if len(sample.error) == 0:
                 logger.info(f'-- completed: {sample}')
             else:
@@ -157,11 +150,6 @@ def run_persisted_benchmarks(
     samples.to_json(filename, orient='records')
 
     logger.info(f'Saved everything to:\n{os.path.abspath(filename)}')
-
-
-def chunks(lst, size):
-    for i in range(0, len(lst), size):
-        yield lst[i:i + size]
 
 
 class Reporter:
