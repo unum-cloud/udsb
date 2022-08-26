@@ -8,8 +8,6 @@ class ViaCuGraph:
     def __init__(self,  edge_list_path: os.PathLike):
         self.edge_list_path = edge_list_path
         self.reinitialize()
-        self.half_edges = list(self.g.edges())[0::2]
-        self.half_nodes = list(self.g.nodes())[0::2]
 
     def reinitialize(self):
         # https://docs.rapids.ai/api/cugraph/stable/
@@ -42,3 +40,21 @@ class ViaCuGraph:
 
     def close(self):
         self.g = None
+
+    def scan_vertices(self):
+        raise NotImplementedError()
+
+    def scan_edges(self):
+        raise NotImplementedError()
+
+    def upsert_edges(self, edges):
+        raise NotImplementedError()
+
+    def remove_edges(self, edges):
+        raise NotImplementedError()
+
+    def upsert_vertices(self, nodes):
+        raise NotImplementedError()
+
+    def remove_vertices(self, nodes):
+        raise NotImplementedError()
