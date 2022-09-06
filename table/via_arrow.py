@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pac
@@ -5,8 +7,15 @@ import pyarrow.compute as pac
 import dataset
 
 
+pa.set_cpu_count(os.cpu_count() * 2 // 3)
+pa.set_io_thread_count(os.cpu_count() * 1 // 3)
+
+
 class ViaArrow:
     """
+        Uses Apache Arrow and Acero, it's internal streaming execution engine,
+        as well as `ParquetDataset` API to scan over folders of Parquet files
+        without using Pandas at all.
     """
 
     def load(self, df_or_paths):
@@ -14,7 +23,7 @@ class ViaArrow:
         if isinstance(df_or_paths, pd.DataFrame):
             self.df = pa.Table.from_pandas(df_or_paths)
         else:
-            super().load(df_or_paths)
+            self.df = dataset.parquet_dataset(df_or_paths).read()
 
     def query1(self):
         df = self.df['vendor_id'].dictionary_encode().value_counts()
