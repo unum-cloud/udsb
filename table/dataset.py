@@ -8,8 +8,9 @@ import pyarrow.parquet as pap
 
 
 def parquet_paths() -> List[str]:
-    dir = pathlib.Path(__file__).parent.resolve()
-    pattern = os.path.join(dir, '~/Datasets/NYCTaxiRides/**/*.parquet')
+    # dir = pathlib.Path(__file__).parent.resolve()
+    dir = pathlib.Path('~/Datasets/NYCTaxiRides')
+    pattern = os.path.join(dir, '/**/*.parquet')
     return sorted(glob.glob(pattern, recursive=True))
 
 
