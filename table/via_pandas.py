@@ -72,12 +72,13 @@ class ViaPandas:
         if isinstance(df_or_paths, pd.DataFrame):
             self.df = df_or_paths
 
-        elif isinstance(df_or_paths, list) and all(isinstance(x, os.PathLike) for x in df_or_paths):
+        elif isinstance(df_or_paths, list):
             # Concatenate all files
             # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
-            files = [self.backend.read_parquet(p) for p in self.paths]
+            files = [self.backend.read_parquet(p) for p in df_or_paths]
             self.df = self.backend.concat(files, ignore_index=True)
-            self._cleanup()
+
+        self._cleanup()
 
     def memory_usage(self) -> int:
         return self.df.memory_usage(deep=True).sum()

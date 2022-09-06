@@ -41,9 +41,9 @@ class ViaDaskCuDF(ViaPandas):
 
         # Passenger count can't be a `None`
         # Passenger count can't be zero or negative
-        # Lazy computed so rmm_pool_size won't be exceded
-        self.df['passenger_count'] = self.df['passenger_count'].mask(self.df['passenger_count'].lt(1), 1)
-
+        # Lazy computed so rmm_pool_size won't be exceeded
+        self.df['passenger_count'] = self.df['passenger_count'].mask(
+            self.df['passenger_count'].lt(1), 1)
 
     def __del__(self):
         self.close()
@@ -79,7 +79,7 @@ class ViaDaskCuDF(ViaPandas):
             'trip_distance',
         ]].copy()
         pulled_df['trip_distance'] = pulled_df['trip_distance'].round().astype(int)
-        pulled_df['year'] = self.to_year(pulled_df, 'pickup_at')
+        pulled_df['year'] = self._replace_with_years(pulled_df, 'pickup_at')
         del pulled_df['pickup_at']
 
         grouped_df = pulled_df.groupby([
@@ -93,10 +93,22 @@ class ViaDaskCuDF(ViaPandas):
         final_df = final_df.sort_values('counts', ascending=False)
         return final_df.compute()
 
+    def _replace_with_years(self, df, column_name: str):
+        # Dask is missing a date parsing functionality
+        # https://stackoverflow.com/q/39584118
+        # https://docs.rapids.ai/api/cudf/legacy/api_docs/api/cudf.to_datetime.html
+        df['year'] = dask_cudf.to_datetime(
+            df[column_name],
+            format='%Y-%m-%d %H:%M:%S',
+        ).dt.year
+        df.drop(columns=[column_name])
+        return df
+
 
 class ViaDaskCuDFUnified(ViaDaskCuDF):
     def __init__(self, **kwargs) -> None:
         super().__init__(unified_memory=True, **kwargs)
+
 
 if __name__ == '__main__':
     dc = ViaDaskCuDF()
