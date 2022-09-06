@@ -3,7 +3,8 @@ import sqlite3
 
 import pandas as pd
 
-from via_pandas import taxi_rides_paths, ViaPandas
+import dataset
+from via_pandas import ViaPandas
 
 
 class ViaSQLite(ViaPandas):
@@ -12,71 +13,74 @@ class ViaSQLite(ViaPandas):
         potentially hidden performance bottlenecks.
 
         Unlike the original, we are not using the built-in Parquet reader
-        function in SQLite. Also, the origianl mapped each Parquet into a
+        function in SQLite. Also, the original mapped each Parquet into a
         separate table. We work differently and import into one!
         https://tech.marksblogg.com/billion-nyc-taxi-rides-sqlite-parquet-hdfs.html
     """
 
     def __init__(
         self,
-        paths: List[str] = taxi_rides_paths(),
         sqlite_path: str = ':memory:'
     ) -> None:
-        self.connenction = sqlite3.connect(sqlite_path)
-        files = [pd.read_parquet(p) for p in paths]
-        # Concatenate all files in Pandas and later dump into the SQLite connection
-        # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
-        df = pd.concat(files, ignore_index=True)
+        self.connection = sqlite3.connect(sqlite_path)
+
+    def load(self, source_paths: List[str] = None):
+        df = dataset.parquet_frame(source_paths)
         # Passenger count can't be zero or negative
         df['passenger_count'] = df['passenger_count'].mask(
             df['passenger_count'].lt(1), 1)
-        df.to_sql('taxis', self.connenction, index=False)
+        df.to_sql('taxis', self.connection, index=False)
 
     def query1(self):
         q = 'SELECT vendor_id, COUNT(*) as cnt FROM taxis GROUP BY vendor_id;'
-        c = self.connenction.cursor()
+        c = self.connection.cursor()
         c.execute(q)
-        return c.fetchall()
+        return {d[0]: d[1] for d in c}
 
     def query2(self):
         q = 'SELECT passenger_count, AVG(total_amount) FROM taxis GROUP BY passenger_count;'
-        c = self.connenction.cursor()
+        c = self.connection.cursor()
         c.execute(q)
-        return c.fetchall()
+        return {d[0]: d[1] for d in c}
 
     def query3(self):
 
         q = '''
             SELECT 
                 passenger_count,
-                STRFTIME('%Y', pickup_at) AS year,
+                CAST(STRFTIME('%Y', pickup_at) AS INTEGER) AS year,
                 COUNT(*) AS counts
             FROM taxis
             GROUP BY passenger_count, year;
         '''
-        c = self.connenction.cursor()
+        c = self.connection.cursor()
         c.execute(q)
-        return c.fetchall()
+        return {(d[0], d[1]): d[2] for d in c}
 
     def query4(self):
 
         q = '''
             SELECT 
                 passenger_count,
-                STRFTIME('%Y', pickup_at) AS year,
+                CAST(STRFTIME('%Y', pickup_at) AS INTEGER) AS year,
                 ROUND(trip_distance) AS distance,
                 COUNT(*) AS counts
             FROM taxis
             GROUP BY passenger_count, year, distance
             ORDER BY year, counts DESC;
         '''
-        c = self.connenction.cursor()
+        c = self.connection.cursor()
         c.execute(q)
         return c.fetchall()
 
     def close(self):
-        self.connenction.close()
+        self.connection.execute('DROP TABLE taxis')
+        self.connection.close()
         self.connection = None
+
+    def log(self):
+        self.load()
+        super().log()
 
 
 if __name__ == '__main__':

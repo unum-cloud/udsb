@@ -1,15 +1,8 @@
-import os
-import glob
-import pathlib
-from typing import List
+from typing import List, Dict, Tuple
 
 import pandas
 
-
-def taxi_rides_paths() -> List[str]:
-    dir = pathlib.Path(__file__).parent.resolve()
-    pattern = os.path.join(dir, 'tmp/**/*.parquet')
-    return sorted(glob.glob(pattern, recursive=True))
+import dataset
 
 
 class ViaPandas:
@@ -19,11 +12,14 @@ class ViaPandas:
     def __init__(
         self,
         backend=pandas,
-        paths: List[str] = taxi_rides_paths(),
+        paths: List[str] = dataset.parquet_paths(),
     ) -> None:
 
         self.backend = backend
-        files = [self.backend.read_parquet(p) for p in paths]
+        self.paths = paths
+
+    def load(self):
+        files = [self.backend.read_parquet(p) for p in self.paths]
         # Concatenate all files
         # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
         self.df = self.backend.concat(files, ignore_index=True)
@@ -50,22 +46,30 @@ class ViaPandas:
     def new_dataframe(self, columns: dict):
         return self.backend.DataFrame(columns)
 
-    def query1(self):
+    def yield_tuples(self, df):
+        return df.itertuples(index=False, name=None)
+
+    def query1(self) -> Dict[str, int]:
         pulled_df = self.df[['vendor_id']].copy()
         # Grouping strings is a lot slower, than converting to categorical series:
         pulled_df['vendor_id'] = pulled_df['vendor_id'].astype('category')
         grouped_df = pulled_df.groupby('vendor_id')
         final_df = grouped_df.size().reset_index()
-        final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        return final_df
 
-    def query2(self):
+        # Column 0: index
+        # Column 1: vendor name
+        # Column 2: counts
+        # If exporting dicts,
+        # final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
+        return {d[0]: d[1] for d in self.yield_tuples(final_df)}
+
+    def query2(self) -> Dict[int, float]:
         pulled_df = self.df[['passenger_count', 'total_amount']]
         grouped_df = pulled_df.groupby('passenger_count')
         final_df = grouped_df.mean().reset_index()
-        return final_df
+        return {d[0]: d[1] for d in self.yield_tuples(final_df)}
 
-    def query3(self):
+    def query3(self) -> Dict[Tuple[int, int], int]:
         # We copy the view, to be able to modify it
         pulled_df = self.df[['passenger_count', 'pickup_at']].copy()
         pulled_df['year'] = self.to_year(pulled_df, 'pickup_at')
@@ -73,10 +77,9 @@ class ViaPandas:
 
         grouped_df = pulled_df.groupby(['passenger_count', 'year'])
         final_df = grouped_df.size().reset_index()
-        final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        return final_df
+        return {(d[0], d[1]): d[2] for d in self.yield_tuples(final_df)}
 
-    def query4(self):
+    def query4(self) -> List[Tuple[int, int, int, int]]:
         # We copy the view, to be able to modify it
         pulled_df = self.df[[
             'passenger_count',
@@ -98,17 +101,15 @@ class ViaPandas:
             ['year', 'counts'],
             ascending=[True, False],
         )
-        return final_df
+        return list(self.yield_tuples(final_df))
 
     def close(self):
         self.df = None
         self.backend = None
 
     def log(self):
-        print('Query 1: Counts by Different Vendors\n', self.query1())
-        print('Query 2: Mean Ride Prices\n', self.query2())
-        print('Query 3: Counts by Number of Passengers and Year\n', self.query3())
-        print('Query 4: Counts by Number of Passengers and Year and Distance, Sorted\n', self.query4())
+        self.df = dataset.example_frame()
+        dataset.test_engine(self)
 
 
 if __name__ == '__main__':
