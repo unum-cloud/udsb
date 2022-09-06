@@ -90,11 +90,18 @@ class ViaArrow:
         self.backend = None
 
     def _replace_with_years(self, df, column_name: str):
-        timestamps = pac.strptime(
-            df[column_name], format='%Y-%m-%d %H:%M:%S', unit='s')
+        if not isinstance(df[column_name].type, pa.TimestampType):
+            timestamps = pac.strptime(
+                df[column_name],
+                format='%Y-%m-%d %H:%M:%S',
+                unit='s',
+                error_is_null=True,
+            )
+        else:
+            timestamps = df[column_name]
         years = pac.year(timestamps)
         df = df.append_column('year', years)
-        return df.drop(['pickup_at'])
+        return df.drop([column_name])
 
 
 if __name__ == '__main__':
