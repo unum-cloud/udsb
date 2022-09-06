@@ -1,4 +1,3 @@
-from typing import List
 import sqlite3
 
 import pandas as pd
@@ -24,8 +23,9 @@ class ViaSQLite(ViaPandas):
     ) -> None:
         self.connection = sqlite3.connect(sqlite_path)
 
-    def load(self, source_paths: List[str] = None):
-        df = dataset.parquet_frame(source_paths)
+    def load(self, df_or_paths):
+        df = df_or_paths if isinstance(
+            df_or_paths, pd.DataFrame) else dataset.parquet_frame(df_or_paths)
         # Passenger count can't be zero or negative
         df['passenger_count'] = df['passenger_count'].mask(
             df['passenger_count'].lt(1), 1)
@@ -78,10 +78,6 @@ class ViaSQLite(ViaPandas):
         self.connection.close()
         self.connection = None
 
-    def log(self):
-        self.load()
-        super().log()
-
 
 if __name__ == '__main__':
-    ViaSQLite().log()
+    dataset.test_engine(ViaSQLite)

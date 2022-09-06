@@ -34,7 +34,10 @@ def example_frame() -> pd.DataFrame:
     })
 
 
-def test_engine(engine):
+def test_engine(engine_class: type):
+
+    engine = engine_class()
+    engine.load(example_frame())
 
     q1 = engine.query1()
     print('Query 1: Counts by Different Vendors\n', q1)
@@ -42,7 +45,7 @@ def test_engine(engine):
     assert q1['Lyft'] == 2, 'Failed on Q1'
 
     q2 = engine.query2()
-    print('Query 2: Mean Ride Prices for any PAssenger Count\n', q2)
+    print('Query 2: Mean Ride Prices for any Passenger Count\n', q2)
     assert q2[2] == 15.0, 'Failed on Q2'
     assert q2[3] == 23.0, 'Failed on Q2'
     assert q2[4] == 17.75, 'Failed on Q2'
@@ -58,3 +61,5 @@ def test_engine(engine):
     assert q4[0] == (4, 2018, 5, 2), 'Failed on Q4'
     assert len(q4) == 3, 'Failed on Q4'
     assert q4[1][3] == 1, 'Failed on Q4'
+
+    engine.close()

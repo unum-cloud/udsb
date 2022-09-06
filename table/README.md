@@ -52,7 +52,7 @@ For that you must reference the parent `DataFrame` itself and manually `map_part
 Implementing it manually would look like this:
 
 ```python
-def to_year(self, df, column_name: str):
+def _replace_with_years(self, df, column_name: str):
     return df.map_partitions(
         cudf.to_datetime,
         format='%Y-%m-%d %H:%M:%S',

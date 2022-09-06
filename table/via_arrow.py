@@ -1,95 +1,101 @@
-import os
-import glob
-import pathlib
-from typing import List
-
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pac
+
+import dataset
 
 
 class ViaArrow:
     """
     """
 
-    def __init__(
-        self,
-    ) -> None:
-        df = pd.DataFrame({
-            'vendor_id': ['Uber', 'Lyft', 'Uber'],
-            'passenger_count': [3, 2, 4],
-            'total_amount': [23, 15, 18],
-            'pickup_at': ['2020-01-23 14:34:45', '2019-01-23 14:34:45', '2018-01-23 14:34:45'],
-            'trip_distance': [2.3, 2.5, 5.3],
-        })
-        self.df = pa.Table.from_pandas(df)
-
-    def to_year(self, df, column_name: str):
-        # Dask is missing a date parsing functionality
-        # https://stackoverflow.com/q/39584118
-        # https://docs.rapids.ai/api/cudf/legacy/api_docs/api/cudf.to_datetime.html
-        # return self.backend.to_datetime(
-        #     df[column_name],
-        #     format='%Y-%m-%d %H:%M:%S',
-        # ).dt.year
-        return df[column_name].astype('datetime64[s]').dt.year
+    def load(self, df_or_paths):
+        # PyArrow has to convert raw `pd.DataFrames` with `from_pandas`
+        if isinstance(df_or_paths, pd.DataFrame):
+            self.df = pa.Table.from_pandas(df_or_paths)
+        else:
+            super().load(df_or_paths)
 
     def query1(self):
-        pulled_df = self.df['vendor_id'].dictionary_encode()
-        # pulled_df = pac.value_counts(self.df['vendor_id'])
-        return pulled_df
+        df = self.df['vendor_id'].dictionary_encode().value_counts()
+        join = zip(df.field('values'), df.field('counts'))
+        result = {v.as_py(): c.as_py() for v, c in join}
+        return result
 
     def query2(self):
-        pulled_df = self.df[['passenger_count', 'total_amount']]
-        grouped_df = pulled_df.group_by('passenger_count')
-        final_df = grouped_df.mean().reset_index()
-        return final_df
+        pulled_df = self.df.select(['passenger_count', 'total_amount'])
+        groups: pa.TableGroupBy = pulled_df.group_by('passenger_count')
+        df = groups.aggregate([('total_amount', 'mean')])
+
+        # Efficiently exporting Arrow is a bit trickier than `to_list`
+        join = zip(df['passenger_count'], df['total_amount_mean'])
+        result = {p.as_py(): c.as_py() for p, c in join}
+        return result
 
     def query3(self):
-        # We copy the view, to be able to modify it
-        pulled_df = self.df[['passenger_count', 'pickup_at']].copy()
-        pulled_df['year'] = self.to_year(pulled_df, 'pickup_at')
-        del pulled_df['pickup_at']
+        pulled_df = self.df.select(['passenger_count', 'pickup_at'])
+        pulled_df = self._replace_with_years(pulled_df, 'pickup_at')
+        groups: pa.TableGroupBy = pulled_df.group_by(
+            ['passenger_count', 'year'])
+        df = groups.aggregate([('year', 'count')])
 
-        grouped_df = pulled_df.group_by(['passenger_count', 'year'])
-        final_df = grouped_df.size().reset_index()
-        final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        return final_df
+        # Efficiently exporting Arrow is a bit trickier than `to_list`
+        join = zip(df['passenger_count'], df['year'], df['year_count'])
+        result = {(p.as_py(), y.as_py()): c.as_py() for p, y, c in join}
+        return result
 
     def query4(self):
-        # We copy the view, to be able to modify it
-        pulled_df = self.df[[
+        pulled_df = self.df.select([
             'passenger_count',
             'pickup_at',
             'trip_distance',
-        ]].copy()
-        pulled_df['trip_distance'] = pulled_df['trip_distance'].round().astype(int)
-        pulled_df['year'] = self.to_year(pulled_df, 'pickup_at')
-        del pulled_df['pickup_at']
+        ])
+        pulled_df = pulled_df.append_column('trip_distance_int', pac.cast(
+            pulled_df['trip_distance'],
+            options=pac.CastOptions(
+                target_type=pa.int32(),
+                allow_float_truncate=True,
+                allow_decimal_truncate=True,
+            ),
+        ))
+        pulled_df = pulled_df.drop(['trip_distance'])
+        pulled_df = self._replace_with_years(pulled_df, 'pickup_at')
 
-        grouped_df = pulled_df.group_by([
+        groups: pa.TableGroupBy = pulled_df.group_by([
             'passenger_count',
             'year',
-            'trip_distance',
+            'trip_distance_int',
         ])
-        final_df = grouped_df.size().reset_index()
-        final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        final_df = final_df.sort_values(
-            ['year', 'counts'],
-            ascending=[True, False],
+        df = groups.aggregate([('year', 'count')])
+        df = df.sort_by([
+            ('year', 'ascending'),
+            ('year_count', 'descending'),
+        ])
+
+        # Efficiently exporting Arrow is a bit trickier than `to_list`
+        join = zip(
+            df['passenger_count'],
+            df['year'],
+            df['trip_distance_int'],
+            df['year_count']
         )
-        return final_df
+        result = [
+            (p.as_py(), y.as_py(), d.as_py(), c.as_py())
+            for p, y, d, c in join
+        ]
+        return result
 
     def close(self):
         self.df = None
         self.backend = None
 
-    def log(self):
-        print('Query 1: Counts by Different Vendors\n', self.query1())
-        print('Query 2: Mean Ride Prices\n', self.query2())
-        print('Query 3: Counts by Number of Passengers and Year\n', self.query3())
-        print('Query 4: Counts by Number of Passengers and Year and Distance, Sorted\n', self.query4())
+    def _replace_with_years(self, df, column_name: str):
+        timestamps = pac.strptime(
+            df[column_name], format='%Y-%m-%d %H:%M:%S', unit='s')
+        years = pac.year(timestamps)
+        df = df.append_column('year', years)
+        return df.drop(['pickup_at'])
 
 
 if __name__ == '__main__':
-    ViaArrow().log()
+    dataset.test_engine(ViaArrow)
