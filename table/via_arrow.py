@@ -20,7 +20,9 @@ class ViaArrow:
 
     def load(self, df_or_paths):
         # PyArrow has to convert raw `pd.DataFrames` with `from_pandas`
-        if isinstance(df_or_paths, pd.DataFrame):
+        if isinstance(df_or_paths, pa.Table):
+            self.df = df_or_paths
+        elif isinstance(df_or_paths, pd.DataFrame):
             self.df = pa.Table.from_pandas(df_or_paths)
         else:
             self.df = dataset.parquet_dataset(df_or_paths).read()

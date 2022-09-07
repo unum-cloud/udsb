@@ -16,7 +16,9 @@ class ViaCuDF(ViaPandas):
 
     def load(self, df_or_paths):
         # CuDF has to convert raw `pd.DataFrames` with `from_pandas`
-        if isinstance(df_or_paths, pd.DataFrame):
+        if isinstance(df_or_paths, cudf.DataFrame):
+            self.df = df_or_paths
+        elif isinstance(df_or_paths, pd.DataFrame):
             self.df = cudf.from_pandas(df_or_paths)
         else:
             super().load(df_or_paths)
