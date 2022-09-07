@@ -45,9 +45,8 @@ def example_frame() -> pd.DataFrame:
     })
 
 
-def test_engine(engine_class: type, small_example: bool = False):
+def test_engine(engine, small_example: bool = False):
 
-    engine = engine_class()
     engine.load(example_frame() if small_example else parquet_paths())
     print('Query 0: Loading the dataset')
 

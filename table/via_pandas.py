@@ -105,4 +105,4 @@ class ViaPandas:
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaPandas)
+    dataset.test_engine(ViaPandas())

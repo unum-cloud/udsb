@@ -24,4 +24,4 @@ class ViaModin(ViaPandas):
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaModin)
+    dataset.test_engine(ViaModin())

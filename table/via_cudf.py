@@ -25,4 +25,4 @@ class ViaCuDF(ViaPandas):
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaCuDF)
+    dataset.test_engine(ViaCuDF())

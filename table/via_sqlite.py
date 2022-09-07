@@ -80,4 +80,4 @@ class ViaSQLite(ViaPandas):
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaSQLite)
+    dataset.test_engine(ViaSQLite())

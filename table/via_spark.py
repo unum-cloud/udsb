@@ -36,4 +36,4 @@ class ViaPySpark(ViaPandas):
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaPySpark)
+    dataset.test_engine(ViaPySpark())

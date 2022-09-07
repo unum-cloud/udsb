@@ -116,4 +116,4 @@ class ViaArrow:
 
 
 if __name__ == '__main__':
-    dataset.test_engine(ViaArrow)
+    dataset.test_engine(ViaArrow())
