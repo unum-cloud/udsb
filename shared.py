@@ -154,23 +154,24 @@ def run_persisted_benchmarks(
 
 class Reporter:
 
-    def __init__(self,
-                 benches,
-                 operation_colname,
-                 backend_colname,
-                 dataset_colname,
-                 result_colname,
-                 backend_baseline):
+    def __init__(
+            self,
+            benches,
+            operation_color_name,
+            backend_color_name,
+            dataset_color_name,
+            result_color_name,
+            backend_baseline):
 
         self.backend_baseline = backend_baseline
         self.backends = [
-            backend for backend in list(benches[backend_colname].unique()) if backend != self.backend_baseline]
+            backend for backend in list(benches[backend_color_name].unique()) if backend != self.backend_baseline]
         self.operations = [
-            operation for operation in list(benches[operation_colname].unique())if operation != "Close"]
-        self.datasets = list(benches[dataset_colname].unique())
+            operation for operation in list(benches[operation_color_name].unique())if operation != "Close"]
+        self.datasets = list(benches[dataset_color_name].unique())
         self.pairwise_speedups: list[list[list[float]]] = []
-        benches_dict = {(d[operation_colname], d[backend_colname],
-                        d[dataset_colname]): d for d in benches.to_records()}
+        benches_dict = {
+            (d[operation_color_name], d[backend_color_name], d[dataset_color_name]): d for d in benches.to_records()}
         for _, operation in enumerate(self.operations):
             cols = []
             for _, backend in enumerate(self.backends):
@@ -187,8 +188,8 @@ class Reporter:
                     if baseline_result is None or improved_result is None or len(baseline_result['error']) or len(improved_result['error']):
                         continue
 
-                    speedup: float = baseline_result[result_colname] / \
-                        improved_result[result_colname]
+                    speedup: float = baseline_result[result_color_name] / \
+                        improved_result[result_color_name]
                     multiples.append(speedup)
 
                 cols.append(multiples)
@@ -218,12 +219,14 @@ class Reporter:
                 z=data,
                 x=self.backends,
                 y=self.operations,
-                colorscale=[[0, '#B8F2FF'],
-                            [0.005, "#82E9FF"],
-                            [0.05, "#47C9FF"],
-                            [0.1, "#266EF6"],
-                            [0.85, "#266EF6"],
-                            [1, "black"]],
+                colorscale=[
+                    [0, '#B8F2FF'],
+                    [0.005, '#82E9FF'],
+                    [0.05, '#47C9FF'],
+                    [0.1, '#266EF6'],
+                    [0.85, '#266EF6'],
+                    [1, 'black']
+                ],
             )
         )
 
@@ -231,6 +234,6 @@ class Reporter:
             paper_bgcolor='white',
             plot_bgcolor='rgba(0,0,0,0)',
         )
-        fig.update_xaxes(side="top")
+        fig.update_xaxes(side='top')
         fig.update_yaxes(gridwidth=5)
         fig.show()
