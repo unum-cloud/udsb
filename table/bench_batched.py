@@ -15,18 +15,20 @@ paths = dataset.parquet_paths()
 def run_backend(
     class_: type,
     class_name: str,
-) -> List[Sample]:
+) -> Generator[Sample, None, None]:
 
+    use_batching = files_per_batch != 0
     logic_engine = class_()
     engine = ViaAnyBatched(
-        logic_engine, files_per_batch) if files_per_batch != 0 else logic_engine
+        logic_engine, files_per_batch) if use_batching else logic_engine
 
+    def load(): return engine.load(paths)
     names = ['Load', 'Q1', 'Q2', 'Q3', 'Q4']
-    funcs = [lambda: engine.load(
-        paths), engine.query1, engine.query2, engine.query3, engine.query4]
-    samples = []
+    funcs = [load, engine.query1, engine.query2, engine.query3, engine.query4]
 
     print('Starting engine:', class_name)
+    if use_batching:
+        load()
     for name, func in zip(names, funcs):
 
         sample = Sample(
@@ -42,12 +44,13 @@ def run_backend(
 
         try:
             sample.seconds = measure_time(func)
-            samples.append(sample)
         except Exception as e:
             print(e)
+            continue
+
+        yield sample
 
     engine.close()
-    return samples
 
 
 def run_backends(backend_names: List[str]) -> Generator[Sample, None, None]:
@@ -89,17 +92,20 @@ if __name__ == '__main__':
 
     try:
         for sample in run_backends([
-            'Pandas',
-            'PyArrow',
+            # 'Pandas',
+            # 'PyArrow',
             # 'Modin',
-            # 'CuDF',
-            # 'SQLite',
+            'SQLite',
             # 'PySpark',
+            # 'CuDF',
             # 'Dask->CuDF',
             # 'Dask+CuDF',
         ]):
             persisted_samples.append(sample)
+            persist_benchmarks(persisted_samples, results_path)
+    except Exception as e:
+        print(e)
     except KeyboardInterrupt:
-        pass
+        print('Will stop and save to:', results_path)
 
     persist_benchmarks(persisted_samples, results_path)
