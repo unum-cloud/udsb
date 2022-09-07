@@ -23,13 +23,56 @@ class ViaSQLite(ViaPandas):
     ) -> None:
         self.connection = sqlite3.connect(sqlite_path)
 
-    def load(self, df_or_paths):
+        self.connection.execute('PRAGMA cache_size = 400000;')
+        self.connection.execute('PRAGMA synchronous = OFF;')
+        self.connection.execute('PRAGMA journal_mode = OFF;')
+        self.connection.execute('PRAGMA locking_mode = EXCLUSIVE;')
+        self.connection.execute('PRAGMA count_changes = OFF;')
+        self.connection.execute('PRAGMA temp_store = MEMORY;')
+        self.connection.execute('PRAGMA auto_vacuum = NONE;')
+
+    def load(self, df_or_paths, batch_size: int = 1024*1024):
         df = df_or_paths if isinstance(
             df_or_paths, pd.DataFrame) else dataset.parquet_frame(df_or_paths)
         # Passenger count can't be zero or negative
+        df = df[[
+            'vendor_id',
+            'pickup_at',
+            'passenger_count',
+            'total_amount',
+            'trip_distance',
+        ]]
         df['passenger_count'] = df['passenger_count'].mask(
             df['passenger_count'].lt(1), 1)
-        df.to_sql('taxis', self.connection, index=False)
+
+        # The `to_sql` may rely on ORMs like, SQL Alchemy, which are highly inefficient
+        # df.to_sql('taxis', self.connection, index=False, if_exists='replace', dtype={
+        #     'vendor_id': Text(),
+        #     'pickup_at': DateTime(),
+        #     'passenger_count': Integer(),
+        #     'total_amount': Float(),
+        #     'trip_distance': Float(),
+        # })
+        self.connection.execute('''
+        CREATE TABLE taxis (
+            vendor_id VARCHAR(8) NOT NULL,
+            pickup_at VARCHAR(25) NOT NULL,
+            passenger_count INT,
+            total_amount REAL,
+            trip_distance REAL
+        )
+        ''')
+        self.connection.commit()
+
+        total_rows = df.shape[0]
+        for start_row in range(0, total_rows, batch_size):
+            rows_block = df.iloc[start_row:start_row + batch_size].copy()
+            rows_block['pickup_at'] = rows_block['pickup_at'].astype(str)
+            records = list(rows_block.itertuples(index=False, name=None))
+            self.connection.executemany(
+                'INSERT INTO taxis VALUES(?,?,?,?,?);', records)
+
+        self.connection.commit()
 
     def query1(self):
         q = 'SELECT vendor_id, COUNT(*) as cnt FROM taxis GROUP BY vendor_id;'
@@ -75,6 +118,7 @@ class ViaSQLite(ViaPandas):
 
     def close(self):
         self.connection.execute('DROP TABLE taxis')
+        self.connection.commit()
         self.connection.close()
         self.connection = None
 
