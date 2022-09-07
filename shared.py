@@ -104,6 +104,20 @@ def default_logger() -> logging.Logger:
     return logging.getLogger()
 
 
+def load_persisted_benchmarks(filename: os.PathLike = 'bench.json') -> List[Sample]:
+    samples = []
+    if os.path.exists(filename):
+        samples = pd.read_json(filename, orient='records')
+        samples = [Sample(**s) for _, s in samples.iterrows()]
+    return samples
+
+
+def persist_benchmarks(samples: List[Sample], filename: os.PathLike = 'bench.json'):
+    samples = [s.__dict__ for s in samples]
+    samples = pd.DataFrame(samples)
+    samples.to_json(filename, orient='records')
+
+
 def run_persisted_benchmarks(
     benchmarks: Iterable[Bench],
     max_seconds: float = 10.0,
@@ -111,11 +125,7 @@ def run_persisted_benchmarks(
     logger: logging.Logger = default_logger(),
 ):
 
-    # Retrieve previous results
-    samples = []
-    if os.path.exists(filename):
-        samples = pd.read_json(filename, orient='records')
-        samples = [Sample(**s) for _, s in samples.iterrows()]
+    samples = load_persisted_benchmarks(filename)
 
     # Bench and track results
     try:
@@ -156,11 +166,7 @@ def run_persisted_benchmarks(
         pass
     logger.info(f'Finished with {len(samples)} benchmarks')
 
-    # Format into a table
-    samples = [s.__dict__ for s in samples]
-    samples = pd.DataFrame(samples)
-    samples.to_json(filename, orient='records')
-
+    persist_benchmarks(samples, filename)
     logger.info(f'Saved everything to:\n{os.path.abspath(filename)}')
 
 

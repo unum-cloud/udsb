@@ -25,7 +25,13 @@ class ViaArrow:
         elif isinstance(df_or_paths, pd.DataFrame):
             self.df = pa.Table.from_pandas(df_or_paths)
         else:
-            self.df = dataset.parquet_dataset(df_or_paths).read()
+            self.df = dataset.parquet_dataset(df_or_paths).read(columns=[
+                'vendor_id',
+                'pickup_at',
+                'passenger_count', 
+                'total_amount'
+                'trip_distance',
+            ])
 
     def query1(self):
         df = self.df['vendor_id'].dictionary_encode().value_counts()

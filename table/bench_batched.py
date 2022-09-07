@@ -3,10 +3,13 @@ from typing import List, Generator
 
 
 from via_any_batched import ViaAnyBatched
-from shared import Sample, measure_time
+from shared import Sample, load_persisted_benchmarks, list_contains_benchmark, persist_benchmarks, measure_time
 import dataset
 
 files_per_batch: int = 2
+results_path = __file__.rsplit('.', 1)[0] + '.json'
+persisted_samples = load_persisted_benchmarks(results_path)
+paths = dataset.parquet_paths()
 
 
 def run_backend(
@@ -17,13 +20,13 @@ def run_backend(
     logic_engine = class_()
     engine = ViaAnyBatched(
         logic_engine, files_per_batch) if files_per_batch != 0 else logic_engine
-    paths = dataset.parquet_paths()
 
     names = ['Load', 'Q1', 'Q2', 'Q3', 'Q4']
     funcs = [lambda: engine.load(
         paths), engine.query1, engine.query2, engine.query3, engine.query4]
     samples = []
 
+    print('Starting engine:', class_name)
     for name, func in zip(names, funcs):
 
         sample = Sample(
@@ -32,9 +35,16 @@ def run_backend(
             backend=class_name,
             dataset='Taxi Rides',
             dataset_bytes=int(39e9),
-            seconds=measure_time(func),
         )
-        samples.append(sample)
+
+        if list_contains_benchmark(persisted_samples, sample):
+            continue
+
+        try:
+            sample.seconds = measure_time(func)
+            samples.append(sample)
+        except Exception as e:
+            print(e)
 
     engine.close()
     return samples
@@ -76,15 +86,20 @@ def run_backends(backend_names: List[str]) -> Generator[Sample, None, None]:
 
 
 if __name__ == '__main__':
-    results = run_backends([
-        'Pandas',
-        'PyArrow',
-        # 'Modin',
-        # 'CuDF',
-        # 'SQLite',
-        # 'PySpark',
-        # 'Dask->CuDF',
-        # 'Dask+CuDF',
-    ])
 
-    print(list(results))
+    try:
+        for sample in run_backends([
+            'Pandas',
+            'PyArrow',
+            # 'Modin',
+            # 'CuDF',
+            # 'SQLite',
+            # 'PySpark',
+            # 'Dask->CuDF',
+            # 'Dask+CuDF',
+        ]):
+            persisted_samples.append(sample)
+    except KeyboardInterrupt:
+        pass
+
+    persist_benchmarks(persisted_samples, results_path)

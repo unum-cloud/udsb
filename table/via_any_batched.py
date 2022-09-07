@@ -2,7 +2,6 @@ import math
 from statistics import mean
 from typing import List, Dict, Tuple
 
-
 from tqdm import tqdm
 
 import shared
@@ -23,10 +22,13 @@ class ViaAnyBatched:
 
     def query1(self) -> Dict[str, int]:
         accumulated = {}
-        progress = tqdm(range(self._count_batches()))
-        progress.set_description('Query 1')
-        for batch_idx in progress:
-            batch = self._prepare_batch(batch_idx)
+        progress = tqdm(
+            range(0, self._count_files(), self.files_per_batch),
+            desc='Query 1',
+            unit='file'
+        )
+        for first_file_idx in progress:
+            batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query1()
             accumulated = shared.dicts_union(accumulated, addition, sum)
@@ -34,10 +36,13 @@ class ViaAnyBatched:
 
     def query2(self) -> Dict[int, float]:
         accumulated = {}
-        progress = tqdm(range(self._count_batches()))
-        progress.set_description('Query 2')
-        for batch_idx in progress:
-            batch = self._prepare_batch(batch_idx)
+        progress = tqdm(
+            range(0, self._count_files(), self.files_per_batch),
+            desc='Query 2',
+            unit='file'
+        )
+        for first_file_idx in progress:
+            batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query2()
             accumulated = shared.dicts_union(accumulated, addition, mean)
@@ -45,10 +50,13 @@ class ViaAnyBatched:
 
     def query3(self) -> Dict[Tuple[int, int], int]:
         accumulated = {}
-        progress = tqdm(range(self._count_batches()))
-        progress.set_description('Query 3')
-        for batch_idx in progress:
-            batch = self._prepare_batch(batch_idx)
+        progress = tqdm(
+            range(0, self._count_files(), self.files_per_batch),
+            desc='Query 3',
+            unit='file'
+        )
+        for first_file_idx in progress:
+            batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query3()
             accumulated = shared.dicts_union(accumulated, addition, sum)
@@ -56,10 +64,13 @@ class ViaAnyBatched:
 
     def query4(self) -> List[Tuple[int, int, int, int]]:
         accumulated = {}
-        progress = tqdm(range(self._count_batches()))
-        progress.set_description('Query 4')
-        for batch_idx in progress:
-            batch = self._prepare_batch(batch_idx)
+        progress = tqdm(
+            range(0, self._count_files(), self.files_per_batch),
+            desc='Query 4',
+            unit='file'
+        )
+        for first_file_idx in progress:
+            batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query4()
             addition = {t[:3]: t[3] for t in addition}
@@ -76,14 +87,20 @@ class ViaAnyBatched:
     def close(self):
         self.engine.close()
 
+    def _count_files(self) -> int:
+        if isinstance(self.df_or_paths, list):
+            return len(self.df_or_paths)
+        else:
+            return 1
+
     def _count_batches(self) -> int:
         if isinstance(self.df_or_paths, list):
             return int(math.ceil(len(self.df_or_paths) / self.files_per_batch))
         else:
             return 1
 
-    def _prepare_batch(self, i: int):
+    def _prepare_batch(self, first_file_idx: int):
         if isinstance(self.df_or_paths, list):
-            return self.df_or_paths[i*self.files_per_batch:][:self.files_per_batch]
+            return self.df_or_paths[first_file_idx:first_file_idx+self.files_per_batch]
         else:
             return self.df_or_paths
