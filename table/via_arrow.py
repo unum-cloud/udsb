@@ -28,8 +28,8 @@ class ViaArrow:
             self.df = dataset.parquet_dataset(df_or_paths).read(columns=[
                 'vendor_id',
                 'pickup_at',
-                'passenger_count', 
-                'total_amount'
+                'passenger_count',
+                'total_amount',
                 'trip_distance',
             ])
 
