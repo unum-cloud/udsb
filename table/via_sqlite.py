@@ -21,15 +21,7 @@ class ViaSQLite(ViaPandas):
         self,
         sqlite_path: str = ':memory:'
     ) -> None:
-        self.connection = sqlite3.connect(sqlite_path)
-
-        self.connection.execute('PRAGMA cache_size = 400000;')
-        self.connection.execute('PRAGMA synchronous = OFF;')
-        self.connection.execute('PRAGMA journal_mode = OFF;')
-        self.connection.execute('PRAGMA locking_mode = EXCLUSIVE;')
-        self.connection.execute('PRAGMA count_changes = OFF;')
-        self.connection.execute('PRAGMA temp_store = MEMORY;')
-        self.connection.execute('PRAGMA auto_vacuum = NONE;')
+        self.sqlite_path = sqlite_path
 
     def load(self, df_or_paths, batch_size: int = 1024*1024):
         df = df_or_paths if isinstance(
@@ -44,8 +36,9 @@ class ViaSQLite(ViaPandas):
         ]]
         df['passenger_count'] = df['passenger_count'].mask(
             df['passenger_count'].lt(1), 1)
+        df['pickup_at'] = df['pickup_at'].astype(str)
 
-        # The `to_sql` may rely on ORMs like, SQL Alchemy, which are highly inefficient
+        # The `to_sql` may rely on ORMs like, SQL-Alchemy, which are highly inefficient
         # df.to_sql('taxis', self.connection, index=False, if_exists='replace', dtype={
         #     'vendor_id': Text(),
         #     'pickup_at': DateTime(),
@@ -53,6 +46,16 @@ class ViaSQLite(ViaPandas):
         #     'total_amount': Float(),
         #     'trip_distance': Float(),
         # })
+        self.connection = sqlite3.connect(self.sqlite_path)
+        self.connection.execute('PRAGMA cache_size = 400000;')
+        self.connection.execute('PRAGMA page_size = 4096;')
+        self.connection.execute('PRAGMA synchronous = OFF;')
+        self.connection.execute('PRAGMA journal_mode = OFF;')
+        self.connection.execute('PRAGMA locking_mode = EXCLUSIVE;')
+        self.connection.execute('PRAGMA count_changes = OFF;')
+        self.connection.execute('PRAGMA temp_store = MEMORY;')
+        self.connection.execute('PRAGMA auto_vacuum = NONE;')
+
         self.connection.execute('''
         CREATE TABLE taxis (
             vendor_id VARCHAR(8) NOT NULL,
@@ -66,8 +69,7 @@ class ViaSQLite(ViaPandas):
 
         total_rows = df.shape[0]
         for start_row in range(0, total_rows, batch_size):
-            rows_block = df.iloc[start_row:start_row + batch_size].copy()
-            rows_block['pickup_at'] = rows_block['pickup_at'].astype(str)
+            rows_block = df.iloc[start_row:start_row + batch_size]
             records = list(rows_block.itertuples(index=False, name=None))
             self.connection.executemany(
                 'INSERT INTO taxis VALUES(?,?,?,?,?);', records)
