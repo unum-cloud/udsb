@@ -31,6 +31,7 @@ class ViaAnyBatched:
             batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query1()
+            self.engine.close()
             accumulated = shared.dicts_union(accumulated, addition, sum)
         return accumulated
 
@@ -45,6 +46,7 @@ class ViaAnyBatched:
             batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query2()
+            self.engine.close()
             accumulated = shared.dicts_union(accumulated, addition, mean)
         return accumulated
 
@@ -59,6 +61,7 @@ class ViaAnyBatched:
             batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query3()
+            self.engine.close()
             accumulated = shared.dicts_union(accumulated, addition, sum)
         return accumulated
 
@@ -73,6 +76,7 @@ class ViaAnyBatched:
             batch = self._prepare_batch(first_file_idx)
             self.engine.load(batch)
             addition = self.engine.query4()
+            self.engine.close()
             addition = {t[:3]: t[3] for t in addition}
             accumulated = shared.dicts_union(accumulated, addition, sum)
 
