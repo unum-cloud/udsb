@@ -33,6 +33,12 @@ class Sample:
         return f'{self.backend}.{self.operation}({self.dataset}): {suffix}'
 
 
+def measure_time(func) -> float:
+    start = time.perf_counter()
+    func()
+    return time.perf_counter() - start
+
+
 @dataclass
 class Bench:
 
@@ -47,7 +53,7 @@ class Bench:
     def __repr__(self) -> str:
         return f'{self.backend}.{self.operation}({self.dataset})'
 
-    def __call__(self, max_seconds: float = 10.0) -> Sample:
+    def sample(self, max_seconds: float = 10.0) -> Sample:
         s = Sample()
         s.operation = self.operation
         s.backend = self.backend
@@ -58,9 +64,7 @@ class Bench:
         while True:
             try:
                 for idx, func in enumerate(self.funcs):
-                    start = time.perf_counter()
-                    func()
-                    seconds[idx] += time.perf_counter() - start
+                    seconds[idx] += measure_time(func)
             except Exception as e:
                 s.error = repr(e)
                 break
@@ -70,6 +74,9 @@ class Bench:
             if s.seconds > max_seconds or s.iterations == self.max_iterations:
                 break
         return s
+
+    def __call__(self, max_seconds: float = 10.0) -> Sample:
+        return self.sample(max_seconds=max_seconds)
 
 
 def list_contains_benchmark(samples: List[Sample], bench: Bench) -> bool:
@@ -125,8 +132,13 @@ def run_persisted_benchmarks(
             previous = find_previous_size(samples, bench)
             if previous is not None and bench.max_iterations != 1:
                 if previous.seconds > max_seconds and previous.iterations == 1:
-                    s = Sample(operation=bench.operation, backend=bench.backend,
-                               dataset=bench.dataset, dataset_bytes=bench.dataset_bytes, error='TimeOut')
+                    s = Sample(
+                        operation=bench.operation,
+                        backend=bench.backend,
+                        dataset=bench.dataset,
+                        dataset_bytes=bench.dataset_bytes,
+                        error='TimeOut',
+                    )
                     samples.append(s)
                     continue
 
@@ -237,3 +249,14 @@ class Reporter:
         fig.update_xaxes(side='top')
         fig.update_yaxes(gridwidth=5)
         fig.show()
+
+
+def dicts_union(a: dict, b: dict, operation=sum, invariant=0) -> dict:
+    all_keys = set(a.keys()).union(b.keys())
+    return {k: operation((a.get(k, invariant), b.get(k, invariant))) for k in all_keys}
+
+
+def dict_multi_union(dicts, operation=sum, invariant=0) -> dict:
+    """Aggregate a sequence of dictionaries using `operation`."""
+    all_keys = set().union(*[el.keys() for el in dicts])
+    return {k: operation([d.get(k, invariant) for d in dicts]) for k in all_keys}
