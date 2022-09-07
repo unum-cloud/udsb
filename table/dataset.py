@@ -18,11 +18,20 @@ def parquet_paths() -> List[str]:
     return paths
 
 
-def parquet_frame(paths: List[str]) -> pd.DataFrame:
+def parquet_frame(paths: List[str], engine=pd) -> pd.DataFrame:
     if paths is None:
         return example_frame()
-    files = [pd.read_parquet(p) for p in paths]
-    return pd.concat(files, ignore_index=True)
+    files = [engine.read_parquet(p, columns=[
+        'vendor_id',
+        'pickup_at',
+        'passenger_count',
+        'total_amount',
+        'trip_distance',
+    ]) for p in paths]
+
+    # Concatenate all files
+    # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
+    return engine.concat(files, ignore_index=True)
 
 
 def parquet_dataset(paths: List[str]) -> pap.ParquetDataset:

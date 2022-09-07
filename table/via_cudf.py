@@ -23,6 +23,9 @@ class ViaCuDF(ViaPandas):
         else:
             super().load(df_or_paths)
 
+    def _yield_tuples(self, df):
+        return super()._yield_tuples(df.to_pandas())
+
 
 if __name__ == '__main__':
     dataset.test_engine(ViaCuDF())

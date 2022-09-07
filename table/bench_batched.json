@@ -1,0 +1,227 @@
+[
+    {
+        "backend": "Pandas",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000002523,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 24.342236706,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 21.403844749,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 34.341906374,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Pandas",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 34.361309101,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000225493,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 3.142519328,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 2.506829174,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 3.297372023,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 3.82732955,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000004433,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 29.722192435,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 26.787439686,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 29.162805227,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "Modin",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 40.966893357,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000000865,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 255.582972863,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 256.717389923,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 284.141203101,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "SQLite",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 351.409427808,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000001202,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 2.463151024,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 1.135077352,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 1.020476393,
+        "iterations": 5,
+        "error": ""
+    },
+    {
+        "backend": "CuDF",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 1.07661081,
+        "iterations": 5,
+        "error": ""
+    }
+]

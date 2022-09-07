@@ -1,22 +1,23 @@
-from typing import List
 
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
 import dask_cudf
 import dask.dataframe
+import pandas as pd
 
-from via_pandas import ViaPandas, taxi_rides_paths
+from via_pandas import ViaPandas
+import dataset
 
 
 class ViaDaskCuDF(ViaPandas):
     """
-        Dask-cuDF adaptation for Multi-GPU accleration.
+        Dask-cuDF adaptation for Multi-GPU acceleration.
 
         https://docs.rapids.ai/api/dask-cuda/nightly/index.html
         https://docs.rapids.ai/api/dask-cuda/nightly/examples/ucx.html
     """
 
-    def __init__(self, paths: List[str] = taxi_rides_paths(), unified_memory=False) -> None:
+    def __init__(self, unified_memory=False) -> None:
         # Dask loves spawning zombi processes:
         # https://docs.dask.org/en/stable/configuration.html
         # fn = os.path.join(os.path.dirname(__file__), 'dask_config.yml')
@@ -27,34 +28,36 @@ class ViaDaskCuDF(ViaPandas):
             # https://developer.nvidia.com/blog/high-performance-python-communication-with-ucx-py/
             protocol='ucx',
             enable_nvlink=True,
-            rmm_pool_size='24GB',
+            rmm_pool_size='20GB',
             # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#spilling-from-device
             device_memory_limit=0.8 if unified_memory else 0,
             # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#jit-unspill
             jit_unspill=True
         )
         self.client = Client(self.cluster)
-
         self.backend = dask_cudf
-        files = [self.backend.read_parquet(p, use_threads=True) for p in paths]
-        self.df = self.backend.concat(files, ignore_index=True)
+
+    def load(self, df_or_paths):
+        # CuDF has to convert raw `pd.DataFrames` with `from_pandas`
+        if isinstance(df_or_paths, dask.dataframe):
+            self.df = df_or_paths
+        elif isinstance(df_or_paths, pd.DataFrame):
+            self.df = dask.dataframe.from_pandas(df_or_paths)
+        else:
+            # https://docs.dask.org/en/stable/generated/dask.dataframe.read_parquet.html
+            self.df = dask.dataframe.read_parquet(df_or_paths, columns=[
+                'vendor_id',
+                'pickup_at',
+                'passenger_count',
+                'total_amount',
+                'trip_distance',
+            ])
 
         # Passenger count can't be a `None`
         # Passenger count can't be zero or negative
         # Lazy computed so rmm_pool_size won't be exceeded
         self.df['passenger_count'] = self.df['passenger_count'].mask(
             self.df['passenger_count'].lt(1), 1)
-
-    def __del__(self):
-        self.close()
-
-    def close(self):
-        if self.client.status != 'closed':
-            self.client.close()
-            self.cluster.close()
-            self.client.io_loop.stop()
-            self.client.loop.stop()
-            self.cluster.loop.stop()
 
     def query1(self):
         pulled_df = self.df[['vendor_id']].copy()
@@ -79,8 +82,7 @@ class ViaDaskCuDF(ViaPandas):
             'trip_distance',
         ]].copy()
         pulled_df['trip_distance'] = pulled_df['trip_distance'].round().astype(int)
-        pulled_df['year'] = self._replace_with_years(pulled_df, 'pickup_at')
-        del pulled_df['pickup_at']
+        pulled_df = self._replace_with_years(pulled_df, 'pickup_at')
 
         grouped_df = pulled_df.groupby([
             'passenger_count',
@@ -104,6 +106,17 @@ class ViaDaskCuDF(ViaPandas):
         df.drop(columns=[column_name])
         return df
 
+    def __del__(self):
+        self.close()
+
+    def close(self):
+        if self.client.status != 'closed':
+            self.client.close()
+            self.cluster.close()
+            self.client.io_loop.stop()
+            self.client.loop.stop()
+            self.cluster.loop.stop()
+
 
 class ViaDaskCuDFUnified(ViaDaskCuDF):
     def __init__(self, **kwargs) -> None:
@@ -111,6 +124,5 @@ class ViaDaskCuDFUnified(ViaDaskCuDF):
 
 
 if __name__ == '__main__':
-    dc = ViaDaskCuDF()
-    dc.log()
-    dc.close()
+    dataset.test_engine(ViaDaskCuDF())
+    dataset.test_engine(ViaDaskCuDFUnified())

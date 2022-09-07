@@ -32,7 +32,7 @@ def run_backend(
     for name, func in zip(names, funcs):
 
         sample = Sample(
-            iterations=1,
+            iterations=len(paths),
             operation=name,
             backend=class_name,
             dataset='Taxi Rides',
@@ -92,12 +92,12 @@ if __name__ == '__main__':
 
     try:
         for sample in run_backends([
-            # 'Pandas',
-            # 'PyArrow',
-            # 'Modin',
+            'Pandas',
+            'PyArrow',
+            'Modin',
             'SQLite',
             # 'PySpark',
-            # 'CuDF',
+            'CuDF',
             # 'Dask->CuDF',
             # 'Dask+CuDF',
         ]):

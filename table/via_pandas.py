@@ -73,10 +73,7 @@ class ViaPandas:
             self.df = df_or_paths
 
         elif isinstance(df_or_paths, list):
-            # Concatenate all files
-            # https://pandas.pydata.org/docs/reference/api/pandas.concat.html?highlight=concat#pandas.concat
-            files = [self.backend.read_parquet(p) for p in df_or_paths]
-            self.df = self.backend.concat(files, ignore_index=True)
+            self.df = dataset.parquet_frame(df_or_paths, self.backend)
 
         self._cleanup()
 
@@ -85,7 +82,6 @@ class ViaPandas:
 
     def close(self):
         self.df = None
-        self.backend = None
 
     def _cleanup(self):
         # Passenger count can't be zero or negative

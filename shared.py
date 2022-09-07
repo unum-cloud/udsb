@@ -115,7 +115,7 @@ def load_persisted_benchmarks(filename: os.PathLike = 'bench.json') -> List[Samp
 def persist_benchmarks(samples: List[Sample], filename: os.PathLike = 'bench.json'):
     samples = [s.__dict__ for s in samples]
     samples = pd.DataFrame(samples)
-    samples.to_json(filename, orient='records')
+    samples.to_json(filename, orient='records', indent=4)
 
 
 def run_persisted_benchmarks(
