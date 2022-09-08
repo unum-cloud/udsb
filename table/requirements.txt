@@ -4,3 +4,4 @@ tqdm
 ray
 modin[ray]
 pyspark
+psutil

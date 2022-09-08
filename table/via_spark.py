@@ -1,6 +1,11 @@
+import os
+import psutil
 
 import pandas as pd
 import pyspark.pandas as ps
+from pyspark.conf import SparkConf
+from pyspark.context import SparkContext
+
 
 from via_pandas import ViaPandas
 import dataset
@@ -15,6 +20,16 @@ class ViaPySpark(ViaPandas):
 
     def __init__(self) -> None:
         super().__init__(ps)
+
+        total_ram_gb: int = psutil.virtual_memory().total // 1e9
+
+        # Available properties:
+        # https://spark.apache.org/docs/latest/configuration.html
+        conf = SparkConf()
+        conf.setMaster('local').setAppName('ADSB')
+        conf.set('spark.driver.cores', str(os.cpu_count() - 4))
+        conf.set('spark.driver.maxResultSize', '10g')
+        conf.set('spark.executor.memory', f'{total_ram_gb}g')
 
     def load(self, df_or_paths):
         # PySpark has to convert raw `pd.DataFrames` with `from_pandas`
