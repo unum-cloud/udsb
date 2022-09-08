@@ -2,7 +2,7 @@
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
 import dask_cudf
-import dask.dataframe
+import dask.dataframe as dd
 import pandas as pd
 
 from via_pandas import ViaPandas
@@ -34,24 +34,31 @@ class ViaDaskCuDF(ViaPandas):
             # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#jit-unspill
             jit_unspill=True
         )
+
         self.client = Client(self.cluster)
-        self.backend = dask_cudf
+        super().__init__(dask_cudf)
 
     def load(self, df_or_paths):
         # CuDF has to convert raw `pd.DataFrames` with `from_pandas`
-        if isinstance(df_or_paths, dask.dataframe):
+        if isinstance(df_or_paths, dd.DataFrame):
             self.df = df_or_paths
         elif isinstance(df_or_paths, pd.DataFrame):
-            self.df = dask.dataframe.from_pandas(df_or_paths)
+            self.df = dd.from_pandas(df_or_paths)
         else:
             # https://docs.dask.org/en/stable/generated/dask.dataframe.read_parquet.html
-            self.df = dask.dataframe.read_parquet(df_or_paths, columns=[
-                'vendor_id',
-                'pickup_at',
-                'passenger_count',
-                'total_amount',
-                'trip_distance',
-            ])
+            self.df = dd.read_parquet(
+                df_or_paths,
+                columns=[
+                    'vendor_id',
+                    'pickup_at',
+                    'passenger_count',
+                    'total_amount',
+                    'trip_distance',
+                ],
+                # This seems to be a faster engine:
+                # https://github.com/dask/dask/issues/7871
+                engine='pyarrow-dataset',
+            )
 
         # Passenger count can't be a `None`
         # Passenger count can't be zero or negative
@@ -99,7 +106,7 @@ class ViaDaskCuDF(ViaPandas):
         # Dask is missing a date parsing functionality
         # https://stackoverflow.com/q/39584118
         # https://docs.rapids.ai/api/cudf/legacy/api_docs/api/cudf.to_datetime.html
-        df['year'] = dask_cudf.to_datetime(
+        df['year'] = dd.to_datetime(
             df[column_name],
             format='%Y-%m-%d %H:%M:%S',
         ).dt.year
