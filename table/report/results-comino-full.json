@@ -142,5 +142,14 @@
         "seconds":11.735035435,
         "iterations":125,
         "error":""
+    },
+    {
+        "backend":"PySpark",
+        "operation":"Q1",
+        "dataset":"Taxi Rides",
+        "dataset_bytes":39000000000,
+        "seconds":158.940782017,
+        "iterations":125,
+        "error":""
     }
 ]

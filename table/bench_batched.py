@@ -63,23 +63,25 @@ def run_backend(conf: Configuration) -> Generator[Sample, None, None]:
 
 if __name__ == '__main__':
 
-    # from via_pandas import ViaPandas
-    # from via_arrow import ViaArrow
-    # from via_modin import ViaModin
-    # from via_cudf import ViaCuDF
-    # from via_sqlite import ViaSQLite
-    # from via_dask_cudf import ViaDaskCuDF
-    # from via_dask_cudf import ViaDaskCuDFUnified
+    from via_pandas import ViaPandas
+    from via_arrow import ViaArrow
+    from via_modin import ViaModin
+    from via_cudf import ViaCuDF
+    from via_sqlite import ViaSQLite
+    from via_dask_cudf import ViaDaskCuDF
+    from via_dask_cudf import ViaDaskCuDFUnified
     from via_spark import ViaPySpark
+
+    files_per_batch = 0
     confs = [
-        # Configuration(ViaPandas, 'Pandas', 10),
-        # Configuration(ViaArrow, 'PyArrow', 10),
-        # Configuration(ViaModin, 'Modin', 10),
-        # Configuration(ViaCuDF, 'CuDF', 10, True),
-        # Configuration(ViaSQLite, 'SQLite', 10),
-        # Configuration(ViaDaskCuDF, 'Dask->CuDF', 10),
-        # Configuration(ViaDaskCuDFUnified, 'Dask+CuDF', 10),
-        Configuration(ViaPySpark, 'PySpark'),
+        Configuration(ViaPandas, 'Pandas', files_per_batch),
+        Configuration(ViaArrow, 'PyArrow', files_per_batch),
+        Configuration(ViaModin, 'Modin', files_per_batch),
+        Configuration(ViaCuDF, 'CuDF', files_per_batch, True),
+        Configuration(ViaSQLite, 'SQLite', files_per_batch),
+        Configuration(ViaDaskCuDF, 'Dask->CuDF', files_per_batch),
+        Configuration(ViaDaskCuDFUnified, 'Dask+CuDF', files_per_batch),
+        Configuration(ViaPySpark, 'PySpark', files_per_batch),
     ]
 
     try:
