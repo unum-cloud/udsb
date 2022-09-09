@@ -4,6 +4,7 @@ import pathlib
 from typing import List
 
 import pandas as pd
+import pyarrow as pa
 import pyarrow.parquet as pap
 
 
@@ -44,6 +45,18 @@ def parquet_dataset(paths: List[str]) -> pap.ParquetDataset:
     )
 
 
+def read_parquet_dataset(paths: List[str]) -> pa.Table:
+    return parquet_dataset(paths).read(
+        columns=[
+            'vendor_id',
+            'pickup_at',
+            'passenger_count',
+            'total_amount',
+            'trip_distance',
+        ],
+    ).combine_chunks()
+
+
 def example_frame() -> pd.DataFrame:
     return pd.DataFrame({
         'vendor_id': ['Uber', 'Lyft', 'Uber', 'Lyft'],
@@ -54,9 +67,9 @@ def example_frame() -> pd.DataFrame:
     })
 
 
-def test_engine(engine, small_example: bool = False):
+def test_engine(engine, small_example: bool = True):
 
-    engine.load(example_frame() if small_example else parquet_paths()[:2])
+    engine.load(example_frame() if small_example else parquet_paths())
     print('Query 0: Loading the dataset')
 
     q1 = engine.query1()

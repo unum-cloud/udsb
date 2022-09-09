@@ -1,5 +1,6 @@
 
 import pandas as pd
+import pyarrow as pa
 import cudf
 
 from via_pandas import ViaPandas
@@ -20,6 +21,9 @@ class ViaCuDF(ViaPandas):
             self.df = df_or_paths
         elif isinstance(df_or_paths, pd.DataFrame):
             self.df = cudf.from_pandas(df_or_paths)
+        elif isinstance(df_or_paths, pa.Table):
+            # self.df = cudf.DataFrame.from_arrow(df_or_paths)
+            self.df = cudf.DataFrame.from_pandas(df_or_paths.to_pandas())
         else:
             super().load(df_or_paths)
 

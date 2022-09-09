@@ -25,13 +25,7 @@ class ViaArrow:
         elif isinstance(df_or_paths, pd.DataFrame):
             self.df = pa.Table.from_pandas(df_or_paths)
         else:
-            self.df = dataset.parquet_dataset(df_or_paths).read(columns=[
-                'vendor_id',
-                'pickup_at',
-                'passenger_count',
-                'total_amount',
-                'trip_distance',
-            ])
+            self.df = dataset.read_parquet_dataset(df_or_paths)
 
     def query1(self):
         df = self.df['vendor_id'].dictionary_encode().value_counts()
@@ -69,11 +63,14 @@ class ViaArrow:
         ])
         pulled_df = pulled_df.append_column('trip_distance_int', pac.cast(
             pulled_df['trip_distance'],
-            options=pac.CastOptions(
-                target_type=pa.int32(),
-                allow_float_truncate=True,
-                allow_decimal_truncate=True,
-            ),
+            target_type=pa.int32(),
+            safe=False,
+            # Only present since API v9:
+            # options=pac.CastOptions(
+            #     target_type=pa.int32(),
+            #     allow_float_truncate=True,
+            #     allow_decimal_truncate=True,
+            # ),
         ))
         pulled_df = pulled_df.drop(['trip_distance'])
         pulled_df = self._replace_with_years(pulled_df, 'pickup_at')

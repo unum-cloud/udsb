@@ -3,8 +3,10 @@ from statistics import mean
 from typing import List, Dict, Tuple
 
 from tqdm import tqdm
+import pyarrow as pa
 
 import shared
+import dataset
 
 
 class ViaAnyBatched:
@@ -13,12 +15,19 @@ class ViaAnyBatched:
         It allows us to fit into VRAM on smaller GPUs.
     """
 
-    def __init__(self, engine, files_per_batch: int = 10) -> None:
+    def __init__(self, engine, files_per_batch: int = 10, prefetch: bool = False) -> None:
         self.engine = engine
         self.files_per_batch = files_per_batch
+        self.prefetch = prefetch
 
     def load(self, df_or_paths):
-        self.df_or_paths = df_or_paths
+        if not self.prefetch:
+            self.df_or_paths = df_or_paths
+            self.dfs = None
+        else:
+            self.df_or_paths = df_or_paths
+            self.dfs = [dataset.read_parquet_dataset(
+                path) for path in df_or_paths]
 
     def query1(self) -> Dict[str, int]:
         accumulated = {}
@@ -105,6 +114,11 @@ class ViaAnyBatched:
 
     def _prepare_batch(self, first_file_idx: int):
         if isinstance(self.df_or_paths, list):
-            return self.df_or_paths[first_file_idx:first_file_idx+self.files_per_batch]
+            if self.dfs:
+                slice = self.dfs[first_file_idx:first_file_idx +
+                                 self.files_per_batch]
+                return pa.concat_tables(slice)
+            else:
+                return self.df_or_paths[first_file_idx:first_file_idx+self.files_per_batch]
         else:
             return self.df_or_paths
