@@ -1,3 +1,4 @@
+import os
 
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
@@ -32,7 +33,8 @@ class ViaDaskCuDF(ViaPandas):
             # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#spilling-from-device
             device_memory_limit=0.8 if unified_memory else 0,
             # https://docs.rapids.ai/api/dask-cuda/nightly/spilling.html#jit-unspill
-            jit_unspill=True
+            jit_unspill=True,
+            threads_per_worker=4,
         )
 
         self.client = Client(self.cluster)
@@ -59,12 +61,26 @@ class ViaDaskCuDF(ViaPandas):
                 # https://github.com/dask/dask/issues/7871
                 engine='pyarrow-dataset',
             )
+            # Alternatively, one can directly call the Arrow reader and then - partition.
+            # df = dataset.parquet_dataset(df_or_paths).read(
+            #     columns=[
+            #         'vendor_id',
+            #         'pickup_at',
+            #         'passenger_count',
+            #         'total_amount',
+            #         'trip_distance',
+            #     ],
+            # )
+            # self.df = dd.from_pandas(
+            #     df.to_pandas(),
+            #     npartitions=os.cpu_count(),
+            # )
 
         # Passenger count can't be a `None`
         # Passenger count can't be zero or negative
         # Lazy computed so rmm_pool_size won't be exceeded
         self.df['passenger_count'] = self.df['passenger_count'].mask(
-            self.df['passenger_count'].lt(1), 1)
+            self.df['passenger_count'].lt(1), 1).compute()
 
     def query1(self):
         pulled_df = self.df[['vendor_id']].copy()
@@ -113,16 +129,13 @@ class ViaDaskCuDF(ViaPandas):
         df.drop(columns=[column_name])
         return df
 
-    def __del__(self):
-        self.close()
-
     def close(self):
         if self.client.status != 'closed':
-            self.client.close()
+            self.cluster.loop.stop()
             self.cluster.close()
             self.client.io_loop.stop()
             self.client.loop.stop()
-            self.cluster.loop.stop()
+            self.client.close()
 
 
 class ViaDaskCuDFUnified(ViaDaskCuDF):
