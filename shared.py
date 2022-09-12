@@ -33,7 +33,7 @@ class Sample:
         return f'{self.backend}.{self.operation}({self.dataset}): {suffix}'
 
 
-def measure_time(func) -> float:
+def measure_seconds(func) -> float:
     start = time.perf_counter()
     func()
     return time.perf_counter() - start
@@ -64,7 +64,7 @@ class Bench:
         while True:
             try:
                 for idx, func in enumerate(self.funcs):
-                    seconds[idx] += measure_time(func)
+                    seconds[idx] += measure_seconds(func)
             except Exception as e:
                 s.error = repr(e)
                 break

@@ -1,9 +1,7 @@
-import os
-
+import cudf
 from dask_cuda import LocalCUDACluster
 from dask.distributed import Client
 import dask_cudf
-import dask.dataframe as dd
 import pandas as pd
 
 from via_pandas import ViaPandas
@@ -13,6 +11,13 @@ import dataset
 class ViaDaskCuDF(ViaPandas):
     """
         Dask-cuDF adaptation for Multi-GPU acceleration.
+
+        Issues:
+        > Doesn't support multi-column sorting
+        > Doesn't support `to_datetime` conversions
+        > Fails on `astype('category)`
+        > Dask-workers die and recover during benchmark, which takes a lot of time
+        > Spuriously fails with out-of-memory and constantly exceeds RMM pool limit
 
         https://docs.rapids.ai/api/dask-cuda/nightly/index.html
         https://docs.rapids.ai/api/dask-cuda/nightly/examples/ucx.html
@@ -42,13 +47,16 @@ class ViaDaskCuDF(ViaPandas):
 
     def load(self, df_or_paths):
         # CuDF has to convert raw `pd.DataFrames` with `from_pandas`
-        if isinstance(df_or_paths, dd.DataFrame):
+        if isinstance(df_or_paths, dask_cudf.DataFrame):
             self.df = df_or_paths
         elif isinstance(df_or_paths, pd.DataFrame):
-            self.df = dd.from_pandas(df_or_paths)
+            self.df = dask_cudf.from_cudf(
+                cudf.from_pandas(df_or_paths),
+                npartitions=16,
+            )
         else:
             # https://docs.dask.org/en/stable/generated/dask.dataframe.read_parquet.html
-            self.df = dd.read_parquet(
+            self.df = dask_cudf.read_parquet(
                 df_or_paths,
                 columns=[
                     'vendor_id',
@@ -57,9 +65,11 @@ class ViaDaskCuDF(ViaPandas):
                     'total_amount',
                     'trip_distance',
                 ],
+                split_row_groups=True,
+                # categories=['vendor_id'],
                 # This seems to be a faster engine:
                 # https://github.com/dask/dask/issues/7871
-                engine='pyarrow-dataset',
+                # engine='pyarrow-dataset',
             )
             # Alternatively, one can directly call the Arrow reader and then - partition.
             # df = dataset.parquet_dataset(df_or_paths).read(
@@ -73,7 +83,7 @@ class ViaDaskCuDF(ViaPandas):
             # )
             # self.df = dd.from_pandas(
             #     df.to_pandas(),
-            #     npartitions=os.cpu_count(),
+            #     npartitions=16,
             # )
 
         # Passenger count can't be a `None`
@@ -83,22 +93,16 @@ class ViaDaskCuDF(ViaPandas):
             self.df['passenger_count'].lt(1), 1).compute()
 
     def query1(self):
+        # Dask-cuDF fails on the `astype('category')` call.
+        # pulled_df = self.df[['vendor_id']]
         pulled_df = self.df[['vendor_id']].copy()
-        # Grouping strings is a lot slower, than converting to categorical series:
-        # pulled_df['vendor_id'] = pulled_df['vendor_id'].astype('category') # Fails with All columns must be same type
+        pulled_df.categorize(['vendor_id'], index=False)
         grouped_df = pulled_df.groupby('vendor_id')
         final_df = grouped_df.size().reset_index()
-        final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        return final_df.compute()
-
-    def query2(self):
-        return self.client.compute(super().query2(), sync=True)
-
-    def query3(self):
-        return self.client.compute(super().query3(), sync=True)
+        return {d[0]: d[1] for d in self._yield_tuples(final_df)}
 
     def query4(self):
-        # We copy the view, to be able to modify it
+        # Dask doesn't support sorting by multiple values
         pulled_df = self.df[[
             'passenger_count',
             'pickup_at',
@@ -114,18 +118,31 @@ class ViaDaskCuDF(ViaPandas):
         ])
         final_df = grouped_df.size().reset_index()
         final_df = final_df.rename(columns={final_df.columns[-1]: 'counts'})
-        final_df = final_df.sort_values('year', ascending=True)
-        final_df = final_df.sort_values('counts', ascending=False)
-        return final_df.compute()
+
+        # We don't have an efficient way of accomplishing what we want with Dask
+        # V1:
+        #      final_df['negative_counts'] = final_df['counts'] * -1.0
+        #      final_df = final_df.set_index(['year', 'negative_counts']).sort_index()
+        # V2:
+        #      final_df = final_df.sort_values('year', ascending=True)
+        #      final_df = final_df.sort_values('counts', ascending=False)
+        final_df['index'] = final_df['year'].astype(
+            str) + final_df['counts'].astype(str).str.zfill(10)
+        final_df = final_df.sort_values('index', ascending=True)
+        return list(self._yield_tuples(final_df))
 
     def _replace_with_years(self, df, column_name: str):
         # Dask is missing a date parsing functionality
         # https://stackoverflow.com/q/39584118
         # https://docs.rapids.ai/api/cudf/legacy/api_docs/api/cudf.to_datetime.html
-        df['year'] = dd.to_datetime(
-            df[column_name],
-            format='%Y-%m-%d %H:%M:%S',
-        ).dt.year
+        def convert_one(partition):
+            partition['year'] = cudf.to_datetime(
+                partition[column_name],
+                format='%Y-%m-%d %H:%M:%S',
+                errors='warn',
+            ).dt.year
+            return partition
+        df = df.map_partitions(convert_one)
         df.drop(columns=[column_name])
         return df
 
@@ -136,6 +153,11 @@ class ViaDaskCuDF(ViaPandas):
             self.client.io_loop.stop()
             self.client.loop.stop()
             self.client.close()
+
+    def _yield_tuples(self, df):
+        if isinstance(df, dask_cudf.DataFrame):
+            df = self.client.compute(df, sync=True)
+        return super()._yield_tuples(df.to_pandas())
 
 
 class ViaDaskCuDFUnified(ViaDaskCuDF):

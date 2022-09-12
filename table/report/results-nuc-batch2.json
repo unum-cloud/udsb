@@ -223,5 +223,50 @@
         "seconds": 1.07661081,
         "iterations": 5,
         "error": ""
+    },
+    {
+        "backend": "PySpark",
+        "operation": "Load",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 0.000001622,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PySpark",
+        "operation": "Q1",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 159.762793313,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PySpark",
+        "operation": "Q2",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 73.5854614711,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PySpark",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 125.076184305,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PySpark",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 669.367997987,
+        "iterations": 125,
+        "error": ""
     }
 ]

@@ -4,7 +4,7 @@ from typing import Generator
 
 
 from via_any_batched import ViaAnyBatched
-from shared import Sample, load_persisted_benchmarks, list_contains_benchmark, persist_benchmarks, measure_time
+from shared import Sample, load_persisted_benchmarks, list_contains_benchmark, persist_benchmarks, measure_seconds
 import dataset
 
 results_path = __file__.rsplit('.', 1)[0] + '.json'
@@ -51,7 +51,9 @@ def run_backend(conf: Configuration) -> Generator[Sample, None, None]:
             continue
 
         try:
-            sample.seconds = measure_time(func)
+            sample.seconds = measure_seconds(func)
+        except KeyboardInterrupt:
+            break
         except Exception as e:
             print(e)
             continue
