@@ -151,5 +151,41 @@
         "seconds":158.940782017,
         "iterations":125,
         "error":""
+    },
+    {
+        "backend":"Dask+CuDF",
+        "operation":"Q1",
+        "dataset":"Taxi Rides",
+        "dataset_bytes":39000000000,
+        "seconds":123.9010586371,
+        "iterations":50,
+        "error":""
+    },
+    {
+        "backend":"Dask+CuDF",
+        "operation":"Q2",
+        "dataset":"Taxi Rides",
+        "dataset_bytes":39000000000,
+        "seconds":66.602623574,
+        "iterations":50,
+        "error":""
+    },
+    {
+        "backend":"Dask+CuDF",
+        "operation":"Q3",
+        "dataset":"Taxi Rides",
+        "dataset_bytes":39000000000,
+        "seconds":118.096105487,
+        "iterations":50,
+        "error":""
+    },
+    {
+        "backend":"Dask+CuDF",
+        "operation":"Q4",
+        "dataset":"Taxi Rides",
+        "dataset_bytes":39000000000,
+        "seconds":162.778848615,
+        "iterations":50,
+        "error":""
     }
 ]
