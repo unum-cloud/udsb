@@ -1,4 +1,4 @@
-# Analyzing 1.1 Billion Taxi Rides in Python
+# Analyzing 1.5 Billion Taxi Rides in Python
 
 This is a rework of Uber processing benchmark, but in Python instead of SQL.
 For now, imperative approaches win the declarative ones and this must be a clear indication.
@@ -30,7 +30,8 @@ $ find . -name '*.csv' | xargs wc -l
   1164675606 total
 ```
 
-Great, 1.1 Billion Taxi Rides. Now we can start processing.
+GreatYou will find 1.1 Billion Taxi Rides in the CSV version and 1.5 Billion in Parquet files.
+Now we can start processing.
 
 ## Preprocessing
 

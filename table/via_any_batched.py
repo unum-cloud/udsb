@@ -34,7 +34,7 @@ class ViaAnyBatched:
         progress = tqdm(
             range(0, self._count_files(), self.files_per_batch),
             desc='Query 1',
-            unit='file'
+            unit='batch'
         )
         for first_file_idx in progress:
             batch = self._prepare_batch(first_file_idx)
@@ -49,7 +49,7 @@ class ViaAnyBatched:
         progress = tqdm(
             range(0, self._count_files(), self.files_per_batch),
             desc='Query 2',
-            unit='file'
+            unit='batch'
         )
         for first_file_idx in progress:
             batch = self._prepare_batch(first_file_idx)
@@ -64,7 +64,7 @@ class ViaAnyBatched:
         progress = tqdm(
             range(0, self._count_files(), self.files_per_batch),
             desc='Query 3',
-            unit='file'
+            unit='batch'
         )
         for first_file_idx in progress:
             batch = self._prepare_batch(first_file_idx)
@@ -79,7 +79,7 @@ class ViaAnyBatched:
         progress = tqdm(
             range(0, self._count_files(), self.files_per_batch),
             desc='Query 4',
-            unit='file'
+            unit='batch'
         )
         for first_file_idx in progress:
             batch = self._prepare_batch(first_file_idx)

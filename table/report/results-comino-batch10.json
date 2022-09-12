@@ -49,7 +49,7 @@
         "operation": "Load",
         "dataset": "Taxi Rides",
         "dataset_bytes": 39000000000,
-        "seconds": 0.000000541,
+        "seconds": 0.0000007719,
         "iterations": 125,
         "error": ""
     },
@@ -58,7 +58,7 @@
         "operation": "Q1",
         "dataset": "Taxi Rides",
         "dataset_bytes": 39000000000,
-        "seconds": 54.75545046,
+        "seconds": 69.13353805,
         "iterations": 125,
         "error": ""
     },
@@ -67,7 +67,25 @@
         "operation": "Q2",
         "dataset": "Taxi Rides",
         "dataset_bytes": 39000000000,
-        "seconds": 40.991975578,
+        "seconds": 54.445224351,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q3",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 74.52530825,
+        "iterations": 125,
+        "error": ""
+    },
+    {
+        "backend": "PyArrow",
+        "operation": "Q4",
+        "dataset": "Taxi Rides",
+        "dataset_bytes": 39000000000,
+        "seconds": 79.36567589,
         "iterations": 125,
         "error": ""
     },
