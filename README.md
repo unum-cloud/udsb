@@ -1,9 +1,9 @@
-# Accelerated DataScience Benchmark
+# Unopinionated DataScience Benchmark
 
 A comparison of most commonly used Data-Science Python packages and their alternatives.
 Generally, those alternatives have identical Python interfaces, but come with Multi-Threaded CPU or even GPU backends, implemented in C++, CUDA, Rust and other low-level languages.
 
-To run the default configuration if  very folder - the procedure is similar:
+To run the default configuration for every folder - the procedure is similar:
 
 ```sh
 cd x

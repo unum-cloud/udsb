@@ -2,7 +2,7 @@
 
 This is a rework of Uber processing benchmark, but in Python instead of SQL.
 For now, imperative approaches win the declarative ones and this must be a clear indication.
-Let us put Pandas, Monin and cuDF head-to-head, to see how well they will perform.
+Let us put Pandas, Modin and cuDF head-to-head, to see how well they will perform.
 
 ## The Dataset & Preprocessing
 
