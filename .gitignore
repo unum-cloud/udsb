@@ -7,3 +7,4 @@ dask-worker-space/
 cufile.log
 .vscode/
 rmm_log.txt
+build/
