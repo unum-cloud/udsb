@@ -11,3 +11,4 @@ Overview
    table
    matrix
    network
+   genindex
